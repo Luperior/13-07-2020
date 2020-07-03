@@ -18,6 +18,7 @@ ostream& operator<<(ostream& os, Table& t){ // operatore stampa tabella
 }
 
 int main() {
+    // ciaociao evry
     time_t now;
     time (&now);
     cout << ctime (&now) << endl;
