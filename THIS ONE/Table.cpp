@@ -109,6 +109,17 @@ int Table::insert_into(const string str) {
                 vector<string> values = printMatchesIT(value_group, reg3A);
                 vector<string> records;
                 int quit = 0;
+                for (int k = 0; k < m[1].size(); k++) {
+                    for (int v = 0; v < targets.size(); v++) {
+                        if (m[1][k] == targets [v]) {
+                            if(!type_check (values [v], m[0][k]))
+                            {
+                                insert_into(reget_str());
+                                return 1;
+                            }
+                        }
+                    }
+                }
                /* for (int z = 0; z < targets.size(); z++) {
                     if (foreign_keys[test]==targets[z]) {
                         for ( int y = 0; y < database[references[test]][0].size(); y++) {

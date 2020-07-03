@@ -32,17 +32,23 @@ Control::Control(const string &_str, const regex& _reg) {
 }
 
 bool Control::c_int(const string &str) {
-    if (stoi(str) == true) { // non ne sono convintissimo
+    try {
+        stoi(str);
         return true;
-    } else
-    return false;
+    }
+    catch (exception &e) {
+        return false;
+    }
 }
 
 bool Control::c_float(const string &str) {
-    if (stof(str) == true) {
+    try {
+        stof(str);
         return true;
-    } else
-    return false;
+    }
+    catch (exception &e) {
+        return false;
+    }
 }
 
 bool Control::c_char(const string &str) {
@@ -53,7 +59,8 @@ bool Control::c_char(const string &str) {
 }
 
 bool Control::c_text(const string &str) {
-    if ((str.find('/')!=string::npos) || (str.find(':')!=string::npos) || (str.find('-')!=string::npos)) {
+    //if ((str.find('/')!=string::npos) || (str.find(':')!=string::npos) || (str.find('-')!=string::npos)) {
+    if (str.size() > MAXSIZE) {
         return false;
     } else
     return true;
@@ -61,33 +68,40 @@ bool Control::c_text(const string &str) {
 
 bool Control::c_date(const string &str) {
     // controllo che sia compatibile con una data
-    return false;
+    return true;
 }
 
 bool Control::c_time(const string &str) {
     // controllo che sia compatibile con un orario
-    return false;
+    return true;
 }
 
 bool Control::type_check(const string &str, const string& type) {
     if (type.find("INT")!=string::npos) {
-        c_int(str);
+        return c_int(str);
     }
     if (type.find("FLOAT")!=string::npos) {
-        c_float(str);
+        return c_float(str);
     }
     if (type.find("CHAR")!=string::npos) {
-        c_char(str);
+        return c_char(str);
     }
     if (type.find("TEXT")!=string::npos) {
-        c_text(str);
+        return c_text(str);
     }
     if (type.find("DATE")!=string::npos) {
-        c_date(str);
+        return c_date(str);
     }
     if (type.find("TIME")!=string::npos) {
-        c_time(str);
-    } else
-    return false;
+        return c_time(str);
+    }
+    else return false;
 }
+
+string Control::reget_str() {
+    string re_str;
+    getline(cin, re_str);
+    return re_str;
+}
+
 

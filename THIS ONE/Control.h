@@ -4,6 +4,7 @@
 
 #ifndef PROGETTO_POLITO_2020_CLION_CONTROL_H
 #define PROGETTO_POLITO_2020_CLION_CONTROL_H
+#define MAXSIZE 50
 
 #include <vector>
 #include <fstream>
@@ -13,6 +14,7 @@
 #include <sstream>
 #include <iomanip>
 #include <ctime>
+#include <exception>
 using namespace std;
 
 class Control {
@@ -28,6 +30,7 @@ public:
     bool c_text (const string& str);
     bool c_date (const string& str);
     bool c_time (const string& str);
+    string reget_str();
 
 private:  //protected o private?
 string str, type;
