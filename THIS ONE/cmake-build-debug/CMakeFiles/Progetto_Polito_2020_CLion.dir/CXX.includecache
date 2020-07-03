@@ -1,0 +1,56 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/lupol/Desktop/THIS ONE/Control.h
+vector
+-
+fstream
+-
+iostream
+-
+regex
+-
+map
+-
+sstream
+-
+iomanip
+-
+ctime
+-
+
+C:/Users/lupol/Desktop/THIS ONE/Date.h
+ctime
+-
+Control.h
+C:/Users/lupol/Desktop/THIS ONE/Control.h
+Table.h
+C:/Users/lupol/Desktop/THIS ONE/Table.h
+
+C:/Users/lupol/Desktop/THIS ONE/Table.h
+Control.h
+C:/Users/lupol/Desktop/THIS ONE/Control.h
+
+C:/Users/lupol/Desktop/THIS ONE/Time.h
+ctime
+-
+Control.h
+C:/Users/lupol/Desktop/THIS ONE/Control.h
+Table.h
+C:/Users/lupol/Desktop/THIS ONE/Table.h
+
+C:/Users/lupol/Desktop/THIS ONE/main.cpp
+Table.h
+C:/Users/lupol/Desktop/THIS ONE/Table.h
+ctime
+-
+Date.h
+C:/Users/lupol/Desktop/THIS ONE/Date.h
+Time.h
+C:/Users/lupol/Desktop/THIS ONE/Time.h
+
