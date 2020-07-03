@@ -43,10 +43,10 @@ RM = "C:\Program Files\JetBrains\CLion 2019.3.4\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "C:\Users\lupol\Desktop\THIS ONE"
+CMAKE_SOURCE_DIR = "C:\Users\lupol\Desktop\13-07-2020\THIS ONE"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "C:\Users\lupol\Desktop\THIS ONE\cmake-build-debug"
+CMAKE_BINARY_DIR = "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\cmake-build-debug"
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -73,14 +73,14 @@ clean: CMakeFiles/Progetto_Polito_2020_CLion.dir/clean
 CMakeFiles/Progetto_Polito_2020_CLion.dir/all:
 	$(MAKE) -f CMakeFiles\Progetto_Polito_2020_CLion.dir\build.make CMakeFiles/Progetto_Polito_2020_CLion.dir/depend
 	$(MAKE) -f CMakeFiles\Progetto_Polito_2020_CLion.dir\build.make CMakeFiles/Progetto_Polito_2020_CLion.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\lupol\Desktop\THIS ONE\cmake-build-debug\CMakeFiles" --progress-num=1,2,3,4,5,6 "Built target Progetto_Polito_2020_CLion"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\lupol\Desktop\13-07-2020\THIS ONE\cmake-build-debug\CMakeFiles" --progress-num=1,2,3,4,5,6 "Built target Progetto_Polito_2020_CLion"
 .PHONY : CMakeFiles/Progetto_Polito_2020_CLion.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Progetto_Polito_2020_CLion.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\lupol\Desktop\THIS ONE\cmake-build-debug\CMakeFiles" 6
+	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\cmake-build-debug\CMakeFiles" 6
 	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/Progetto_Polito_2020_CLion.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\lupol\Desktop\THIS ONE\cmake-build-debug\CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\cmake-build-debug\CMakeFiles" 0
 .PHONY : CMakeFiles/Progetto_Polito_2020_CLion.dir/rule
 
 # Convenience name for target.

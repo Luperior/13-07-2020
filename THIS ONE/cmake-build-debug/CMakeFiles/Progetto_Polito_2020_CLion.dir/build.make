@@ -42,10 +42,10 @@ RM = "C:\Program Files\JetBrains\CLion 2019.3.4\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "C:\Users\lupol\Desktop\THIS ONE"
+CMAKE_SOURCE_DIR = "C:\Users\lupol\Desktop\13-07-2020\THIS ONE"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "C:\Users\lupol\Desktop\THIS ONE\cmake-build-debug"
+CMAKE_BINARY_DIR = "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\cmake-build-debug"
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Progetto_Polito_2020_CLion.dir/depend.make
@@ -58,68 +58,68 @@ include CMakeFiles/Progetto_Polito_2020_CLion.dir/flags.make
 
 CMakeFiles/Progetto_Polito_2020_CLion.dir/main.cpp.obj: CMakeFiles/Progetto_Polito_2020_CLion.dir/flags.make
 CMakeFiles/Progetto_Polito_2020_CLion.dir/main.cpp.obj: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\lupol\Desktop\THIS ONE\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Progetto_Polito_2020_CLion.dir/main.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Progetto_Polito_2020_CLion.dir\main.cpp.obj -c "C:\Users\lupol\Desktop\THIS ONE\main.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\lupol\Desktop\13-07-2020\THIS ONE\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Progetto_Polito_2020_CLion.dir/main.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Progetto_Polito_2020_CLion.dir\main.cpp.obj -c "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\main.cpp"
 
 CMakeFiles/Progetto_Polito_2020_CLion.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Progetto_Polito_2020_CLion.dir/main.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\lupol\Desktop\THIS ONE\main.cpp" > CMakeFiles\Progetto_Polito_2020_CLion.dir\main.cpp.i
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\main.cpp" > CMakeFiles\Progetto_Polito_2020_CLion.dir\main.cpp.i
 
 CMakeFiles/Progetto_Polito_2020_CLion.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Progetto_Polito_2020_CLion.dir/main.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\lupol\Desktop\THIS ONE\main.cpp" -o CMakeFiles\Progetto_Polito_2020_CLion.dir\main.cpp.s
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\main.cpp" -o CMakeFiles\Progetto_Polito_2020_CLion.dir\main.cpp.s
 
 CMakeFiles/Progetto_Polito_2020_CLion.dir/Table.cpp.obj: CMakeFiles/Progetto_Polito_2020_CLion.dir/flags.make
 CMakeFiles/Progetto_Polito_2020_CLion.dir/Table.cpp.obj: ../Table.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\lupol\Desktop\THIS ONE\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Progetto_Polito_2020_CLion.dir/Table.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Progetto_Polito_2020_CLion.dir\Table.cpp.obj -c "C:\Users\lupol\Desktop\THIS ONE\Table.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\lupol\Desktop\13-07-2020\THIS ONE\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Progetto_Polito_2020_CLion.dir/Table.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Progetto_Polito_2020_CLion.dir\Table.cpp.obj -c "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\Table.cpp"
 
 CMakeFiles/Progetto_Polito_2020_CLion.dir/Table.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Progetto_Polito_2020_CLion.dir/Table.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\lupol\Desktop\THIS ONE\Table.cpp" > CMakeFiles\Progetto_Polito_2020_CLion.dir\Table.cpp.i
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\Table.cpp" > CMakeFiles\Progetto_Polito_2020_CLion.dir\Table.cpp.i
 
 CMakeFiles/Progetto_Polito_2020_CLion.dir/Table.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Progetto_Polito_2020_CLion.dir/Table.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\lupol\Desktop\THIS ONE\Table.cpp" -o CMakeFiles\Progetto_Polito_2020_CLion.dir\Table.cpp.s
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\Table.cpp" -o CMakeFiles\Progetto_Polito_2020_CLion.dir\Table.cpp.s
 
 CMakeFiles/Progetto_Polito_2020_CLion.dir/Control.cpp.obj: CMakeFiles/Progetto_Polito_2020_CLion.dir/flags.make
 CMakeFiles/Progetto_Polito_2020_CLion.dir/Control.cpp.obj: ../Control.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\lupol\Desktop\THIS ONE\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Progetto_Polito_2020_CLion.dir/Control.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Progetto_Polito_2020_CLion.dir\Control.cpp.obj -c "C:\Users\lupol\Desktop\THIS ONE\Control.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\lupol\Desktop\13-07-2020\THIS ONE\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Progetto_Polito_2020_CLion.dir/Control.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Progetto_Polito_2020_CLion.dir\Control.cpp.obj -c "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\Control.cpp"
 
 CMakeFiles/Progetto_Polito_2020_CLion.dir/Control.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Progetto_Polito_2020_CLion.dir/Control.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\lupol\Desktop\THIS ONE\Control.cpp" > CMakeFiles\Progetto_Polito_2020_CLion.dir\Control.cpp.i
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\Control.cpp" > CMakeFiles\Progetto_Polito_2020_CLion.dir\Control.cpp.i
 
 CMakeFiles/Progetto_Polito_2020_CLion.dir/Control.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Progetto_Polito_2020_CLion.dir/Control.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\lupol\Desktop\THIS ONE\Control.cpp" -o CMakeFiles\Progetto_Polito_2020_CLion.dir\Control.cpp.s
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\Control.cpp" -o CMakeFiles\Progetto_Polito_2020_CLion.dir\Control.cpp.s
 
 CMakeFiles/Progetto_Polito_2020_CLion.dir/Date.cpp.obj: CMakeFiles/Progetto_Polito_2020_CLion.dir/flags.make
 CMakeFiles/Progetto_Polito_2020_CLion.dir/Date.cpp.obj: ../Date.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\lupol\Desktop\THIS ONE\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Progetto_Polito_2020_CLion.dir/Date.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Progetto_Polito_2020_CLion.dir\Date.cpp.obj -c "C:\Users\lupol\Desktop\THIS ONE\Date.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\lupol\Desktop\13-07-2020\THIS ONE\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Progetto_Polito_2020_CLion.dir/Date.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Progetto_Polito_2020_CLion.dir\Date.cpp.obj -c "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\Date.cpp"
 
 CMakeFiles/Progetto_Polito_2020_CLion.dir/Date.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Progetto_Polito_2020_CLion.dir/Date.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\lupol\Desktop\THIS ONE\Date.cpp" > CMakeFiles\Progetto_Polito_2020_CLion.dir\Date.cpp.i
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\Date.cpp" > CMakeFiles\Progetto_Polito_2020_CLion.dir\Date.cpp.i
 
 CMakeFiles/Progetto_Polito_2020_CLion.dir/Date.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Progetto_Polito_2020_CLion.dir/Date.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\lupol\Desktop\THIS ONE\Date.cpp" -o CMakeFiles\Progetto_Polito_2020_CLion.dir\Date.cpp.s
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\Date.cpp" -o CMakeFiles\Progetto_Polito_2020_CLion.dir\Date.cpp.s
 
 CMakeFiles/Progetto_Polito_2020_CLion.dir/Time.cpp.obj: CMakeFiles/Progetto_Polito_2020_CLion.dir/flags.make
 CMakeFiles/Progetto_Polito_2020_CLion.dir/Time.cpp.obj: ../Time.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\lupol\Desktop\THIS ONE\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Progetto_Polito_2020_CLion.dir/Time.cpp.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Progetto_Polito_2020_CLion.dir\Time.cpp.obj -c "C:\Users\lupol\Desktop\THIS ONE\Time.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\lupol\Desktop\13-07-2020\THIS ONE\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Progetto_Polito_2020_CLion.dir/Time.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Progetto_Polito_2020_CLion.dir\Time.cpp.obj -c "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\Time.cpp"
 
 CMakeFiles/Progetto_Polito_2020_CLion.dir/Time.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Progetto_Polito_2020_CLion.dir/Time.cpp.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\lupol\Desktop\THIS ONE\Time.cpp" > CMakeFiles\Progetto_Polito_2020_CLion.dir\Time.cpp.i
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\Time.cpp" > CMakeFiles\Progetto_Polito_2020_CLion.dir\Time.cpp.i
 
 CMakeFiles/Progetto_Polito_2020_CLion.dir/Time.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Progetto_Polito_2020_CLion.dir/Time.cpp.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\lupol\Desktop\THIS ONE\Time.cpp" -o CMakeFiles\Progetto_Polito_2020_CLion.dir\Time.cpp.s
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\Time.cpp" -o CMakeFiles\Progetto_Polito_2020_CLion.dir\Time.cpp.s
 
 # Object files for target Progetto_Polito_2020_CLion
 Progetto_Polito_2020_CLion_OBJECTS = \
@@ -141,7 +141,7 @@ Progetto_Polito_2020_CLion.exe: CMakeFiles/Progetto_Polito_2020_CLion.dir/build.
 Progetto_Polito_2020_CLion.exe: CMakeFiles/Progetto_Polito_2020_CLion.dir/linklibs.rsp
 Progetto_Polito_2020_CLion.exe: CMakeFiles/Progetto_Polito_2020_CLion.dir/objects1.rsp
 Progetto_Polito_2020_CLion.exe: CMakeFiles/Progetto_Polito_2020_CLion.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="C:\Users\lupol\Desktop\THIS ONE\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable Progetto_Polito_2020_CLion.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="C:\Users\lupol\Desktop\13-07-2020\THIS ONE\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable Progetto_Polito_2020_CLion.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Progetto_Polito_2020_CLion.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -154,6 +154,6 @@ CMakeFiles/Progetto_Polito_2020_CLion.dir/clean:
 .PHONY : CMakeFiles/Progetto_Polito_2020_CLion.dir/clean
 
 CMakeFiles/Progetto_Polito_2020_CLion.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "C:\Users\lupol\Desktop\THIS ONE" "C:\Users\lupol\Desktop\THIS ONE" "C:\Users\lupol\Desktop\THIS ONE\cmake-build-debug" "C:\Users\lupol\Desktop\THIS ONE\cmake-build-debug" "C:\Users\lupol\Desktop\THIS ONE\cmake-build-debug\CMakeFiles\Progetto_Polito_2020_CLion.dir\DependInfo.cmake" --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "C:\Users\lupol\Desktop\13-07-2020\THIS ONE" "C:\Users\lupol\Desktop\13-07-2020\THIS ONE" "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\cmake-build-debug" "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\cmake-build-debug" "C:\Users\lupol\Desktop\13-07-2020\THIS ONE\cmake-build-debug\CMakeFiles\Progetto_Polito_2020_CLion.dir\DependInfo.cmake" --color=$(COLOR)
 .PHONY : CMakeFiles/Progetto_Polito_2020_CLion.dir/depend
 

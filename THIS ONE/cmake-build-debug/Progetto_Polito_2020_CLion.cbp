@@ -8,18 +8,18 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug"/>
+				<Option working_dir="C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Progetto_Polito_2020_CLion">
-				<Option output="C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Progetto_Polito_2020_CLion.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug"/>
+				<Option output="C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Progetto_Polito_2020_CLion.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -32,15 +32,15 @@
 					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/../../../../i686-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 Progetto_Polito_2020_CLion"/>
-					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 Progetto_Polito_2020_CLion"/>
+					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Progetto_Polito_2020_CLion/fast">
-				<Option output="C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Progetto_Polito_2020_CLion.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug"/>
+				<Option output="C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Progetto_Polito_2020_CLion.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -53,61 +53,61 @@
 					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/../../../../i686-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 Progetto_Polito_2020_CLion/fast"/>
-					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 Progetto_Polito_2020_CLion/fast"/>
+					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug"/>
+				<Option working_dir="C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug"/>
+				<Option working_dir="C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/lupol/Desktop/13-07-2020/THIS ONE/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/lupol/Desktop/THIS ONE/Control.cpp">
+		<Unit filename="C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Control.cpp">
 			<Option target="Progetto_Polito_2020_CLion"/>
 		</Unit>
-		<Unit filename="C:/Users/lupol/Desktop/THIS ONE/Control.h">
+		<Unit filename="C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Control.h">
 			<Option target="Progetto_Polito_2020_CLion"/>
 		</Unit>
-		<Unit filename="C:/Users/lupol/Desktop/THIS ONE/Date.cpp">
+		<Unit filename="C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Date.cpp">
 			<Option target="Progetto_Polito_2020_CLion"/>
 		</Unit>
-		<Unit filename="C:/Users/lupol/Desktop/THIS ONE/Date.h">
+		<Unit filename="C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Date.h">
 			<Option target="Progetto_Polito_2020_CLion"/>
 		</Unit>
-		<Unit filename="C:/Users/lupol/Desktop/THIS ONE/Table.cpp">
+		<Unit filename="C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Table.cpp">
 			<Option target="Progetto_Polito_2020_CLion"/>
 		</Unit>
-		<Unit filename="C:/Users/lupol/Desktop/THIS ONE/Table.h">
+		<Unit filename="C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Table.h">
 			<Option target="Progetto_Polito_2020_CLion"/>
 		</Unit>
-		<Unit filename="C:/Users/lupol/Desktop/THIS ONE/Time.cpp">
+		<Unit filename="C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Time.cpp">
 			<Option target="Progetto_Polito_2020_CLion"/>
 		</Unit>
-		<Unit filename="C:/Users/lupol/Desktop/THIS ONE/Time.h">
+		<Unit filename="C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Time.h">
 			<Option target="Progetto_Polito_2020_CLion"/>
 		</Unit>
-		<Unit filename="C:/Users/lupol/Desktop/THIS ONE/main.cpp">
+		<Unit filename="C:/Users/lupol/Desktop/13-07-2020/THIS ONE/main.cpp">
 			<Option target="Progetto_Polito_2020_CLion"/>
 		</Unit>
-		<Unit filename="C:/Users/lupol/Desktop/THIS ONE/CMakeLists.txt">
+		<Unit filename="C:/Users/lupol/Desktop/13-07-2020/THIS ONE/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

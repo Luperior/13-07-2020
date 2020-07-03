@@ -21,7 +21,7 @@ public:
     Control(const string &str, const regex& _reg);
     virtual ~Control();
     vector <string> printMatchesIT(string str, regex reg);
-    bool type_check (const string& str);
+    bool type_check (const string& str, const string& type);
     bool c_int (const string& str);
     bool c_float (const string& str);
     bool c_char (const string& str);
@@ -30,7 +30,7 @@ public:
     bool c_time (const string& str);
 
 private:  //protected o private?
-string str;
+string str, type;
 regex reg;
 };
 

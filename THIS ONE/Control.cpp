@@ -69,23 +69,23 @@ bool Control::c_time(const string &str) {
     return false;
 }
 
-bool Control::type_check(const string &str) {
-    if (str.find("INT")!=string::npos) {
+bool Control::type_check(const string &str, const string& type) {
+    if (type.find("INT")!=string::npos) {
         c_int(str);
     }
-    if (str.find("FLOAT")!=string::npos) {
+    if (type.find("FLOAT")!=string::npos) {
         c_float(str);
     }
-    if (str.find("CHAR")!=string::npos) {
+    if (type.find("CHAR")!=string::npos) {
         c_char(str);
     }
-    if (str.find("TEXT")!=string::npos) {
+    if (type.find("TEXT")!=string::npos) {
         c_text(str);
     }
-    if (str.find("DATE")!=string::npos) {
+    if (type.find("DATE")!=string::npos) {
         c_date(str);
     }
-    if (str.find("TIME")!=string::npos) {
+    if (type.find("TIME")!=string::npos) {
         c_time(str);
     } else
     return false;
