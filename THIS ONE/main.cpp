@@ -23,7 +23,7 @@ int main() {
     time (&now);
     cout << ctime (&now) << endl;
     Date daje;
-    daje.get_day("2020/07/03");
+    daje.get_day("03/07/2020");
     Time time;
     time.get_time("14:45:58");
     map <string,Table> database;
@@ -35,7 +35,8 @@ int main() {
         if (command.find("CREATE") != string::npos) {
             string name = t.create_Table(command);
             database[name].set_target_names();
-            cout << database[name] << endl;
+            //cout << database[name] << endl;
+            cout << endl;
         }/*
         else if (command.find("UPDATE") != string::npos) {
             update_record(command);

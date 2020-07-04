@@ -6,10 +6,12 @@
 
 Table::Table() {}
 
-Table::Table(const string &_str, const string &_str2, const map<int, vector<string>>& _m) {
+Table::Table(const string &_str, const string &_str2, const map<int, vector<string>>& _m, const vector<bool>& _n_null, const vector<bool>& _a_inc) {
     str = _str;
     str2 = _str2;
     m = _m;
+    n_null = _n_null;
+    a_inc = _a_inc;
 }
 
 Table::~Table() {
@@ -36,12 +38,33 @@ string Table::create_Table(string& str) {
 vector<string> Table::getlabel(const vector<string>& structure) {
     string s;
     vector <string> vect;
-    for (int i = 0; i < structure.size(); i++)
-    {
-        s = structure[i].substr(0, structure[i].find(" "));
-        vect.push_back(s);
+    for (int i = 0; i < structure.size(); i++) {
+        if ((structure[i].find("NOT NULL") != string::npos) || (structure[i].find("AUTO_INCREMENT") != string::npos)) {
+            if ((structure[i].find("NOT NULL") != string::npos) &&
+                (structure[i].find("AUTO_INCREMENT") != string::npos)) {
+                s = structure[i].substr(0, structure[i].find(' '));
+                n_null.emplace_back(true);
+                a_inc.emplace_back(true);
+                vect.push_back(s);
+            } else if (structure[i].find("NOT NULL") != string::npos) {
+                s = structure[i].substr(0, structure[i].find(' '));
+                n_null.emplace_back(true);
+                a_inc.emplace_back(false);
+                vect.push_back(s);
+            } else if (structure[i].find("AUTO_INCREMENT") != string::npos) {
+                s = structure[i].substr(0, structure[i].find(' '));
+                a_inc.emplace_back(true);
+                n_null.emplace_back(false);
+                vect.push_back(s);
+            }
+        }
+        else {
+            s = structure[i].substr(0, structure[i].find(' '));
+            vect.push_back(s);
+            n_null.emplace_back(false);
+            a_inc.emplace_back(false);
+        }
     }
-    //cout << vect.size() << endl;
     return vect;
 }
 
@@ -55,9 +78,10 @@ vector<string> Table::get_types(const vector<string>& structure) {
         smatch match;
         regex_search(s, match, reg);
         s = match.str();
-        cout << "s corrisponde a" << s << endl;
+        // cout << "s corrisponde a" << s << endl;
         vect.push_back(s);
     }
+    //cout << vect;
     return vect;
 }
 
@@ -77,7 +101,7 @@ void Table::set_target_names() {
         } else {
             names.push_back(s);
         }
-    } while (v != 1); //vedi poi di usare un match così anche se mette spazi blocca ugualmente
+    } while (v != 1);
     m[0] = get_types(names);
     m[1] = getlabel(names);
 }
@@ -112,7 +136,7 @@ int Table::insert_into(const string str) {
                 for (int k = 0; k < m[1].size(); k++) {
                     for (int v = 0; v < targets.size(); v++) {
                         if (m[1][k] == targets [v]) {
-                            if(!type_check (values [v], m[0][k]))
+                            if(!type_check (values [v], m[0][k])) // se ci sta qualche errore dovuto ai tipi
                             {
                                 insert_into(reget_str());
                                 return 1;
@@ -160,6 +184,20 @@ int Table::insert_into(const string str) {
                     }
                     if (count == 0) {
                         records.emplace_back("\t"); // al posto di push_back ha suggerito questo
+                    }
+                }
+                for (int p = 0; p < n_null.size(); p++) { // scorro il vettore dei not null
+                    bool c = true;
+                    if (n_null[p] == true) {
+                        c = false;
+                        for (int d = 0; d < targets.size(); d++) {
+                            if (m[1][p] == targets[d]) {
+                                c = true;
+                            }
+                        }
+                    }
+                    if (!c) {
+                        records[p] = "std_val";
                     }
                 }
                 m[i] = records;

@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Control.cpp
-Control.h
-C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Control.h
-
 C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Control.h
 vector
 -
@@ -30,10 +26,6 @@ ctime
 exception
 -
 
-C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Date.cpp
-Date.h
-C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Date.h
-
 C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Date.h
 ctime
 -
@@ -42,17 +34,9 @@ C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Control.h
 Table.h
 C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Table.h
 
-C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Table.cpp
-Table.h
-C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Table.h
-
 C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Table.h
 Control.h
 C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Control.h
-
-C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Time.cpp
-Time.h
-C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Time.h
 
 C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Time.h
 ctime
