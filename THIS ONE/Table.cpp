@@ -22,6 +22,18 @@ Table::~Table() {
 
 }
 
+string Table::get_primary_key() {
+    return primary_key;
+}
+
+string Table::get_foreign_key() {
+    return foreign_key;
+}
+
+string Table::get_reference() {
+    return reference;
+}
+
 string Table::create_Table(string& str) {
     if ((str.find("CREATE") != string::npos) && (str.find("TABLE") != string::npos) && (str.find(" (") != string::npos)) {
         regex reg(R"(\b(?!\bCREATE|TABLE\b)\w+\b)");
@@ -170,7 +182,7 @@ int Table::insert_into(const string& str, map <string,Table> database) {
                 for (int z = 0; z < targets.size(); z++) {
                     if (foreign_key == targets[z]) {
                         for ( int y = 0; y < database[reference].get_map()[1].size(); y++) {
-                            if (database[reference].get_map()[1][y] == primary_key) {
+                            if (database[reference].get_map()[1][y] == database[reference].get_primary_key()) {
                                 for (int w = 2; w < database[reference].get_map().size(); w++) { // HO IL DUBBIO SE W PARTE DA 0, 1 O 2
                                     primary_values.emplace_back(database[reference].get_map()[w][y]); // vettore per confrontare i valori
                                 }

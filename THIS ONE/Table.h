@@ -18,6 +18,9 @@ public:
     vector<string> get_types(const vector<string>& structure);
     map <int, vector <string>> get_map();
     int insert_into(const string& str, map <string,Table> database);
+    string get_primary_key();
+    string get_foreign_key();
+    string get_reference();
     int size();
     //vector <string>& operator new[](int&i);
     //string& operator[](std::size_t idx);
