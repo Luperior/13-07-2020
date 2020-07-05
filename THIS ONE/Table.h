@@ -10,7 +10,7 @@
 class Table:Control {
 public:
     Table();
-    Table(const string &_str, const string &_str2, const map<int, vector<string>>& _m, const vector<bool>& _n_null, const vector<bool>& _a_inc, const int& _a_inc_count);
+    Table(const string &_str, const string &_str2, const map<int, vector<string>>& _m, const vector<bool>& _n_null, const vector<bool>& _a_inc, const int& _a_inc_count, const string& _primary_key, const string& _foreign_key, const string& _reference);
     virtual ~Table();
     string create_Table(string& str);
     vector<string> getlabel(const vector<string>& structure); //manca NOT NULL
@@ -27,6 +27,7 @@ public:
 
 protected:
 string str, str2;
+string primary_key, foreign_key, reference;
 map <int, vector <string>> m;
 vector <bool> n_null, a_inc;
 int a_inc_count = 1;

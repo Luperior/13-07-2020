@@ -6,13 +6,16 @@
 
 Table::Table() {}
 
-Table::Table(const string &_str, const string &_str2, const map<int, vector<string>>& _m, const vector<bool>& _n_null, const vector<bool>& _a_inc, const int& _a_inc_count) {
+Table::Table(const string &_str, const string &_str2, const map<int, vector<string>>& _m, const vector<bool>& _n_null, const vector<bool>& _a_inc, const int& _a_inc_count, const string& _primary_key, const string& _foreign_key, const string& _reference) {
     str = _str;
     str2 = _str2;
     m = _m;
     n_null = _n_null;
     a_inc = _a_inc;
     a_inc_count = _a_inc_count;
+    primary_key = _primary_key;
+    foreign_key = _foreign_key;
+    reference = _reference;
 }
 
 Table::~Table() {
