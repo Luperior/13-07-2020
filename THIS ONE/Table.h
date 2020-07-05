@@ -17,7 +17,7 @@ public:
     void set_target_names(); //da aggiornare
     vector<string> get_types(const vector<string>& structure);
     map <int, vector <string>> get_map();
-    int insert_into(const string str);
+    int insert_into(const string& str, map <string,Table> database);
     int size();
     //vector <string>& operator new[](int&i);
     //string& operator[](std::size_t idx);
@@ -26,7 +26,8 @@ public:
 
 
 protected:
-string str, str2;
+string str, str2; // secondo me queste possiamo rimuoverle, del resto derivano dall'esterno e non sono proprie della singola Table
+                  // Lupo, 05/07
 string primary_key, foreign_key, reference;
 map <int, vector <string>> m;
 vector <bool> n_null, a_inc;

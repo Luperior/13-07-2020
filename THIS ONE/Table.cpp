@@ -24,7 +24,7 @@ Table::~Table() {
 
 string Table::create_Table(string& str) {
     if ((str.find("CREATE") != string::npos) && (str.find("TABLE") != string::npos) && (str.find(" (") != string::npos)) {
-        regex reg(R"(\b(?!\bCREATE|TABLE\b)\w+\b)"); //QUI HO SEGUITO UN CONSIGLIO DEL COMPILATORE CON QUELLA R INIZIALE
+        regex reg(R"(\b(?!\bCREATE|TABLE\b)\w+\b)");
         smatch match;
         regex_search(str, match, reg);
         string test;
@@ -102,8 +102,25 @@ void Table::set_target_names() {
             v = 1;
         } else if ((s.find("AUTO_INCREMENT")!= string::npos) && (s.find("INT")== string::npos)) { // ovvero se definisco un NON int come auto_inc
             cerr << "auto_increment can only be applied to INT data types: try again" << endl;
-        }
-        else {
+        } else if (s.find("PRIMARY KEY")!=string::npos) {
+            regex reg(R"(\((.*?)\))"); // tutto ciò che è tra ( e )
+            smatch match;
+            regex_search(s, match, reg);
+            primary_key = match[1].str();
+        } else if ((s.find("FOREIGN KEY")!=string::npos) && (s.find("REFERENCES")!=string::npos)) {
+            regex reg(R"(\((.*?)\))"); // tutto ciò che è tra ( e )
+            smatch match, match_extra;
+            regex_search(s, match, reg);
+            foreign_key = match[1].str(); // il campo dipendente
+            string extra = s.substr(s.find("REFERENCES ") +11, string::npos);
+            /*regex_search(extra, match_extra, reg);
+            string key_check = match_extra[1].str();*/ // il campo indipendente, ma lo commento perchè dovrebbe essere solo quello primary della tabella cui ci riferiamo
+            regex reg0(R"(^([\w\-]+))");
+            smatch match0;
+            regex_search(extra, match0, reg0);
+            string table_check = match0[1].str();
+            reference = table_check; // ovvero la tabella dipendente si rifà a quella primaria check
+        } else {
             names.push_back(s);
         }
     } while (v != 1);
@@ -111,7 +128,8 @@ void Table::set_target_names() {
     m[1] = getlabel(names);
 }
 
-int Table::insert_into(const string str) {
+int Table::insert_into(const string& str, map <string,Table> database) {
+    vector <string> primary_values;
     if ((str.find("INSERT INTO ") != string::npos) && (str.find('(') != string::npos)) {
         string value_group, buf, buf2, insert, target_list, a2, a3;
         //regex reg(R"(\b(?!\bINSERT|INTO\b)\w+\b)");
@@ -143,18 +161,18 @@ int Table::insert_into(const string str) {
                         if (m[1][k] == targets [v]) {
                             if(!type_check (values [v], m[0][k])) // se ci sta qualche errore dovuto ai tipi
                             {
-                                insert_into(reget_str());
+                                insert_into(reget_str(), database);
                                 return 1;
                             }
                         }
                     }
-                }
-               /* for (int z = 0; z < targets.size(); z++) {
-                    if (foreign_keys[test]==targets[z]) {
-                        for ( int y = 0; y < database[references[test]][0].size(); y++) {
-                            if (database[references[test]][0][y] == primary_keys[references[test]]) {
-                                for (int w = 0; w < database[references[test]].size(); w++) {
-                                    primary_values.emplace_back(database[references[test]][w][y]); // vettore per confrontare i valori
+                } // eventualmente qua inizia il commento
+                for (int z = 0; z < targets.size(); z++) {
+                    if (foreign_key == targets[z]) {
+                        for ( int y = 0; y < database[reference].get_map()[1].size(); y++) {
+                            if (database[reference].get_map()[1][y] == primary_key) {
+                                for (int w = 2; w < database[reference].get_map().size(); w++) { // HO IL DUBBIO SE W PARTE DA 0, 1 O 2
+                                    primary_values.emplace_back(database[reference].get_map()[w][y]); // vettore per confrontare i valori
                                 }
                             }
                         }
@@ -165,7 +183,7 @@ int Table::insert_into(const string str) {
                 }
                 for (int n = 0; n < primary_values.size(); n++) {
                     for (int z = 0; z < targets.size(); z++) {
-                        if (foreign_keys[test]==targets[z]) {
+                        if (foreign_key==targets[z]) {
                             if (primary_values[n]==values[z]) {
                                 quit = 1;
                             }
@@ -176,9 +194,9 @@ int Table::insert_into(const string str) {
                     cerr << "Primary keys error: try again" << endl;
                     string error;
                     getline (cin , error);
-                    insert_into(error);
+                    insert_into(error, database);
                     return 1; // ho piazzato il return altrimenti avrebbe continuato da qua e sovrascritto
-                }*/
+                } // eventualmente qua finisce il commento
                 for (int it = 0; it < m[1].size(); it++) {
                     int count = 0;
                     for (int it2 = 0; it2 < targets.size(); it2++) {
@@ -218,7 +236,7 @@ int Table::insert_into(const string str) {
             cerr << "syntax error, try again" << endl;
             string string1;
             getline(cin, string1);
-            insert_into(string1); //richiama se stessa così da poter inserire tutto finchè non metto roba giusta
+            insert_into(string1, database); //richiama se stessa così da poter inserire tutto finchè non metto roba giusta
         }
     }
     return 1;

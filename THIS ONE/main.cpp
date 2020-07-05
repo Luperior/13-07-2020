@@ -18,14 +18,13 @@ ostream& operator<<(ostream& os, Table& t){ // operatore stampa tabella
 }
 
 int main() {
-   
-    time_t now;
+    /*time_t now;
     time (&now);
     cout << ctime (&now) << endl;
     Date daje;
     daje.get_day("03/07/2020");
     Time time;
-    time.get_time("14:45:58");
+    time.get_time("14:45:58");*/ // ho commentato per non "sporcare" ogni volta quando avvio il codice
     map <string,Table> database;
     Table t;
     int q = 0;
@@ -33,7 +32,8 @@ int main() {
         string command;
         getline(cin, command);
         if (command.find("CREATE") != string::npos) {
-            string name = t.create_Table(command);
+            string name = t.create_Table(command); // ottengo il nome della mia prossima tabella
+                                                      // di fatto non serve t, potremmo portarlo fuori? Lupo 05/07
             database[name].set_target_names();
             //cout << database[name] << endl;
             cout << endl;
@@ -47,7 +47,7 @@ int main() {
             smatch match;
             regex_search(command, match, reg);
             string name = match.str();
-           database[name].insert_into(command);
+           database[name].insert_into(command, database);  // IMPORTANTE: ADESSO MANDO DATABASE A INSERT INTO PER POTER AVER TRACCIA DELLE ALTRE TABLE PER IL COLLEGAMENTO Lupo 05/07
             cout << database[name] << endl;
         } else if (command.find("SELECT") != string::npos) { //aggiunto print_table con SELECT. Non collaudato
             regex regAlpha(R"(^[^;]+)");        //Ho un po' scopiazzato da "insert_into". Ho spostato le regex, ecc fuori dal metodo
@@ -65,7 +65,6 @@ int main() {
         } else {
             cerr << "Oooops, something went wrong. Try again" << endl << endl; // così se sbaglia comando ripete subito
         }
-        //print_Table();
     } while (q != 1);
     /*if (q==1) {
         for (const auto &x : m) {

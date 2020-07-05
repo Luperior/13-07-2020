@@ -15,6 +15,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Table.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Table.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Table.h" beforeDir="false" afterPath="$PROJECT_DIR$/Table.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/Table.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/Table.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/main.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/objects.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Progetto_Polito_2020_CLion.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Progetto_Polito_2020_CLion.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +67,7 @@
       <workItem from="1593786687735" duration="20000" />
       <workItem from="1593786757385" duration="6854000" />
       <workItem from="1593878735546" duration="5166000" />
-      <workItem from="1593941128513" duration="4776000" />
+      <workItem from="1593941128513" duration="8113000" />
     </task>
     <servers />
   </component>
@@ -77,21 +82,21 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="585" y="88" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1593946994920" />
-    <state width="1877" height="39" key="GridCell.Tab.0.bottom" timestamp="1593945065289">
+    <state width="1877" height="238" key="GridCell.Tab.0.bottom" timestamp="1593967652255">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="39" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593945065289" />
-    <state width="1877" height="39" key="GridCell.Tab.0.center" timestamp="1593945065289">
+    <state width="1877" height="238" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593967652255" />
+    <state width="1877" height="238" key="GridCell.Tab.0.center" timestamp="1593967652255">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="39" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593945065289" />
-    <state width="1877" height="39" key="GridCell.Tab.0.left" timestamp="1593945065289">
+    <state width="1877" height="238" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593967652255" />
+    <state width="1877" height="238" key="GridCell.Tab.0.left" timestamp="1593967652255">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="39" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593945065289" />
-    <state width="1877" height="39" key="GridCell.Tab.0.right" timestamp="1593945065289">
+    <state width="1877" height="238" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593967652255" />
+    <state width="1877" height="238" key="GridCell.Tab.0.right" timestamp="1593967652255">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="39" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593945065289" />
+    <state width="1877" height="238" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593967652255" />
   </component>
 </project>
