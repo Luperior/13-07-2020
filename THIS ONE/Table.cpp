@@ -6,12 +6,13 @@
 
 Table::Table() {}
 
-Table::Table(const string &_str, const string &_str2, const map<int, vector<string>>& _m, const vector<bool>& _n_null, const vector<bool>& _a_inc) {
+Table::Table(const string &_str, const string &_str2, const map<int, vector<string>>& _m, const vector<bool>& _n_null, const vector<bool>& _a_inc, const int& _a_inc_count) {
     str = _str;
     str2 = _str2;
     m = _m;
     n_null = _n_null;
     a_inc = _a_inc;
+    a_inc_count = _a_inc_count;
 }
 
 Table::~Table() {
@@ -78,10 +79,8 @@ vector<string> Table::get_types(const vector<string>& structure) {
         smatch match;
         regex_search(s, match, reg);
         s = match.str();
-        // cout << "s corrisponde a" << s << endl;
         vect.push_back(s);
     }
-    //cout << vect;
     return vect;
 }
 
@@ -98,7 +97,10 @@ void Table::set_target_names() {
         getline(cin, s);
         if (s.find(");")!= string::npos) {
             v = 1;
-        } else {
+        } else if ((s.find("AUTO_INCREMENT")!= string::npos) && (s.find("INT")== string::npos)) { // ovvero se definisco un NON int come auto_inc
+            cerr << "auto_increment can only be applied to INT data types: try again" << endl;
+        }
+        else {
             names.push_back(s);
         }
     } while (v != 1);
@@ -201,7 +203,14 @@ int Table::insert_into(const string str) {
                     }
                 }
                 m[i] = records;
+                for (int y = 0; y < a_inc.size(); y++) {
+                    if (a_inc[y] == true) {
+                        string str_value = to_string(a_inc_count);
+                        m[i][y] = str_value;
+                    }
+                }
             }
+            a_inc_count++;
         } else {
             cerr << "syntax error, try again" << endl;
             string string1;
