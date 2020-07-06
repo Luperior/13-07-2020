@@ -173,8 +173,24 @@ int Table::insert_into(const string& str, map <string,Table> database) {
                         if (m[1][k] == targets [v]) {
                             if(!type_check (values [v], m[0][k])) // se ci sta qualche errore dovuto ai tipi
                             {
+                                cerr << "wrong data type input: try again" << endl;
                                 insert_into(reget_str(), database);
                                 return 1;
+                            }
+                        }
+                    }
+                } // eventualmente qua inizia il commento
+                for (int f = 0; f < targets.size(); f++) {
+                    if (targets[f] == primary_key) {
+                        for (int g = 0; g < m[1].size(); g++) {
+                            if (m[1][g] == primary_key) {
+                                for (int n = 2; n < m.size(); n++) {
+                                    if (values[f] == m[n][g]) {
+                                        cerr << "Primary key field already contains this value: try again"<< endl;
+                                        insert_into(reget_str(), database);
+                                        return 1;
+                                    }
+                                }
                             }
                         }
                     }
