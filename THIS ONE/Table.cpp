@@ -179,7 +179,7 @@ int Table::insert_into(const string& str, map <string,Table> database) {
                             }
                         }
                     }
-                } // eventualmente qua inizia il commento
+                }
                 for (int f = 0; f < targets.size(); f++) {
                     if (targets[f] == primary_key) {
                         for (int g = 0; g < m[1].size(); g++) {
@@ -234,7 +234,7 @@ int Table::insert_into(const string& str, map <string,Table> database) {
                         }
                     }
                     if (count == 0) {
-                        records.emplace_back("\t"); // al posto di push_back ha suggerito questo
+                        records.emplace_back("\t");
                     }
                 }
                 for (int p = 0; p < n_null.size(); p++) { // scorro il vettore dei not null
