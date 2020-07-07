@@ -168,7 +168,7 @@ int Table::insert_into(const string& str, map <string,Table> database) {
                 vector<string> values = printMatchesIT(value_group, reg3A);
                 vector<string> records;
                 int quit = 0;
-                for (int k = 0; k < m[1].size(); k++) {
+                for (int k = 0; k < m[1].size(); k++) { // avvio controllo data types
                     for (int v = 0; v < targets.size(); v++) {
                         if (m[1][k] == targets [v]) {
                             if(!type_check (values [v], m[0][k])) // se ci sta qualche errore dovuto ai tipi
@@ -179,8 +179,8 @@ int Table::insert_into(const string& str, map <string,Table> database) {
                             }
                         }
                     }
-                }
-                for (int f = 0; f < targets.size(); f++) {
+                } // termine controllo data types
+                for (int f = 0; f < targets.size(); f++) { // avvio controllo valori ripetuti prim_key
                     if (targets[f] == primary_key) {
                         for (int g = 0; g < m[1].size(); g++) {
                             if (m[1][g] == primary_key) {
@@ -194,8 +194,8 @@ int Table::insert_into(const string& str, map <string,Table> database) {
                             }
                         }
                     }
-                } // eventualmente qua inizia il commento
-                for (int z = 0; z < targets.size(); z++) {
+                } // termine controllo valori ripetuti prim_key
+                for (int z = 0; z < targets.size(); z++) { // avvio controllo foreign key, ovvero se la tabella è connessa ad un'altra
                     if (foreign_key == targets[z]) {
                         for ( int y = 0; y < database[reference].get_map()[1].size(); y++) {
                             if (database[reference].get_map()[1][y] == database[reference].get_primary_key()) {
@@ -224,8 +224,8 @@ int Table::insert_into(const string& str, map <string,Table> database) {
                     getline (cin , error);
                     insert_into(error, database);
                     return 1; // ho piazzato il return altrimenti avrebbe continuato da qua e sovrascritto
-                } // eventualmente qua finisce il commento
-                for (int it = 0; it < m[1].size(); it++) {
+                } // termine controllo foreign key
+                for (int it = 0; it < m[1].size(); it++) { // inserimento provvisorio dei valori
                     int count = 0;
                     for (int it2 = 0; it2 < targets.size(); it2++) {
                         if (targets[it2] == m[1][it]) {
@@ -237,7 +237,7 @@ int Table::insert_into(const string& str, map <string,Table> database) {
                         records.emplace_back("\t");
                     }
                 }
-                for (int p = 0; p < n_null.size(); p++) { // scorro il vettore dei not null
+                for (int p = 0; p < n_null.size(); p++) { // avvio controllo not null
                     bool c = true;
                     if (n_null[p] == true) {
                         c = false;
@@ -250,25 +250,105 @@ int Table::insert_into(const string& str, map <string,Table> database) {
                     if (!c) {
                         records[p] = "std_val";
                     }
-                }
-                m[i] = records;
-                for (int y = 0; y < a_inc.size(); y++) {
+                } // termine controllo not null
+                m[i] = records; // inserimento effettivo dei valori
+                for (int y = 0; y < a_inc.size(); y++) { // avvio eventuale correzione dovuta ad auto_inc
                     if (a_inc[y] == true) {
                         string str_value = to_string(a_inc_count);
                         m[i][y] = str_value;
                     }
-                }
+                } // termine eventuale correzione dovuta ad auto_inc
             }
             a_inc_count++;
-        } else {
+        } else { //richiama se stessa così da poter inserire tutto finchè non metto roba giusta
             cerr << "syntax error, try again" << endl;
             string string1;
             getline(cin, string1);
-            insert_into(string1, database); //richiama se stessa così da poter inserire tutto finchè non metto roba giusta
+            insert_into(string1, database);
         }
     }
     return 1;
 }
+
+int Table::update_record(const string& str) { // IMPORTANTE CONTROLLO RICORSIONE         LUPO 07/07/20
+    string s1, s2 , buf, buf2, buf3, buf4, buf5;
+    vector < string > set_names , set_values;
+    getline ( cin, s1);
+    if (s1.find("SET")!=string::npos) {
+        string s1A = s1.substr(4, string::npos );
+        stringstream ss(s1A);
+        while (getline ( ss , buf , ',')) {
+            regex reg2(R"(\w{0,22}[^ =])"); // ciò che è a sx dell'uguale, anche se in realtà il match prenderebbe la roba prima E quella dopo
+            regex reg3(R"(\=(.*))"); // ciò che è a dx dell'uguale, uguale compreso
+            smatch match2, match3;
+            regex_search(buf, match2, reg2);
+            buf2 = match2.str();
+            set_names.push_back(buf2); // il names ora contiene i nomi dei campi da modificare
+            regex_search(buf, match3, reg3);
+            buf3 = match3.str();
+            buf3 = buf3.substr(2, string::npos); // elimino l'uguale dal match
+            set_values.push_back(buf3); // il values ora contiene i valori da inserire nei campi da modificare
+        }
+        getline ( cin, s2);
+        if (s2.find(';')!=string::npos) {
+            regex regAlpha(R"(^[^;]+)");
+            smatch matchAlpha;
+            regex_search(s2, matchAlpha, regAlpha);
+            s2 = matchAlpha.str();
+            if (s2.find("WHERE")!= string::npos) {
+                regex reg4(R"(\w{0,22}[^ =])");
+                regex reg5(R"(\=(.*))");
+                smatch match4, match5;
+                string s2A = s2.substr(6, string::npos);
+                regex_search(s2A, match4, reg4);
+                buf4 = match4.str(); // contiene il nome dell'etichetta da controllare
+                regex_search(s2, match5, reg5);
+                buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
+                buf5 = buf5.substr(2, string::npos);
+                for (int k = 0; k < m[1].size(); k++) { // avvio controllo data types
+                    for (int v = 0; v < set_names.size(); v++) {
+                        if (m[1][k] == set_names [v]) {
+                            if(!type_check (set_values [v], m[0][k])) // se ci sta qualche errore dovuto ai tipi
+                            {
+                                cerr << "wrong data type input: try again" << endl;
+                                update_record(reget_str());
+                                return 0;
+                            }
+                        }
+                    }
+                } // termine controllo data types
+                for (int k = 0; k < m[1].size(); k++) { // avvio controllo tentativo di sovrascrittura di dato auto_inc
+                    for (int v = 0; v < set_names.size(); v++) {
+                        if (m[1][k] == set_names[v]) {
+                            if (a_inc[k] == true) {
+                                cerr << "auto_increment data cannot be updated: try again" << endl;
+                                update_record(reget_str());
+                                return 0;
+                            }
+                        }
+                    }
+                }  // termine controllo tentativo di sovrascrittura di dato auto_inc
+                for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                    if (buf4 == m[1][j]) { // verifico che corrisponda
+                        for (int it = 2; it <m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
+                            if (m[it][j] == buf5) { // controllo che lo assuma
+                                for (int k = 0;k < set_names.size(); k++) { // vedo via via quali sono le etichette da modificare
+                                    for (int l = 0; l < m[1].size(); l++) { // e vedo a che posizione corrispondono nella prima riga
+                                        if (set_names[k] == m[1][l]) { // appena trovo un match
+                                            m[it][l] = set_values[k]; // sostituisco il valore nuovo, corrispondente alla posizione di set_names
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return 0;
+}
+
 
 int Table::size() {
     return m.size();

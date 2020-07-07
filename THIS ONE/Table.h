@@ -18,6 +18,7 @@ public:
     vector<string> get_types(const vector<string>& structure);
     map <int, vector <string>> get_map();
     int insert_into(const string& str, map <string,Table> database);
+    int update_record(const string& str);
     string get_primary_key();
     string get_foreign_key();
     string get_reference();

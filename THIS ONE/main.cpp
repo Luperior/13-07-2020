@@ -13,7 +13,7 @@
 
 
 ostream& operator<<(ostream& os, Table& t){ // operatore stampa tabella
-    os << t.get_map() << endl;
+    os << t.get_map();
     return os;
 }
 
@@ -36,7 +36,7 @@ int main() {
                                                       // di fatto non serve t, potremmo portarlo fuori? Lupo 05/07
             database[name].set_target_names();
             //cout << database[name] << endl;
-            cout << "Table " + name + " successfully created" << endl;
+            cout << "Table " + name + " successfully created" << endl << endl;
         }/*
         else if (command.find("UPDATE") != string::npos) {
             update_record(command);
@@ -49,7 +49,14 @@ int main() {
             string name = match.str();
            database[name].insert_into(command, database);  // IMPORTANTE: ADESSO MANDO DATABASE A INSERT INTO PER POTER AVER TRACCIA DELLE ALTRE TABLE PER IL COLLEGAMENTO Lupo 05/07
             cout << database[name] << endl;
-            cout << "Record successfully inserted into Table " + name << endl;
+            cout << "Record successfully inserted into Table " + name << endl << endl;
+        }  else if (command.find("UPDATE") != string::npos) {
+            regex reg(R"(\b(?!\bUPDATE\b)\w+\b)");
+            smatch match;
+            regex_search(command, match, reg);
+            string name= match.str();
+            database[name].update_record(command);
+            cout << "Table " + name + " successfully updated" << endl << endl;
         } else if (command.find("SELECT") != string::npos) { //aggiunto print_table con SELECT. Non collaudato
             regex regAlpha(R"(^[^;]+)");        //Ho un po' scopiazzato da "insert_into". Ho spostato le regex, ecc fuori dal metodo
             smatch matchAlpha;                       //in modo da poter poi avere database[name] al posto di t.     30/06/2020  Evry
