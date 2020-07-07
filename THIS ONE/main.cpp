@@ -36,7 +36,7 @@ int main() {
                                                       // di fatto non serve t, potremmo portarlo fuori? Lupo 05/07
             database[name].set_target_names();
             //cout << database[name] << endl;
-            cout << endl;
+            cout << "Table " + name + " successfully created" << endl;
         }/*
         else if (command.find("UPDATE") != string::npos) {
             update_record(command);
@@ -49,6 +49,7 @@ int main() {
             string name = match.str();
            database[name].insert_into(command, database);  // IMPORTANTE: ADESSO MANDO DATABASE A INSERT INTO PER POTER AVER TRACCIA DELLE ALTRE TABLE PER IL COLLEGAMENTO Lupo 05/07
             cout << database[name] << endl;
+            cout << "Record successfully inserted into Table " + name << endl;
         } else if (command.find("SELECT") != string::npos) { //aggiunto print_table con SELECT. Non collaudato
             regex regAlpha(R"(^[^;]+)");        //Ho un po' scopiazzato da "insert_into". Ho spostato le regex, ecc fuori dal metodo
             smatch matchAlpha;                       //in modo da poter poi avere database[name] al posto di t.     30/06/2020  Evry
