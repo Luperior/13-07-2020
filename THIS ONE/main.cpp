@@ -28,6 +28,8 @@ int main() {
     map <string,Table> database;
     vector<string> database_names;
     Table t;
+    Control c;
+    c.upload_tablenames(database_names);
     int q = 0;
    do {
         string command;
@@ -36,15 +38,9 @@ int main() {
             string name = t.create_Table(command); // ottengo il nome della mia prossima tabella
                                                       // di fatto non serve t, potremmo portarlo fuori? Lupo 05/07
             database[name].set_target_names();
-            //cout << database[name] << endl;
             database_names.emplace_back(name);
             cout << "Table " + name + " successfully created" << endl << endl;
-        }/*
-        else if (command.find("UPDATE") != string::npos) {
-            update_record(command);
-            cout << endl;
-        }*/
-        else if (command.find("INSERT") != string::npos) {
+        } else if (command.find("INSERT") != string::npos) {
             regex reg(R"(\b(?!\bINSERT|INTO\b)\w+\b)");         //ci va un if/else nel caso in cui sia inserito male? 30/06 Evry
             smatch match;
             regex_search(command, match, reg);
@@ -81,10 +77,15 @@ int main() {
                     smatch match;
                     regex_search(command, match, reg);
                     string drop = match.str();
-                    database.erase(drop);
-                    vector<string>::iterator del;
-                    del = find(database_names.begin(), database_names.end(), drop);
-                    database_names.erase(del);
+                    if (database[drop].get_map().size()== 0) {
+                        cerr << "No such map exists" << endl;
+                    } else {
+                        database.erase(drop);
+                        vector<string>::iterator del;
+                        del = find(database_names.begin(), database_names.end(), drop);
+                        database_names.erase(del);
+                        cout << "Table " + drop + " successfully removed" << endl << endl;
+                    }
                 }
             }
         } else if (command.find("TRUNCATE") != string::npos) {
@@ -99,6 +100,7 @@ int main() {
                     regex_search(command, match, reg);
                     string drop = match.str();
                     database[drop].get_map().erase(2); // svuoto la map corrispondente al nome indicato, utilizzato come indice drop dalla riga 2 così restano le etichette
+                    cout << "Table " + drop + " successfully truncated" << endl << endl;
                 }
             }
         } else if (command.find("ORDER") != string::npos) {
@@ -115,19 +117,14 @@ int main() {
             string s2;
             getline ( cin, s2);
             database[table_name].delete_from_table(s2);
+            cout << "Table " + table_name + " successfully deleted" << endl << endl;
         } else if (command.find("QUIT()") != string::npos) {
             q = 1;
         } else {
             cerr << "Oooops, something went wrong. Try again" << endl << endl; // così se sbaglia comando ripete subito
         }
     } while (q != 1);
-    /*if (q==1) {
-        for (const auto &x : m) {
-            cout << x.second << endl;
-        }
-        // salvo su file essendo comando QUIT
-        exit(0);
-    }*/
+    c.save_tablenames(database_names); // creo i file ognuno con un nome
     return 0;
     }
 

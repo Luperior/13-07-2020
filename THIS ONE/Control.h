@@ -31,19 +31,23 @@ public:
     bool c_date (const string& str);
     bool c_time (const string& str);
     string reget_str();
+    void save_tablenames(const vector<string>& table_names);
+    vector <string> upload_tablenames(vector <string>& table_names);
 
 private:  //protected o private?
 string str, type;
 regex reg;
 };
 
-// operatore stampa vettore
-ostream& operator<<(ostream& os, const vector<string>& v)
+template <typename T> // operatore stampa vettore
+ostream& operator<<(ostream& os, const vector<T>& v)
 {
-    string del = "\t";
     for (int i = 0; i < v.size(); ++i) {
-        if (del != v[i]) {
+        if (v[i] != "\t") {
             os << v[i] << "\t";
+        }
+        else {
+            os << v[i];
         }
     }
     return os;

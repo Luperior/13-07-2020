@@ -104,3 +104,23 @@ string Control::reget_str() {
     return re_str;
 }
 
+void Control::save_tablenames(const vector<string>& table_names) {
+    ofstream outf ("table_names.bin", ios::binary);
+    //ofstream outf ("table_names.txt");
+    for (auto it = table_names.begin(); it < table_names.end(); it++)
+    {
+        outf << *it << endl;
+    }
+} // salva i nomi delle tabelle
+
+vector <string> Control::upload_tablenames(vector <string>& table_names) {
+    string s;
+    //ifstream inf("table_names.txt");
+    ifstream inf("table_names.bin", ios::binary);
+    while (getline(inf, s))
+    {
+        table_names.push_back(s);
+    }
+    inf.close();
+    return table_names;
+} // ricarica i nomi delle tabelle
