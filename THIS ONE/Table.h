@@ -19,12 +19,12 @@ public:
     map <int, vector <string>> get_map();
     int insert_into(const string& str, map <string,Table> database);
     int update_record(const string& str);
+    void ordiniamoli();
+    void delete_from_table(const string& s2);
     string get_primary_key();
     string get_foreign_key();
     string get_reference();
     int size();
-    //vector <string>& operator new[](int&i);
-    //string& operator[](std::size_t idx);
     vector <string> line (const int& idx);
     void print_table(const string& _str);
 

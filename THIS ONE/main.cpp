@@ -26,6 +26,7 @@ int main() {
     Time time;
     time.get_time("14:45:58");*/ // ho commentato per non "sporcare" ogni volta quando avvio il codice
     map <string,Table> database;
+    vector<string> database_names;
     Table t;
     int q = 0;
    do {
@@ -36,6 +37,7 @@ int main() {
                                                       // di fatto non serve t, potremmo portarlo fuori? Lupo 05/07
             database[name].set_target_names();
             //cout << database[name] << endl;
+            database_names.emplace_back(name);
             cout << "Table " + name + " successfully created" << endl << endl;
         }/*
         else if (command.find("UPDATE") != string::npos) {
@@ -68,6 +70,51 @@ int main() {
             string name = match.str();
             database[name].print_table(command);
             cout << endl;
+        } else if (command.find("DROP") != string::npos) {
+            if (command.find(';') != string::npos) {
+                regex regAlpha(R"(^[^;]+)");
+                smatch matchAlpha;
+                regex_search(command, matchAlpha, regAlpha);
+                command = matchAlpha.str();
+                if (command.find("DROP TABLE") != string::npos) {
+                    regex reg(R"(\b(?!\bDROP|TABLE\b)\w+\b)");
+                    smatch match;
+                    regex_search(command, match, reg);
+                    string drop = match.str();
+                    database.erase(drop);
+                    vector<string>::iterator del;
+                    del = find(database_names.begin(), database_names.end(), drop);
+                    database_names.erase(del);
+                }
+            }
+        } else if (command.find("TRUNCATE") != string::npos) {
+            if (command.find(';')!=string::npos) {
+                regex regAlpha(R"(^[^;]+)");
+                smatch matchAlpha;
+                regex_search(command, matchAlpha, regAlpha);
+                command = matchAlpha.str();
+                if (command.find("TRUNCATE TABLE") != string::npos) {
+                    regex reg(R"(\b(?!\bTRUNCATE|TABLE\b)\w+\b)");
+                    smatch match;
+                    regex_search(command, match, reg);
+                    string drop = match.str();
+                    database[drop].get_map().erase(2); // svuoto la map corrispondente al nome indicato, utilizzato come indice drop dalla riga 2 così restano le etichette
+                }
+            }
+        } else if (command.find("ORDER") != string::npos) {
+            regex reg(R"(\b(?!\bORDER|FROM\b)\w+\b)");         //ci va un if/else nel caso in cui sia inserito male? 30/06 Evry
+            smatch match;
+            regex_search(command, match, reg);
+            string name = match.str();
+            database[name].ordiniamoli();
+        } else if (command.find("DELETE") != string::npos) {
+            regex reg(R"(\b(?!\bDELETE|FROM\b)\w+\b)");
+            smatch match;
+            regex_search(command, match, reg);
+            string table_name= match.str();
+            string s2;
+            getline ( cin, s2);
+            database[table_name].delete_from_table(s2);
         } else if (command.find("QUIT") != string::npos) {
             q = 1;
         } else {

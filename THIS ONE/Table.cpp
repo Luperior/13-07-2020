@@ -51,6 +51,66 @@ string Table::create_Table(string& str) {
     }
 }
 
+void Table::ordiniamoli() {
+    vector<string> target;
+    string order_label = "ID";
+    for (int l = 0; l < m[1].size(); l++) {
+        if (order_label == m[1][l]) {
+            for (int p = 2; p < m.size(); p++) {
+                target.emplace_back(m[p][l]);
+            }
+        }
+    }
+    sort(target.begin(),target.end());
+    vector<string> order = target;
+    vector<int> order_index;
+    for (int n = 0; n < m[1].size(); n++) {
+        if (m[1][n] == order_label) { // supponendo che order_label sia l'etichetta guida
+            for (int i = 0; i < order.size(); i++) { // vettore ordinato
+                for (int j = 0; j < m.size(); j++) {
+                    if (order[i] == m[j][n]) {
+                        order_index.emplace_back(j);
+                    }
+                }
+            }
+        }
+    }
+
+    for (int k = 0; k < order_index.size(); k++) {
+        cout << m[order_index[k]] << endl;
+    }
+}
+
+void Table::delete_from_table(const string& s2) {
+    string s3, buf4 , buf5;
+    if (s2.find(';')!=string::npos) {
+        regex regAlpha(R"(^[^;]+)");
+        smatch matchAlpha;
+        regex_search(s2, matchAlpha, regAlpha);
+        s3 = matchAlpha.str();
+        if (s3.find("WHERE") != string::npos) {
+            regex reg4(R"(\w{0,22}[^ =])");
+            regex reg5(R"(\=(.*))");
+            smatch match4, match5;
+            string s2A = s3.substr(6, string::npos);
+            regex_search(s2A, match4, reg4);
+            buf4 = match4.str(); // contiene il nome dell'etichetta da controllare
+            regex_search(s3, match5, reg5);
+            buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
+            buf5 = buf5.substr(2, string::npos);
+            for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                if (buf4 == m[1][j]) { // verifico che corrisponda
+                    for (int it = 2; it < m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
+                        if (m[it][j] == buf5) { // controllo che lo assuma
+                            m.erase(it);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 vector<string> Table::getlabel(const vector<string>& structure) {
     string s;
     vector <string> vect;
@@ -554,14 +614,4 @@ void Table::print_table(const string& _str) {
 }
 
 
-/*
-string &Table::operator[](std::size_t idx) {
-    return [idx];
-}
-
-vector <string>& Table::operator new[](int &i, map <int, vector <string>> m) {
-    vector <string> vect_str;
-    m[i] = vect_str;
-    return vect_str;
-}*/
 

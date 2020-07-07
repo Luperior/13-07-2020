@@ -104,4 +104,3 @@ string Control::reget_str() {
     return re_str;
 }
 
-
