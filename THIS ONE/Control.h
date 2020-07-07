@@ -37,11 +37,14 @@ string str, type;
 regex reg;
 };
 
-
-template <typename T> //operatore stampa vettore
-ostream &operator<<(ostream &os, const vector<T> &v) {
+// operatore stampa vettore
+ostream& operator<<(ostream& os, const vector<string>& v)
+{
+    string del = "\t";
     for (int i = 0; i < v.size(); ++i) {
-        os << v[i] << "\t";
+        if (del != v[i]) {
+            os << v[i] << "\t";
+        }
     }
     return os;
 }
