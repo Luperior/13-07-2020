@@ -11,10 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f93d186-80c6-44b3-868f-9deeafcb109c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Control.h" beforeDir="false" afterPath="$PROJECT_DIR$/Control.h" afterDir="false" />
-    </list>
+    <list default="true" id="6f93d186-80c6-44b3-868f-9deeafcb109c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,7 +60,7 @@
       <workItem from="1593878735546" duration="5166000" />
       <workItem from="1593941128513" duration="8641000" />
       <workItem from="1594045706281" duration="1671000" />
-      <workItem from="1594110389028" duration="8538000" />
+      <workItem from="1594110389028" duration="8880000" />
     </task>
     <task id="LOCAL-00001" summary="Primary_Key now perfectly working">
       <created>1594047051144</created>
@@ -93,7 +90,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594136810106</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="DROP, DELETE e TRUNCATE #2">
+      <created>1594137056209</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1594137056209</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -104,13 +108,14 @@
     <MESSAGE value="Primary_Key now perfectly working2" />
     <MESSAGE value="Cazzatine" />
     <MESSAGE value="DROP, DELETE e TRUNCATE" />
-    <option name="LAST_COMMIT_MESSAGE" value="DROP, DELETE e TRUNCATE" />
+    <MESSAGE value="DROP, DELETE e TRUNCATE #2" />
+    <option name="LAST_COMMIT_MESSAGE" value="DROP, DELETE e TRUNCATE #2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="585" y="88" key="CommitChangelistDialog2" timestamp="1594136807015">
+    <state x="585" y="88" key="CommitChangelistDialog2" timestamp="1594137055271">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="585" y="88" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594136807015" />
+    <state x="585" y="88" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594137055271" />
     <state width="1877" height="202" key="GridCell.Tab.0.bottom" timestamp="1594134357425">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -127,9 +132,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="202" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594134357425" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1594136812957">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1594137058678">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594136812957" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594137058678" />
   </component>
 </project>
