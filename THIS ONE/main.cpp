@@ -115,7 +115,7 @@ int main() {
             string s2;
             getline ( cin, s2);
             database[table_name].delete_from_table(s2);
-        } else if (command.find("QUIT") != string::npos) {
+        } else if (command.find("QUIT()") != string::npos) {
             q = 1;
         } else {
             cerr << "Oooops, something went wrong. Try again" << endl << endl; // così se sbaglia comando ripete subito
