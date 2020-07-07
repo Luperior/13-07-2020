@@ -11,18 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f93d186-80c6-44b3-868f-9deeafcb109c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Control.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Control.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Control.h" beforeDir="false" afterPath="$PROJECT_DIR$/Control.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/Control.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/Control.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/Table.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/Table.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/main.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/objects.a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Progetto_Polito_2020_CLion.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Progetto_Polito_2020_CLion.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="6f93d186-80c6-44b3-868f-9deeafcb109c" name="Default Changelist" comment="DROP, DELETE e TRUNCATE #2" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,7 +60,7 @@
       <workItem from="1593878735546" duration="5166000" />
       <workItem from="1593941128513" duration="8641000" />
       <workItem from="1594045706281" duration="1671000" />
-      <workItem from="1594110389028" duration="11802000" />
+      <workItem from="1594110389028" duration="11909000" />
     </task>
     <task id="LOCAL-00001" summary="Primary_Key now perfectly working">
       <created>1594047051144</created>
@@ -126,10 +115,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="DROP, DELETE e TRUNCATE #2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="585" y="88" key="CommitChangelistDialog2" timestamp="1594137055271">
+    <state x="585" y="88" key="CommitChangelistDialog2" timestamp="1594140346241">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="585" y="88" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594137055271" />
+    <state x="585" y="88" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594140346241" />
     <state width="1877" height="202" key="GridCell.Tab.0.bottom" timestamp="1594139656687">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
