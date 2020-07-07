@@ -26,7 +26,7 @@ public:
     string get_reference();
     int size();
     vector <string> line (const int& idx);
-    void print_table(const string& _str);
+    void print_table(const string& _str, map <string,Table> database);
 
 
 protected:

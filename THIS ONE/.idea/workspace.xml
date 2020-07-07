@@ -11,7 +11,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f93d186-80c6-44b3-868f-9deeafcb109c" name="Default Changelist" comment="DROP, DELETE e TRUNCATE #2" />
+    <list default="true" id="6f93d186-80c6-44b3-868f-9deeafcb109c" name="Default Changelist" comment="DROP, DELETE e TRUNCATE #2">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Table.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Table.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Table.h" beforeDir="false" afterPath="$PROJECT_DIR$/Table.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -60,7 +65,7 @@
       <workItem from="1593878735546" duration="5166000" />
       <workItem from="1593941128513" duration="8641000" />
       <workItem from="1594045706281" duration="1671000" />
-      <workItem from="1594110389028" duration="11909000" />
+      <workItem from="1594110389028" duration="13135000" />
     </task>
     <task id="LOCAL-00001" summary="Primary_Key now perfectly working">
       <created>1594047051144</created>

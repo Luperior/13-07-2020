@@ -418,22 +418,213 @@ vector<string> Table::line(const int& idx) {
     return m[idx];
 }
 
-void Table::print_table(const string& _str) {
+void Table::print_table(const string& _str, map <string,Table> database) {
     if (str.find('*') != string::npos) {
         string from;
         getline(cin, from);
-        if ((from.find("FROM") != string::npos) && (from.find(';') != string::npos)) { // qui come mai è commentato tutto? in questo modo non compie alcuna azione quando
-                                                                                                // voglio stampare semplicemente tutta la tabella
-                                                                                                // 03/07 Lupo
-           /* regex regAlpha(R"(^[^;]+)");
+        if ((from.find("FROM") != string::npos) && (from.find(';') != string::npos)) {
+            regex regAlpha(R"(^[^;]+)");
             smatch matchAlpha;
             regex_search(from, matchAlpha, regAlpha);
             from = matchAlpha.str();
             regex reg(R"(\b(?!\bFROM\b)\w+\b)");
             smatch match;
             regex_search(from, match, reg);
-            string s = match.str();*/
-            //cout << database[s];
+            string s = match.str();
+            cout << database[s].get_map();
+        } else if (from.find("FROM") != string::npos) {
+            string where;
+            getline(cin, where);
+            if (where.find("WHERE") != string::npos) {
+                if (where.find(';') != string::npos) {
+                    regex reg9(R"(\b(?!\bFROM\b)\w+\b)");
+                    smatch match9;
+                    regex_search(from, match9, reg9);
+                    string s = match9.str();
+                    regex regAlpha(R"(^[^;]+)");
+                    smatch matchAlpha;
+                    regex_search(where, matchAlpha, regAlpha);
+                    where = matchAlpha.str();
+                    string buf = where.substr(where.find("WHERE") + 6, string::npos);
+                    regex reg(R"(\w{0,22}[^ =])");
+                    smatch match, match2;
+                    regex_search(buf, match, reg);
+                    string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                    regex reg2(R"(\=(.*))");
+                    regex_search(buf, match2, reg2);
+                    string buf3 = match2.str().substr(2,
+                                                      string::npos); // contiene il valore dell'etichetta da controllare
+                    vector<int> number;
+                    for (int a = 0; a < database[s][0].size(); a++) {
+                        if (buf2 == database[s][0][a]) {
+                            for (int it = 1; it < database[s].size(); it++) {
+                                if (buf3 == database[s][it][a]) {
+                                    number.emplace_back(
+                                            it); // contiene tutti gli indici dei record dove la condizione WHERE è soddisfatta
+                                }
+                            }
+                        }
+                    }
+                    cout << database[s][0] << endl;
+                    for (auto ti = number.begin(); ti < number.end(); ti++) {
+                        cout << database[s][*ti] << endl;
+                    }
+                } else {
+                    string order_by;
+                    getline(cin, order_by);
+                    if ((order_by.find("ORDER BY") != string::npos) && (order_by.find(';') != string::npos)) {
+                        if (order_by.find("ASC") != string::npos) {
+
+                        } else if (order_by.find("DESC") != string::npos) {
+
+                        }
+                    }
+                }
+            } else if (where.find("ORDER BY") != string::npos) {
+                if (where.find("ASC") != string::npos) {
+
+                } else if (where.find("DESC") != string::npos) {
+
+                }
+            }
+        }
+    } else {
+        string from;
+        getline(cin, from);
+        if (from.find("FROM") != string::npos) {
+            if (from.find(';') != string::npos) {
+                regex regAlpha(R"(^[^;]+)");
+                smatch matchAlpha;
+                regex_search(from, matchAlpha, regAlpha);
+                from = matchAlpha.str();
+                regex reg(R"(\b(?!\bFROM\b)\w+\b)");
+                smatch match;
+                regex_search(from, match, reg);
+                string s = match.str();
+                string y = str.substr(str.find("SELECT") + 7, string::npos);
+                stringstream ss(y);
+                string buf;
+                vector<string> vect;
+                while (getline(ss, buf, ',')) {
+                    regex reg0(R"([^\s]+)");
+                    smatch match0;
+                    regex_search(buf, match0, reg0);
+                    string buf0 = match0.str();
+                    vect.emplace_back(buf0);
+                }
+                vector<int> positions;
+                for (int j = 0; j < vect.size(); j++) {
+                    for (int k = 0; k < database[s][0].size(); k++) {
+                        if (vect[j] == database[s][0][k]) {
+                            cout << database[s][0][k] << "\t";
+                            positions.emplace_back(k);
+                        }
+                    }
+                }
+                cout << endl;
+                for (int it = 1; it < database[s].size(); it++) {
+                    for (auto l = positions.begin(); l < positions.end(); l++) {
+                        cout << database[s][it][*l] << "\t";
+                    }
+                    cout << endl;
+                }
+            } else {
+                string where;
+                getline(cin, where);
+                if (where.find("WHERE") != string::npos) {
+                    if (where.find(';') != string::npos) {
+                        regex reg9(R"(\b(?!\bFROM\b)\w+\b)");
+                        smatch match9;
+                        regex_search(from, match9, reg9);
+                        string s = match9.str();
+                        string y = str.substr(str.find("SELECT") + 7, string::npos);
+                        stringstream ss(y);
+                        string buf9;
+                        vector<string> vect;
+                        while (getline(ss, buf9, ',')) {
+                            regex reg0(R"([^\s]+)");
+                            smatch match0;
+                            regex_search(buf9, match0, reg0);
+                            string buf0 = match0.str();
+                            vect.emplace_back(buf0); // vect contiene i campi che vogliamo stampare
+                        }
+                        regex regAlpha(R"(^[^;]+)");
+                        smatch matchAlpha;
+                        regex_search(where, matchAlpha, regAlpha);
+                        where = matchAlpha.str();
+                        string buf = where.substr(where.find("WHERE") + 6, string::npos);
+                        regex reg(R"(\w{0,22}[^ =])");
+                        smatch match, match2;
+                        regex_search(buf, match, reg);
+                        string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                        regex reg2(R"(\=(.*))");
+                        regex_search(buf, match2, reg2);
+                        string buf3 = match2.str().substr(2,
+                                                          string::npos); // contiene il valore dell'etichetta da controllare
+                        vector<int> number;
+                        for (int a = 0; a < database[s][0].size(); a++) {
+                            if (buf2 == database[s][0][a]) {
+                                for (int it = 1; it < database[s].size(); it++) {
+                                    if (buf3 == database[s][it][a]) {
+                                        number.emplace_back(
+                                                it); // contiene tutti gli indici delle righe (record) dove la condizione WHERE è soddisfatta
+                                    }
+                                }
+                            }
+                        }
+                        vector<int> positions;
+                        for (int j = 0; j < vect.size(); j++) {
+                            for (int k = 0; k < database[s][0].size(); k++) {
+                                if (vect[j] == database[s][0][k]) {
+                                    cout << database[s][0][k] << "\t";
+                                    positions.emplace_back(k);
+                                }
+                            }
+                        }
+                        cout << endl;
+                        for (auto b = number.begin(); b < number.end(); b++) {
+                            for (auto l = positions.begin(); l < positions.end(); l++) {
+                                cout << database[s][*b][*l] << "\t";
+                            }
+                            cout << endl;
+                        }
+                    } else {
+                        string order_by;
+                        getline(cin, order_by);
+                        if ((order_by.find("ORDER BY") != string::npos) && (order_by.find(';') != string::npos)) {
+                            if (order_by.find("ASC") != string::npos) {
+
+                            } else if (order_by.find("DESC") != string::npos) {
+
+                            }
+                        }
+                    }
+                } else if (where.find("ORDER BY") != string::npos) {
+                    if (where.find("ASC") != string::npos) {
+
+                    } else if (where.find("DESC") != string::npos) {
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+ /* void Table::print_table(const string& _str, map <string,Table> database) {
+    if (str.find('*') != string::npos) {
+        string from;
+        getline(cin, from);
+        if ((from.find("FROM") != string::npos) && (from.find(';') != string::npos)) {
+            regex regAlpha(R"(^[^;]+)");
+            smatch matchAlpha;
+            regex_search(from, matchAlpha, regAlpha);
+            from = matchAlpha.str();
+            regex reg(R"(\b(?!\bFROM\b)\w+\b)");
+            smatch match;
+            regex_search(from, match, reg);
+            string s = match.str();
+            cout << database[s].get_map();
         } else if (from.find("FROM") != string::npos) {
             string where;
             getline(cin, where);
@@ -611,7 +802,4 @@ void Table::print_table(const string& _str) {
             }
         }
     }
-}
-
-
-
+}*/

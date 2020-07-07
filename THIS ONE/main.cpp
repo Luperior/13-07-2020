@@ -55,16 +55,8 @@ int main() {
             string name= match.str();
             database[name].update_record(command);
             cout << "Table " + name + " successfully updated" << endl << endl;
-        } else if (command.find("SELECT") != string::npos) { //aggiunto print_table con SELECT. Non collaudato
-            regex regAlpha(R"(^[^;]+)");        //Ho un po' scopiazzato da "insert_into". Ho spostato le regex, ecc fuori dal metodo
-            smatch matchAlpha;                       //in modo da poter poi avere database[name] al posto di t.     30/06/2020  Evry
-            regex_search(command, matchAlpha, regAlpha);
-            command = matchAlpha.str();
-            regex reg(R"(\b(?!\bFROM\b)\w+\b)");
-            smatch match;
-            regex_search(command, match, reg);
-            string name = match.str();
-            database[name].print_table(command);
+        } else if (command.find("SELECT") != string::npos) {
+            t.print_table(command, database);
             cout << endl;
         } else if (command.find("DROP") != string::npos) {
             if (command.find(';') != string::npos) {
@@ -77,7 +69,7 @@ int main() {
                     smatch match;
                     regex_search(command, match, reg);
                     string drop = match.str();
-                    if (database[drop].get_map().size()== 0) {
+                    if (database[drop].get_map().empty()) {
                         cerr << "No such map exists" << endl;
                     } else {
                         database.erase(drop);
