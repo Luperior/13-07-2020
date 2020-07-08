@@ -85,7 +85,42 @@ void Table::order_asc(const string& str, const vector<int>& number) {
 }
 
 void Table::select_order_asc(const string& str, const vector<int>& number, const vector<int>& positions) {
-
+    regex reg(R"(\b(?!\bORDER|BY\b)\w+\b)");
+    smatch match;
+    regex_search(str, match, reg);
+    vector<string> target;
+    string order_label = match.str();
+    for (int l = 0; l < m[1].size(); l++) {
+        if (order_label == m[1][l]) {
+            for (int p = 0; p < number.size(); p++) {
+                target.emplace_back(m[number[p]][l]);
+            }
+        }
+    }
+    sort(target.begin(),target.end());
+    vector<string> order = target;
+    vector<int> order_index;
+    for (int n = 0; n < m[1].size(); n++) {
+        if (m[1][n] == order_label) { // supponendo che order_label sia l'etichetta guida
+            for (int i = 0; i < order.size(); i++) { // vettore ordinato
+                for (int j = 2; j < m.size(); j++) {
+                    if (order[i] == m[j][n]) {
+                        order_index.emplace_back(j);
+                    }
+                }
+            }
+        }
+    }
+    for (int d = 0; d < positions.size(); d++) {
+        cout << m[1][positions[d]] << "\t";
+    }
+    cout << endl;
+    for (int it = 0; it < order_index.size(); it++) {
+        for (auto l = positions.begin(); l < positions.end(); l++) {
+            cout << m[order_index[it]][*l] << "\t";
+        }
+        cout << endl;
+    }
 }
 
 void Table::order_desc(const string& str, const vector<int>& number) {
@@ -122,7 +157,42 @@ void Table::order_desc(const string& str, const vector<int>& number) {
 }
 
 void Table::select_order_desc(const string& str, const vector<int>& number, const vector<int>& positions) {
-
+    regex reg(R"(\b(?!\bORDER|BY\b)\w+\b)");
+    smatch match;
+    regex_search(str, match, reg);
+    vector<string> target;
+    string order_label = match.str();
+    for (int l = 0; l < m[1].size(); l++) {
+        if (order_label == m[1][l]) {
+            for (int p = 0; p < number.size(); p++) {
+                target.emplace_back(m[number[p]][l]);
+            }
+        }
+    }
+    sort(target.begin(),target.end());
+    vector<string> order = target;
+    vector<int> order_index;
+    for (int n = 0; n < m[1].size(); n++) {
+        if (m[1][n] == order_label) { // supponendo che order_label sia l'etichetta guida
+            for (int i = 0; i < order.size(); i++) { // vettore ordinato
+                for (int j = 2; j < m.size(); j++) {
+                    if (order[i] == m[j][n]) {
+                        order_index.emplace_back(j);
+                    }
+                }
+            }
+        }
+    }
+    for (int d = 0; d < positions.size(); d++) {
+        cout << m[1][positions[d]] << "\t";
+    }
+    cout << endl;
+    for (int it = order_index.size() -1; it > -1; it--) {
+        for (auto l = positions.begin(); l < positions.end(); l++) {
+            cout << m[order_index[it]][*l] << "\t";
+        }
+        cout << endl;
+    }
 }
 
 void Table::delete_from_table(const string& s2) {
@@ -460,7 +530,7 @@ vector<string> Table::line(const int& idx) {
     return m[idx];
 }
 
-void Table::print_table(const string& str, map <string,Table> database) { // da sistemare la stampa SENZA * e CON ordinamento, causa doppia stampa e metodi select_order vuoti
+void Table::print_table(const string& str, map <string,Table> database) {
     if (str.find('*') != string::npos) {
         string from;
         getline(cin, from);
@@ -711,17 +781,9 @@ void Table::print_table(const string& str, map <string,Table> database) { // da 
                             for (int j = 0; j < vect.size(); j++) {
                                 for (int k = 0; k < database[s].get_map()[1].size(); k++) {
                                     if (vect[j] == database[s].get_map()[1][k]) {
-                                        cout << database[s].get_map()[1][k] << "\t";
                                         positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
                                     }
                                 }
-                            }
-                            cout << endl;
-                            for (auto b = number.begin(); b < number.end(); b++) {
-                                for (auto l = positions.begin(); l < positions.end(); l++) {
-                                    cout << database[s].get_map()[*b][*l] << "\t";
-                                }
-                                cout << endl;
                             }
                             if (order_by.find("ASC") != string::npos) {
                                 database[s].select_order_asc(where, number, positions);
@@ -754,17 +816,9 @@ void Table::print_table(const string& str, map <string,Table> database) { // da 
                     for (int j = 0; j < vect.size(); j++) {
                         for (int k = 0; k < database[s].get_map()[1].size(); k++) {
                             if (vect[j] == database[s].get_map()[1][k]) {
-                                cout << database[s].get_map()[1][k] << "\t";
                                 positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
                             }
                         }
-                    }
-                    cout << endl;
-                    for (int it = 2; it < database[s].get_map().size(); it++) {
-                        for (auto l = positions.begin(); l < positions.end(); l++) {
-                            cout << database[s].get_map()[it][*l] << "\t";
-                        }
-                        cout << endl;
                     }
                     vector <int> number;
                     for (int e = 2; e < database[s].get_map().size(); e++) {
