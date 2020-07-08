@@ -46,14 +46,14 @@ int main() {
             regex_search(command, match, reg);
             string name = match.str();
            database[name].insert_into(command, database);  // IMPORTANTE: ADESSO MANDO DATABASE A INSERT INTO PER POTER AVER TRACCIA DELLE ALTRE TABLE PER IL COLLEGAMENTO Lupo 05/07
-            cout << database[name] << endl;
+            //cout << database[name] << endl;
             cout << "Record successfully inserted into Table " + name << endl << endl;
         }  else if (command.find("UPDATE") != string::npos) {
             regex reg(R"(\b(?!\bUPDATE\b)\w+\b)");
             smatch match;
             regex_search(command, match, reg);
             string name= match.str();
-            database[name].update_record(command);
+            database[name].update_record();
             cout << "Table " + name + " successfully updated" << endl << endl;
         } else if (command.find("SELECT") != string::npos) {
             t.print_table(command, database);
@@ -116,8 +116,10 @@ int main() {
             cerr << "Oooops, something went wrong. Try again" << endl << endl; // così se sbaglia comando ripete subito
         }
     } while (q != 1);
+    t.save_table(database, database_names);
     c.save_tablenames(database_names); // creo i file ognuno con un nome
     return 0;
-    }
+}
+
 
 
