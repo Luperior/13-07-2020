@@ -51,13 +51,16 @@ string Table::create_Table(string& str) {
     }
 }
 
-void Table::ordiniamoli() {
+void Table::order_asc(const string& str, const vector<int>& number) {
+    regex reg(R"(\b(?!\bORDER|BY\b)\w+\b)");
+    smatch match;
+    regex_search(str, match, reg);
     vector<string> target;
-    string order_label = "ID";
+    string order_label = match.str();
     for (int l = 0; l < m[1].size(); l++) {
         if (order_label == m[1][l]) {
-            for (int p = 2; p < m.size(); p++) {
-                target.emplace_back(m[p][l]);
+            for (int p = 0; p < number.size(); p++) {
+                target.emplace_back(m[number[p]][l]);
             }
         }
     }
@@ -67,7 +70,7 @@ void Table::ordiniamoli() {
     for (int n = 0; n < m[1].size(); n++) {
         if (m[1][n] == order_label) { // supponendo che order_label sia l'etichetta guida
             for (int i = 0; i < order.size(); i++) { // vettore ordinato
-                for (int j = 0; j < m.size(); j++) {
+                for (int j = 2; j < m.size(); j++) {
                     if (order[i] == m[j][n]) {
                         order_index.emplace_back(j);
                     }
@@ -79,6 +82,47 @@ void Table::ordiniamoli() {
     for (int k = 0; k < order_index.size(); k++) {
         cout << m[order_index[k]] << endl;
     }
+}
+
+void Table::select_order_asc(const string& str, const vector<int>& number, const vector<int>& positions) {
+
+}
+
+void Table::order_desc(const string& str, const vector<int>& number) {
+    regex reg(R"(\b(?!\bORDER|BY\b)\w+\b)");
+    smatch match;
+    regex_search(str, match, reg);
+    vector<string> target;
+    string order_label = match.str();
+    for (int l = 0; l < m[1].size(); l++) {
+        if (order_label == m[1][l]) {
+            for (int p = 0; p < number.size(); p++) {
+                target.emplace_back(m[number[p]][l]);
+            }
+        }
+    }
+    sort(target.begin(),target.end());
+    vector<string> order = target;
+    vector<int> order_index;
+    for (int n = 0; n < m[1].size(); n++) {
+        if (m[1][n] == order_label) { // supponendo che order_label sia l'etichetta guida
+            for (int i = 0; i < order.size(); i++) { // vettore ordinato
+                for (int j = 2; j < m.size(); j++) {
+                    if (order[i] == m[j][n]) {
+                        order_index.emplace_back(j);
+                    }
+                }
+            }
+        }
+    }
+
+    for (int k = order_index.size() -1 ; k > -1 ; k--) {
+        cout << m[order_index[k]] << endl; // stampo al contrario
+    }
+}
+
+void Table::select_order_desc(const string& str, const vector<int>& number, const vector<int>& positions) {
+
 }
 
 void Table::delete_from_table(const string& s2) {
@@ -408,7 +452,6 @@ int Table::update_record() { // IMPORTANTE CONTROLLO RICORSIONE         LUPO 07/
     return 0;
 }
 
-
 int Table::size() {
     return m.size();
 }
@@ -417,7 +460,7 @@ vector<string> Table::line(const int& idx) {
     return m[idx];
 }
 
-void Table::print_table(const string& str, map <string,Table> database) {
+void Table::print_table(const string& str, map <string,Table> database) { // da sistemare la stampa SENZA * e CON ordinamento, causa doppia stampa e metodi select_order vuoti
     if (str.find('*') != string::npos) {
         string from;
         getline(cin, from);
@@ -472,19 +515,56 @@ void Table::print_table(const string& str, map <string,Table> database) {
                     string order_by;
                     getline(cin, order_by);
                     if ((order_by.find("ORDER BY") != string::npos) && (order_by.find(';') != string::npos)) {
+                        regex reg9(R"(\b(?!\bFROM\b)\w+\b)");
+                        smatch match9;
+                        regex_search(from, match9, reg9);
+                        string s = match9.str();
+                        regex regAlpha(R"(^[^;]+)");
+                        smatch matchAlpha;
+                        regex_search(where, matchAlpha, regAlpha);
+                        where = matchAlpha.str();
+                        string buf = where.substr(where.find("WHERE") + 6, string::npos);
+                        regex reg(R"(\w{0,22}[^ =])");
+                        smatch match, match2;
+                        regex_search(buf, match, reg);
+                        string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                        regex reg2(R"(\=(.*))");
+                        regex_search(buf, match2, reg2);
+                        string buf3 = match2.str().substr(2, string::npos); // contiene il valore dell'etichetta da controllare
+                        vector<int> number;
+                        for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                            if (buf2 == database[s].get_map()[1][a]) {
+                                for (int it = 2; it < database[s].get_map().size(); it++) {
+                                    if (buf3 == database[s].get_map()[it][a]) {
+                                        number.emplace_back(it); // contiene tutti gli indici dei record dove la condizione WHERE è soddisfatta
+                                    }
+                                }
+                            }
+                        }
                         if (order_by.find("ASC") != string::npos) {
-                            regex reg(R"(\b(?!\bORDER|BY\b)\w+\b)");
-                            smatch match;
+                           database[s].order_asc(order_by, number);
                         } else if (order_by.find("DESC") != string::npos) {
-
+                            database[s].order_desc(order_by, number);
                         }
                     }
                 }
-            } else if (where.find("ORDER BY") != string::npos) {
+            } else if ((where.find("ORDER BY") != string::npos) && (where.find(';') != string::npos)) {
+                regex reg9(R"(\b(?!\bFROM\b)\w+\b)");
+                smatch match9;
+                regex_search(from, match9, reg9);
+                string s = match9.str();
+                regex regAlpha(R"(^[^;]+)");
+                smatch matchAlpha;
+                regex_search(where, matchAlpha, regAlpha);
+                where = matchAlpha.str();
+                vector <int> number;
+                for (int e = 2; e < database[s].get_map().size(); e++) {
+                    number.emplace_back(e);
+                }
                 if (where.find("ASC") != string::npos) {
-
+                    database[s].order_asc(where, number);
                 } else if (where.find("DESC") != string::npos) {
-
+                    database[s].order_desc(where, number);
                 }
             }
         }
@@ -510,14 +590,14 @@ void Table::print_table(const string& str, map <string,Table> database) {
                     smatch match0;
                     regex_search(buf, match0, reg0);
                     string buf0 = match0.str();
-                    vect.emplace_back(buf0);
+                    vect.emplace_back(buf0); // vect contiene i campi che vogliamo stampare
                 }
                 vector<int> positions;
                 for (int j = 0; j < vect.size(); j++) {
                     for (int k = 0; k < database[s].get_map()[1].size(); k++) {
                         if (vect[j] == database[s].get_map()[1][k]) {
                             cout << database[s].get_map()[1][k] << "\t";
-                            positions.emplace_back(k);
+                            positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
                         }
                     }
                 }
@@ -575,7 +655,7 @@ void Table::print_table(const string& str, map <string,Table> database) {
                             for (int k = 0; k < database[s].get_map()[1].size(); k++) {
                                 if (vect[j] == database[s].get_map()[1][k]) {
                                     cout << database[s].get_map()[1][k] << "\t";
-                                    positions.emplace_back(k);
+                                    positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
                                 }
                             }
                         }
@@ -590,18 +670,110 @@ void Table::print_table(const string& str, map <string,Table> database) {
                         string order_by;
                         getline(cin, order_by);
                         if ((order_by.find("ORDER BY") != string::npos) && (order_by.find(';') != string::npos)) {
+                            regex reg9(R"(\b(?!\bFROM\b)\w+\b)");
+                            smatch match9;
+                            regex_search(from, match9, reg9);
+                            string s = match9.str();
+                            string y = str.substr(str.find("SELECT") + 7, string::npos);
+                            stringstream ss(y);
+                            string buf9;
+                            vector<string> vect;
+                            while (getline(ss, buf9, ',')) {
+                                regex reg0(R"([^\s]+)");
+                                smatch match0;
+                                regex_search(buf9, match0, reg0);
+                                string buf0 = match0.str();
+                                vect.emplace_back(buf0); // vect contiene i campi che vogliamo stampare
+                            }
+                            regex regAlpha(R"(^[^;]+)");
+                            smatch matchAlpha;
+                            regex_search(where, matchAlpha, regAlpha);
+                            where = matchAlpha.str();
+                            string buf = where.substr(where.find("WHERE") + 6, string::npos);
+                            regex reg(R"(\w{0,22}[^ =])");
+                            smatch match, match2;
+                            regex_search(buf, match, reg);
+                            string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                            regex reg2(R"(\=(.*))");
+                            regex_search(buf, match2, reg2);
+                            string buf3 = match2.str().substr(2, string::npos); // contiene il valore dell'etichetta da controllare
+                            vector<int> number;
+                            for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                if (buf2 == database[s].get_map()[1][a]) {
+                                    for (int it = 2; it < database[s].get_map().size(); it++) {
+                                        if (buf3 == database[s].get_map()[it][a]) {
+                                            number.emplace_back(it); // contiene tutti gli indici delle righe (record) dove la condizione WHERE è soddisfatta
+                                        }
+                                    }
+                                }
+                            }
+                            vector<int> positions;
+                            for (int j = 0; j < vect.size(); j++) {
+                                for (int k = 0; k < database[s].get_map()[1].size(); k++) {
+                                    if (vect[j] == database[s].get_map()[1][k]) {
+                                        cout << database[s].get_map()[1][k] << "\t";
+                                        positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
+                                    }
+                                }
+                            }
+                            cout << endl;
+                            for (auto b = number.begin(); b < number.end(); b++) {
+                                for (auto l = positions.begin(); l < positions.end(); l++) {
+                                    cout << database[s].get_map()[*b][*l] << "\t";
+                                }
+                                cout << endl;
+                            }
                             if (order_by.find("ASC") != string::npos) {
-
+                                database[s].select_order_asc(where, number, positions);
                             } else if (order_by.find("DESC") != string::npos) {
-
+                                database[s].select_order_desc(where, number, positions);
                             }
                         }
                     }
-                } else if (where.find("ORDER BY") != string::npos) {
+                } else if ((where.find("ORDER BY") != string::npos) && (where.find(';') != string::npos)) {
+                    regex regAlpha(R"(^[^;]+)");
+                    smatch matchAlpha;
+                    regex_search(from, matchAlpha, regAlpha);
+                    from = matchAlpha.str();
+                    regex reg(R"(\b(?!\bFROM\b)\w+\b)");
+                    smatch match;
+                    regex_search(from, match, reg);
+                    string s = match.str();
+                    string y = str.substr(str.find("SELECT") + 7, string::npos);
+                    stringstream ss(y);
+                    string buf;
+                    vector<string> vect;
+                    while (getline(ss, buf, ',')) {
+                        regex reg0(R"([^\s]+)");
+                        smatch match0;
+                        regex_search(buf, match0, reg0);
+                        string buf0 = match0.str();
+                        vect.emplace_back(buf0); // vect contiene i campi che vogliamo stampare
+                    }
+                    vector<int> positions;
+                    for (int j = 0; j < vect.size(); j++) {
+                        for (int k = 0; k < database[s].get_map()[1].size(); k++) {
+                            if (vect[j] == database[s].get_map()[1][k]) {
+                                cout << database[s].get_map()[1][k] << "\t";
+                                positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
+                            }
+                        }
+                    }
+                    cout << endl;
+                    for (int it = 2; it < database[s].get_map().size(); it++) {
+                        for (auto l = positions.begin(); l < positions.end(); l++) {
+                            cout << database[s].get_map()[it][*l] << "\t";
+                        }
+                        cout << endl;
+                    }
+                    vector <int> number;
+                    for (int e = 2; e < database[s].get_map().size(); e++) {
+                        number.emplace_back(e);
+                    }
                     if (where.find("ASC") != string::npos) {
-
+                        database[s].select_order_asc(where, number, positions);
                     } else if (where.find("DESC") != string::npos) {
-
+                        database[s].select_order_desc(where, number, positions);
                     }
                 }
             }

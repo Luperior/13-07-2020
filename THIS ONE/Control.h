@@ -43,11 +43,15 @@ template <typename T> // operatore stampa vettore
 ostream& operator<<(ostream& os, const vector<T>& v)
 {
     for (int i = 0; i < v.size(); ++i) {
-        if (v[i] != "\t") {
-            os << v[i] << "\t";
+        try { // praticamente provo a comparare se è diverso da Tab
+            if (v[i] != "\t") {
+                os << v[i] << "\t";
+            } else {
+                os << v[i];
+            }
         }
-        else {
-            os << v[i];
+        catch (exception &e) { // se non può comparare certo non sarà una string, quindi non sarà mai un Tab, quindi non corriamo il rischio che lo stampi doppio quindi stampo già io Tab
+            os << v[i] << "\t";
         }
     }
     return os;

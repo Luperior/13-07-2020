@@ -95,12 +95,6 @@ int main() {
                     cout << "Table " + drop + " successfully truncated" << endl << endl;
                 }
             }
-        } else if (command.find("ORDER") != string::npos) {
-            regex reg(R"(\b(?!\bORDER|FROM\b)\w+\b)");         //ci va un if/else nel caso in cui sia inserito male? 30/06 Evry
-            smatch match;
-            regex_search(command, match, reg);
-            string name = match.str();
-            database[name].ordiniamoli();
         } else if (command.find("DELETE") != string::npos) {
             regex reg(R"(\b(?!\bDELETE|FROM\b)\w+\b)");
             smatch match;

@@ -20,7 +20,10 @@ public:
     map <int, vector <string>> get_map();
     int insert_into(const string& str, map <string,Table> database);
     int update_record();
-    void ordiniamoli();
+    void order_asc(const string& str, const vector<int>& number);
+    void order_desc(const string& str, const vector<int>& number);
+    void select_order_asc(const string& str, const vector<int>& number, const vector<int>& positions);
+    void select_order_desc(const string& str, const vector<int>& number, const vector<int>& positions);
     void delete_from_table(const string& s2);
     string get_primary_key();
     string get_foreign_key();
