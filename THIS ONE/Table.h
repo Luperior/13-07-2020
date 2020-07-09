@@ -12,10 +12,14 @@ public:
     Table();
     Table(const string &_str, const string &_str2, const map<int, vector<string>>& _m, const vector<bool>& _n_null, const vector<bool>& _a_inc, const int& _a_inc_count, const string& _primary_key, const string& _foreign_key, const string& _reference);
     virtual ~Table();
+    Table(const Table &to_copy);
     string create_Table(string& str);
-    void save_table( map <string,Table>& database, const vector <string> &table_names);
-    vector<string> getlabel(const vector<string>& structure); //manca NOT NULL
-    void set_target_names(); //da aggiornare
+    void save_nnull(const string& table_name);
+    map <int, vector <string>> uploader(const string& table_name);
+    void save_ainc (const string& table_name);
+    void save_table (const string &table_name);
+    vector<string> getlabel(const vector<string>& structure);
+    void set_target_names();
     vector<string> get_types(const vector<string>& structure);
     map <int, vector <string>> get_map();
     int insert_into(const string& str, map <string,Table> database);
@@ -33,7 +37,7 @@ public:
     void print_table(const string& _str, map <string,Table> database);
 
 
-protected:
+private:
 string str, str2; // secondo me queste possiamo rimuoverle, del resto derivano dall'esterno e non sono proprie della singola Table
                   // Lupo, 05/07
 string primary_key, foreign_key, reference;

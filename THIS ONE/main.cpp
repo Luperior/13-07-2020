@@ -30,6 +30,13 @@ int main() {
     Table t;
     Control c;
     c.upload_tablenames(database_names);
+    for (int in = 0; in < database_names.size(); in++)
+    {
+        Table obj_buff;
+        obj_buff.uploader(database_names[in]);
+        //tutti gli upload
+        database[database_names[in]] = obj_buff;
+    }
     int q = 0;
    do {
         string command;
@@ -110,7 +117,13 @@ int main() {
             cerr << "Oooops, something went wrong. Try again" << endl << endl; // così se sbaglia comando ripete subito
         }
     } while (q != 1);
-    t.save_table(database, database_names);
+    for (int k= 0; k < database_names.size(); k++) {
+        database[database_names[k]].save_table(database_names[k]);
+        database[database_names[k]].save_ainc(database_names[k]);
+        database[database_names[k]].save_nnull(database_names[k]);
+        //  database[database_names[k]].save_foreingkey(database_names[k]);
+        //  database[database_names[k]].save_secondarykey(database_names[k]);
+    }
     c.save_tablenames(database_names); // creo i file ognuno con un nome
     return 0;
 }
