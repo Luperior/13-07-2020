@@ -15,9 +15,13 @@ public:
     Table(const Table &to_copy);
     string create_Table(string& str);
     void save_nnull(const string& table_name);
-    map <int, vector <string>> uploader(const string& table_name);
+    vector<bool> upload_nnull(const string &table_name);
     void save_ainc (const string& table_name);
+    vector<bool> upload_ainc(const string &table_name);
     void save_table (const string &table_name);
+    map <int, vector <string>> uploader(const string& table_name);
+    void save_keys(const string &table_name);
+    void upload_keys(const string& table_name);
     vector<string> getlabel(const vector<string>& structure);
     void set_target_names();
     vector<string> get_types(const vector<string>& structure);

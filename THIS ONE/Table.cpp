@@ -352,20 +352,122 @@ void Table::delete_from_table(const string& s2) {
         regex_search(s2, matchAlpha, regAlpha);
         s3 = matchAlpha.str();
         if (s3.find("WHERE") != string::npos) {
-            regex reg4(R"(\w{0,22}[^ =])");
-            regex reg5(R"(\=(.*))");
-            smatch match4, match5;
-            string s2A = s3.substr(6, string::npos);
-            regex_search(s2A, match4, reg4);
-            buf4 = match4.str(); // contiene il nome dell'etichetta da controllare
-            regex_search(s3, match5, reg5);
-            buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
-            buf5 = buf5.substr(2, string::npos);
-            for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
-                if (buf4 == m[1][j]) { // verifico che corrisponda
-                    for (int it = 2; it < m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
-                        if (m[it][j] == buf5) { // controllo che lo assuma
-                            m.erase(it);
+            if (s3.find('=')!=string::npos) {
+                regex reg4(R"(\w{0,22}[^ =])");
+                regex reg5(R"(\=(.*))");
+                smatch match4, match5;
+                string s2A = s3.substr(6, string::npos);
+                regex_search(s2A, match4, reg4);
+                buf4 = match4.str(); // contiene il nome dell'etichetta da controllare
+                regex_search(s3, match5, reg5);
+                buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
+                buf5 = buf5.substr(2, string::npos);
+                for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                    if (buf4 == m[1][j]) { // verifico che corrisponda
+                        for (int it = 2; it < m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
+                            if (m[it][j] == buf5) { // controllo che lo assuma
+                                m.erase(it);
+                            }
+                        }
+                    }
+                }
+            }
+            else if (s3.find('<')!=string::npos) {
+                regex reg4(R"(\w{0,22}[^ <])");
+                regex reg5(R"(\<(.*))");
+                smatch match4, match5;
+                string s2A = s3.substr(6, string::npos);
+                regex_search(s2A, match4, reg4);
+                buf4 = match4.str(); // contiene il nome dell'etichetta da controllare
+                regex_search(s3, match5, reg5);
+                buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
+                buf5 = buf5.substr(2, string::npos);
+                for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                    if (stof(buf4) > stof(m[1][j])) { // verifico che corrisponda
+                        for (int it = 2; it < m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
+                            if (m[it][j] == buf5) { // controllo che lo assuma
+                                m.erase(it);
+                            }
+                        }
+                    }
+                }
+            }
+            else if (s3.find('>')!=string::npos) {
+                regex reg4(R"(\w{0,22}[^ >])");
+                regex reg5(R"(\>(.*))");
+                smatch match4, match5;
+                string s2A = s3.substr(6, string::npos);
+                regex_search(s2A, match4, reg4);
+                buf4 = match4.str(); // contiene il nome dell'etichetta da controllare
+                regex_search(s3, match5, reg5);
+                buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
+                buf5 = buf5.substr(2, string::npos);
+                for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                    if (stof(buf4) < stof(m[1][j])) { // verifico che corrisponda
+                        for (int it = 2; it < m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
+                            if (m[it][j] == buf5) { // controllo che lo assuma
+                                m.erase(it);
+                            }
+                        }
+                    }
+                }
+            }
+            else if (s3.find("<>")!=string::npos) {
+                regex reg4(R"(\w{0,22}[^ <>])");
+                regex reg5(R"(\<>(.*))");
+                smatch match4, match5;
+                string s2A = s3.substr(6, string::npos);
+                regex_search(s2A, match4, reg4);
+                buf4 = match4.str(); // contiene il nome dell'etichetta da controllare
+                regex_search(s3, match5, reg5);
+                buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
+                buf5 = buf5.substr(3, string::npos);
+                for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                    if (stof(buf4) != stof(m[1][j])) { // verifico che corrisponda
+                        for (int it = 2; it < m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
+                            if (m[it][j] == buf5) { // controllo che lo assuma
+                                m.erase(it);
+                            }
+                        }
+                    }
+                }
+            }
+            else if (s3.find("<=")!=string::npos) {
+                regex reg4(R"(\w{0,22}[^ <=])");
+                regex reg5(R"(\<=(.*))");
+                smatch match4, match5;
+                string s2A = s3.substr(6, string::npos);
+                regex_search(s2A, match4, reg4);
+                buf4 = match4.str(); // contiene il nome dell'etichetta da controllare
+                regex_search(s3, match5, reg5);
+                buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
+                buf5 = buf5.substr(3, string::npos);
+                for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                    if ((stof(buf4) > stof(m[1][j])) || (stof(buf4) > stof(m[1][j]))) { // verifico che corrisponda
+                        for (int it = 2; it < m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
+                            if (m[it][j] == buf5) { // controllo che lo assuma
+                                m.erase(it);
+                            }
+                        }
+                    }
+                }
+            }
+            else if (s3.find(">=")!=string::npos) {
+                regex reg4(R"(\w{0,22}[^ >=])");
+                regex reg5(R"(\>=(.*))");
+                smatch match4, match5;
+                string s2A = s3.substr(6, string::npos);
+                regex_search(s2A, match4, reg4);
+                buf4 = match4.str(); // contiene il nome dell'etichetta da controllare
+                regex_search(s3, match5, reg5);
+                buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
+                buf5 = buf5.substr(3, string::npos);
+                for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                    if ((stof(buf4) < stof(m[1][j])) || (stof(buf4) > stof(m[1][j]))) { // verifico che corrisponda
+                        for (int it = 2; it < m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
+                            if (m[it][j] == buf5) { // controllo che lo assuma
+                                m.erase(it);
+                            }
                         }
                     }
                 }
@@ -432,30 +534,35 @@ void Table::set_target_names() {
     do {
         string s;
         getline(cin, s);
-        if (s.find(");")!= string::npos) {
-            v = 1;
-        } else if ((s.find("AUTO_INCREMENT")!= string::npos) && (s.find("INT")== string::npos)) { // ovvero se definisco un NON int come auto_inc
-            cerr << "auto_increment can only be applied to INT data types: try again" << endl;
-        } else if (s.find("PRIMARY KEY")!=string::npos) {
-            regex reg(R"(\((.*?)\))"); // tutto ciò che è tra ( e )
-            smatch match;
-            regex_search(s, match, reg);
-            primary_key = match[1].str();
-        } else if ((s.find("FOREIGN KEY")!=string::npos) && (s.find("REFERENCES")!=string::npos)) {
-            regex reg(R"(\((.*?)\))"); // tutto ciò che è tra ( e )
-            smatch match, match_extra;
-            regex_search(s, match, reg);
-            foreign_key = match[1].str(); // il campo dipendente
-            string extra = s.substr(s.find("REFERENCES ") +11, string::npos);
-            /*regex_search(extra, match_extra, reg);
-            string key_check = match_extra[1].str();*/ // il campo indipendente, ma lo commento perchè dovrebbe essere solo quello primary della tabella cui ci riferiamo
-            regex reg0(R"(^([\w\-]+))");
-            smatch match0;
-            regex_search(extra, match0, reg0);
-            string table_check = match0[1].str();
-            reference = table_check; // ovvero la tabella dipendente si rifà a quella primaria check
+        if ((s.find("INT")!= string::npos) || (s.find("FLOAT")!= string::npos) || (s.find("TEXT")!= string::npos) || (s.find("CHAR")!= string::npos) || (s.find("DATE")!= string::npos) || (s.find("TIME")!= string::npos) || (s.find("KEY")!= string::npos) || (s.find(");")!= string::npos)) {
+            if (s.find(");") != string::npos) {
+                v = 1;
+            } else if ((s.find("AUTO_INCREMENT") != string::npos) &&
+                       (s.find("INT") == string::npos)) { // ovvero se definisco un NON int come auto_inc
+                cerr << "auto_increment can only be applied to INT data types: try again" << endl;
+            } else if (s.find("PRIMARY KEY") != string::npos) {
+                regex reg(R"(\((.*?)\))"); // tutto ciò che è tra ( e )
+                smatch match;
+                regex_search(s, match, reg);
+                primary_key = match[1].str();
+            } else if ((s.find("FOREIGN KEY") != string::npos) && (s.find("REFERENCES") != string::npos)) {
+                regex reg(R"(\((.*?)\))"); // tutto ciò che è tra ( e )
+                smatch match, match_extra;
+                regex_search(s, match, reg);
+                foreign_key = match[1].str(); // il campo dipendente
+                string extra = s.substr(s.find("REFERENCES ") + 11, string::npos);
+                /*regex_search(extra, match_extra, reg);
+                string key_check = match_extra[1].str();*/ // il campo indipendente, ma lo commento perchè dovrebbe essere solo quello primary della tabella cui ci riferiamo
+                regex reg0(R"(^([\w\-]+))");
+                smatch match0;
+                regex_search(extra, match0, reg0);
+                string table_check = match0[1].str();
+                reference = table_check; // ovvero la tabella dipendente si rifà a quella primaria check
+            } else {
+                names.push_back(s);
+            }
         } else {
-            names.push_back(s);
+            cerr << "invalid statement: try again" << endl;
         }
     } while (v != 1);
     m[0] = get_types(names);
@@ -472,7 +579,7 @@ int Table::insert_into(const string& str, map <string,Table> database) {
         //test = match.str(); // nome della tabella da modificare
         int i = m.size(); // ogni volta che entro in insert into mette la riga dopo, dato che la 0 è occupata dai tipi e la 1 dalle etichette
         regex reg2("[\\(](.*)[\\)]");
-        regex reg2A(R"([^ ,()]\w{0,22}|"^[0-9]+$")");
+        regex reg2A(R"([^ ,()]\w{0,22}|"^[0-9]+$")"); // ^[-+]?\d*\.?\d*$    ^[0-9]+$
         regex_search(str, match2, reg2);
         target_list = match2.str();
         vector<string> targets = printMatchesIT(target_list, reg2A);
@@ -618,46 +725,288 @@ int Table::update_record() { // IMPORTANTE CONTROLLO RICORSIONE         LUPO 07/
             regex_search(s2, matchAlpha, regAlpha);
             s2 = matchAlpha.str();
             if (s2.find("WHERE")!= string::npos) {
-                regex reg4(R"(\w{0,22}[^ =])");
-                regex reg5(R"(\=(.*))");
-                smatch match4, match5;
-                string s2A = s2.substr(6, string::npos);
-                regex_search(s2A, match4, reg4);
-                buf4 = match4.str(); // contiene il nome dell'etichetta da controllare
-                regex_search(s2, match5, reg5);
-                buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
-                buf5 = buf5.substr(2, string::npos);
-                for (int k = 0; k < m[1].size(); k++) { // avvio controllo data types
-                    for (int v = 0; v < set_names.size(); v++) {
-                        if (m[1][k] == set_names [v]) {
-                            if(!type_check (set_values [v], m[0][k])) // se ci sta qualche errore dovuto ai tipi
-                            {
-                                cerr << "wrong data type input: try again. First line MUST be skipped (= UPDATE + name)" << endl;
-                                update_record();
-                                return 0;
+                if (s2.find('=')!= string::npos) {
+                    regex reg4(R"(\w{0,22}[^ =])");
+                    regex reg5(R"(\=(.*))");
+                    smatch match4, match5;
+                    string s2A = s2.substr(6, string::npos);
+                    regex_search(s2A, match4, reg4);
+                    buf4 = match4.str(); // contiene il nome dell'etichetta da controllare
+                    regex_search(s2, match5, reg5);
+                    buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
+                    buf5 = buf5.substr(2, string::npos);
+                    for (int k = 0; k < m[1].size(); k++) { // avvio controllo data types
+                        for (int v = 0; v < set_names.size(); v++) {
+                            if (m[1][k] == set_names [v]) {
+                                if(!type_check (set_values [v], m[0][k])) // se ci sta qualche errore dovuto ai tipi
+                                {
+                                    cerr << "wrong data type input: try again. First line MUST be skipped (= UPDATE + name)" << endl;
+                                    update_record();
+                                    return 0;
+                                }
+                            }
+                        }
+                    } // termine controllo data types
+                    for (int k = 0; k < m[1].size(); k++) { // avvio controllo tentativo di sovrascrittura di dato auto_inc
+                        for (int v = 0; v < set_names.size(); v++) {
+                            if (m[1][k] == set_names[v]) {
+                                if (a_inc[k] == true) {
+                                    cerr << "auto_increment data cannot be updated: try again. First line MUST be skipped (= UPDATE + name)" << endl;
+                                    update_record();
+                                    return 0;
+                                }
+                            }
+                        }
+                    }  // termine controllo tentativo di sovrascrittura di dato auto_inc
+                    for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                        if (buf4 == m[1][j]) { // verifico che corrisponda
+                            for (int it = 2; it <m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
+                                if (m[it][j] == buf5) { // controllo che lo assuma
+                                    for (int k = 0;k < set_names.size(); k++) { // vedo via via quali sono le etichette da modificare
+                                        for (int l = 0; l < m[1].size(); l++) { // e vedo a che posizione corrispondono nella prima riga
+                                            if (set_names[k] == m[1][l]) { // appena trovo un match
+                                                m[it][l] = set_values[k]; // sostituisco il valore nuovo, corrispondente alla posizione di set_names
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
-                } // termine controllo data types
-                for (int k = 0; k < m[1].size(); k++) { // avvio controllo tentativo di sovrascrittura di dato auto_inc
-                    for (int v = 0; v < set_names.size(); v++) {
-                        if (m[1][k] == set_names[v]) {
-                            if (a_inc[k] == true) {
-                                cerr << "auto_increment data cannot be updated: try again. First line MUST be skipped (= UPDATE + name)" << endl;
-                                update_record();
-                                return 0;
+                } else if (s2.find('<')!= string::npos) {
+                    regex reg4(R"(\w{0,22}[^ <])");
+                    regex reg5(R"(\<(.*))");
+                    smatch match4, match5;
+                    string s2A = s2.substr(6, string::npos);
+                    regex_search(s2A, match4, reg4);
+                    buf4 = match4.str(); // contiene il nome dell'etichetta da controllare
+                    regex_search(s2, match5, reg5);
+                    buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
+                    buf5 = buf5.substr(2, string::npos);
+                    for (int k = 0; k < m[1].size(); k++) { // avvio controllo data types
+                        for (int v = 0; v < set_names.size(); v++) {
+                            if (m[1][k] == set_names [v]) {
+                                if(!type_check (set_values [v], m[0][k])) // se ci sta qualche errore dovuto ai tipi
+                                {
+                                    cerr << "wrong data type input: try again. First line MUST be skipped (= UPDATE + name)" << endl;
+                                    update_record();
+                                    return 0;
+                                }
+                            }
+                        }
+                    } // termine controllo data types
+                    for (int k = 0; k < m[1].size(); k++) { // avvio controllo tentativo di sovrascrittura di dato auto_inc
+                        for (int v = 0; v < set_names.size(); v++) {
+                            if (m[1][k] == set_names[v]) {
+                                if (a_inc[k] == true) {
+                                    cerr << "auto_increment data cannot be updated: try again. First line MUST be skipped (= UPDATE + name)" << endl;
+                                    update_record();
+                                    return 0;
+                                }
+                            }
+                        }
+                    }  // termine controllo tentativo di sovrascrittura di dato auto_inc
+                    for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                        if (buf4 == m[1][j]) { // verifico che corrisponda
+                            for (int it = 2; it <m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
+                                if (stof(m[it][j]) < stof(buf5)) { // controllo che lo assuma
+                                    for (int k = 0;k < set_names.size(); k++) { // vedo via via quali sono le etichette da modificare
+                                        for (int l = 0; l < m[1].size(); l++) { // e vedo a che posizione corrispondono nella prima riga
+                                            if (set_names[k] == m[1][l]) { // appena trovo un match
+                                                m[it][l] = set_values[k]; // sostituisco il valore nuovo, corrispondente alla posizione di set_names
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
-                }  // termine controllo tentativo di sovrascrittura di dato auto_inc
-                for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
-                    if (buf4 == m[1][j]) { // verifico che corrisponda
-                        for (int it = 2; it <m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
-                            if (m[it][j] == buf5) { // controllo che lo assuma
-                                for (int k = 0;k < set_names.size(); k++) { // vedo via via quali sono le etichette da modificare
-                                    for (int l = 0; l < m[1].size(); l++) { // e vedo a che posizione corrispondono nella prima riga
-                                        if (set_names[k] == m[1][l]) { // appena trovo un match
-                                            m[it][l] = set_values[k]; // sostituisco il valore nuovo, corrispondente alla posizione di set_names
+                } else if (s2.find('>')!= string::npos) {
+                    regex reg4(R"(\w{0,22}[^ >])");
+                    regex reg5(R"(\>(.*))");
+                    smatch match4, match5;
+                    string s2A = s2.substr(6, string::npos);
+                    regex_search(s2A, match4, reg4);
+                    buf4 = match4.str(); // contiene il nome dell'etichetta da controllare
+                    regex_search(s2, match5, reg5);
+                    buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
+                    buf5 = buf5.substr(2, string::npos);
+                    for (int k = 0; k < m[1].size(); k++) { // avvio controllo data types
+                        for (int v = 0; v < set_names.size(); v++) {
+                            if (m[1][k] == set_names [v]) {
+                                if(!type_check (set_values [v], m[0][k])) // se ci sta qualche errore dovuto ai tipi
+                                {
+                                    cerr << "wrong data type input: try again. First line MUST be skipped (= UPDATE + name)" << endl;
+                                    update_record();
+                                    return 0;
+                                }
+                            }
+                        }
+                    } // termine controllo data types
+                    for (int k = 0; k < m[1].size(); k++) { // avvio controllo tentativo di sovrascrittura di dato auto_inc
+                        for (int v = 0; v < set_names.size(); v++) {
+                            if (m[1][k] == set_names[v]) {
+                                if (a_inc[k] == true) {
+                                    cerr << "auto_increment data cannot be updated: try again. First line MUST be skipped (= UPDATE + name)" << endl;
+                                    update_record();
+                                    return 0;
+                                }
+                            }
+                        }
+                    }  // termine controllo tentativo di sovrascrittura di dato auto_inc
+                    for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                        if (buf4 == m[1][j]) { // verifico che corrisponda
+                            for (int it = 2; it <m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
+                                if (stof(m[it][j]) > stof(buf5)) { // controllo che lo assuma
+                                    for (int k = 0;k < set_names.size(); k++) { // vedo via via quali sono le etichette da modificare
+                                        for (int l = 0; l < m[1].size(); l++) { // e vedo a che posizione corrispondono nella prima riga
+                                            if (set_names[k] == m[1][l]) { // appena trovo un match
+                                                m[it][l] = set_values[k]; // sostituisco il valore nuovo, corrispondente alla posizione di set_names
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else if (s2.find("<>")!= string::npos) {
+                    regex reg4(R"(\w{0,22}[^ <>])");
+                    regex reg5(R"(\<>(.*))");
+                    smatch match4, match5;
+                    string s2A = s2.substr(6, string::npos);
+                    regex_search(s2A, match4, reg4);
+                    buf4 = match4.str(); // contiene il nome dell'etichetta da controllare
+                    regex_search(s2, match5, reg5);
+                    buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
+                    buf5 = buf5.substr(3, string::npos);
+                    for (int k = 0; k < m[1].size(); k++) { // avvio controllo data types
+                        for (int v = 0; v < set_names.size(); v++) {
+                            if (m[1][k] == set_names [v]) {
+                                if(!type_check (set_values [v], m[0][k])) // se ci sta qualche errore dovuto ai tipi
+                                {
+                                    cerr << "wrong data type input: try again. First line MUST be skipped (= UPDATE + name)" << endl;
+                                    update_record();
+                                    return 0;
+                                }
+                            }
+                        }
+                    } // termine controllo data types
+                    for (int k = 0; k < m[1].size(); k++) { // avvio controllo tentativo di sovrascrittura di dato auto_inc
+                        for (int v = 0; v < set_names.size(); v++) {
+                            if (m[1][k] == set_names[v]) {
+                                if (a_inc[k] == true) {
+                                    cerr << "auto_increment data cannot be updated: try again. First line MUST be skipped (= UPDATE + name)" << endl;
+                                    update_record();
+                                    return 0;
+                                }
+                            }
+                        }
+                    }  // termine controllo tentativo di sovrascrittura di dato auto_inc
+                    for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                        if (buf4 == m[1][j]) { // verifico che corrisponda
+                            for (int it = 2; it <m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
+                                if (stof(m[it][j]) != stof(buf5)) { // controllo che lo assuma
+                                    for (int k = 0;k < set_names.size(); k++) { // vedo via via quali sono le etichette da modificare
+                                        for (int l = 0; l < m[1].size(); l++) { // e vedo a che posizione corrispondono nella prima riga
+                                            if (set_names[k] == m[1][l]) { // appena trovo un match
+                                                m[it][l] = set_values[k]; // sostituisco il valore nuovo, corrispondente alla posizione di set_names
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else if (s2.find("<=")!= string::npos) {
+                    regex reg4(R"(\w{0,22}[^ <=])");
+                    regex reg5(R"(\<=(.*))");
+                    smatch match4, match5;
+                    string s2A = s2.substr(6, string::npos);
+                    regex_search(s2A, match4, reg4);
+                    buf4 = match4.str(); // contiene il nome dell'etichetta da controllare
+                    regex_search(s2, match5, reg5);
+                    buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
+                    buf5 = buf5.substr(3, string::npos);
+                    for (int k = 0; k < m[1].size(); k++) { // avvio controllo data types
+                        for (int v = 0; v < set_names.size(); v++) {
+                            if (m[1][k] == set_names [v]) {
+                                if(!type_check (set_values [v], m[0][k])) // se ci sta qualche errore dovuto ai tipi
+                                {
+                                    cerr << "wrong data type input: try again. First line MUST be skipped (= UPDATE + name)" << endl;
+                                    update_record();
+                                    return 0;
+                                }
+                            }
+                        }
+                    } // termine controllo data types
+                    for (int k = 0; k < m[1].size(); k++) { // avvio controllo tentativo di sovrascrittura di dato auto_inc
+                        for (int v = 0; v < set_names.size(); v++) {
+                            if (m[1][k] == set_names[v]) {
+                                if (a_inc[k] == true) {
+                                    cerr << "auto_increment data cannot be updated: try again. First line MUST be skipped (= UPDATE + name)" << endl;
+                                    update_record();
+                                    return 0;
+                                }
+                            }
+                        }
+                    }  // termine controllo tentativo di sovrascrittura di dato auto_inc
+                    for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                        if (buf4 == m[1][j]) { // verifico che corrisponda
+                            for (int it = 2; it <m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
+                                if (stof(m[it][j]) < stof(buf5)||stof(m[it][j]) == stof(buf5)) { // controllo che lo assuma
+                                    for (int k = 0;k < set_names.size(); k++) { // vedo via via quali sono le etichette da modificare
+                                        for (int l = 0; l < m[1].size(); l++) { // e vedo a che posizione corrispondono nella prima riga
+                                            if (set_names[k] == m[1][l]) { // appena trovo un match
+                                                m[it][l] = set_values[k]; // sostituisco il valore nuovo, corrispondente alla posizione di set_names
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else if (s2.find(">=")!= string::npos) {
+                    regex reg4(R"(\w{0,22}[^ >=])");
+                    regex reg5(R"(\>=(.*))");
+                    smatch match4, match5;
+                    string s2A = s2.substr(6, string::npos);
+                    regex_search(s2A, match4, reg4);
+                    buf4 = match4.str(); // contiene il nome dell'etichetta da controllare
+                    regex_search(s2, match5, reg5);
+                    buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
+                    buf5 = buf5.substr(3, string::npos);
+                    for (int k = 0; k < m[1].size(); k++) { // avvio controllo data types
+                        for (int v = 0; v < set_names.size(); v++) {
+                            if (m[1][k] == set_names [v]) {
+                                if(!type_check (set_values [v], m[0][k])) // se ci sta qualche errore dovuto ai tipi
+                                {
+                                    cerr << "wrong data type input: try again. First line MUST be skipped (= UPDATE + name)" << endl;
+                                    update_record();
+                                    return 0;
+                                }
+                            }
+                        }
+                    } // termine controllo data types
+                    for (int k = 0; k < m[1].size(); k++) { // avvio controllo tentativo di sovrascrittura di dato auto_inc
+                        for (int v = 0; v < set_names.size(); v++) {
+                            if (m[1][k] == set_names[v]) {
+                                if (a_inc[k] == true) {
+                                    cerr << "auto_increment data cannot be updated: try again. First line MUST be skipped (= UPDATE + name)" << endl;
+                                    update_record();
+                                    return 0;
+                                }
+                            }
+                        }
+                    }  // termine controllo tentativo di sovrascrittura di dato auto_inc
+                    for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                        if (buf4 == m[1][j]) { // verifico che corrisponda
+                            for (int it = 2; it <m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
+                                if (stof(m[it][j]) > stof(buf5)||stof(m[it][j]) == stof(buf5)) { // controllo che lo assuma
+                                    for (int k = 0;k < set_names.size(); k++) { // vedo via via quali sono le etichette da modificare
+                                        for (int l = 0; l < m[1].size(); l++) { // e vedo a che posizione corrispondono nella prima riga
+                                            if (set_names[k] == m[1][l]) { // appena trovo un match
+                                                m[it][l] = set_values[k]; // sostituisco il valore nuovo, corrispondente alla posizione di set_names
+                                            }
                                         }
                                     }
                                 }
@@ -710,26 +1059,143 @@ void Table::print_table(const string& str, map <string,Table> database) {
                         regex_search(where, matchAlpha, regAlpha);
                         where = matchAlpha.str();
                         string buf = where.substr(where.find("WHERE") + 6, string::npos);
-                        regex reg(R"(\w{0,22}[^ =])");
-                        smatch match, match2;
-                        regex_search(buf, match, reg);
-                        string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
-                        regex reg2(R"(\=(.*))");
-                        regex_search(buf, match2, reg2);
-                        string buf3 = match2.str().substr(2, string::npos); // contiene il valore dell'etichetta da controllare
-                        vector<int> number;
-                        for (int a = 0; a < database[s].get_map()[1].size(); a++) {
-                            if (buf2 == database[s].get_map()[1][a]) {
-                                for (int it = 2; it < database[s].get_map().size(); it++) {
-                                    if (buf3 == database[s].get_map()[it][a]) {
-                                        number.emplace_back(it); // contiene tutti gli indici dei record dove la condizione WHERE è soddisfatta
+                        if (where.find('=')!=string::npos) {
+                            regex reg(R"(\w{0,22}[^ =])");
+                            smatch match, match2;
+                            regex_search(buf, match, reg);
+                            string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                            regex reg2(R"(\=(.*))");
+                            regex_search(buf, match2, reg2);
+                            string buf3 = match2.str().substr(2, string::npos); // contiene il valore dell'etichetta da controllare
+                            vector<int> number;
+                            for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                if (buf2 == database[s].get_map()[1][a]) {
+                                    for (int it = 2; it < database[s].get_map().size(); it++) {
+                                        if (buf3 == database[s].get_map()[it][a]) {
+                                            number.emplace_back(it); // contiene tutti gli indici dei record dove la condizione WHERE è soddisfatta
+                                        }
                                     }
                                 }
                             }
+                            cout << database[s].get_map()[1] << endl;
+                            for (auto ti = number.begin(); ti < number.end(); ti++) {
+                                cout << database[s].get_map()[*ti] << endl;
+                            }
                         }
-                        cout << database[s].get_map()[1] << endl;
-                        for (auto ti = number.begin(); ti < number.end(); ti++) {
-                            cout << database[s].get_map()[*ti] << endl;
+                        else if (where.find('<')!=string::npos) {
+                            regex reg(R"(\w{0,22}[^ <])");
+                            smatch match, match2;
+                            regex_search(buf, match, reg);
+                            string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                            regex reg2(R"(\<(.*))");
+                            regex_search(buf, match2, reg2);
+                            string buf3 = match2.str().substr(2, string::npos); // contiene il valore dell'etichetta da controllare
+                            vector<int> number;
+                            for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                if (buf2 == database[s].get_map()[1][a]) {
+                                    for (int it = 2; it < database[s].get_map().size(); it++) {
+                                        if (stof(buf3) > stof(database[s].get_map()[it][a])) {
+                                            number.emplace_back(it); // contiene tutti gli indici dei record dove la condizione WHERE è soddisfatta
+                                        }
+                                    }
+                                }
+                            }
+                            cout << database[s].get_map()[1] << endl;
+                            for (auto ti = number.begin(); ti < number.end(); ti++) {
+                                cout << database[s].get_map()[*ti] << endl;
+                            }
+                        }
+                        else if (where.find('>')!=string::npos) {
+                            regex reg(R"(\w{0,22}[^ >])");
+                            smatch match, match2;
+                            regex_search(buf, match, reg);
+                            string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                            regex reg2(R"(\>(.*))");
+                            regex_search(buf, match2, reg2);
+                            string buf3 = match2.str().substr(2, string::npos); // contiene il valore dell'etichetta da controllare
+                            vector<int> number;
+                            for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                if (buf2 == database[s].get_map()[1][a]) {
+                                    for (int it = 2; it < database[s].get_map().size(); it++) {
+                                        if (stof(buf3) < stof(database[s].get_map()[it][a])) {
+                                            number.emplace_back(it); // contiene tutti gli indici dei record dove la condizione WHERE è soddisfatta
+                                        }
+                                    }
+                                }
+                            }
+                            cout << database[s].get_map()[1] << endl;
+                            for (auto ti = number.begin(); ti < number.end(); ti++) {
+                                cout << database[s].get_map()[*ti] << endl;
+                            }
+                        }
+                        else if (where.find("<>")!=string::npos) {
+                            regex reg(R"(\w{0,22}[^ <>])");
+                            smatch match, match2;
+                            regex_search(buf, match, reg);
+                            string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                            regex reg2(R"(\<>(.*))");
+                            regex_search(buf, match2, reg2);
+                            string buf3 = match2.str().substr(3, string::npos); // contiene il valore dell'etichetta da controllare
+                            vector<int> number;
+                            for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                if (buf2 == database[s].get_map()[1][a]) {
+                                    for (int it = 2; it < database[s].get_map().size(); it++) {
+                                        if (stof(buf3) != stof(database[s].get_map()[it][a])) {
+                                            number.emplace_back(it); // contiene tutti gli indici dei record dove la condizione WHERE è soddisfatta
+                                        }
+                                    }
+                                }
+                            }
+                            cout << database[s].get_map()[1] << endl;
+                            for (auto ti = number.begin(); ti < number.end(); ti++) {
+                                cout << database[s].get_map()[*ti] << endl;
+                            }
+                        }
+                        else if (where.find("<=")!=string::npos) {
+                            regex reg(R"(\w{0,22}[^ <=])");
+                            smatch match, match2;
+                            regex_search(buf, match, reg);
+                            string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                            regex reg2(R"(\<=(.*))");
+                            regex_search(buf, match2, reg2);
+                            string buf3 = match2.str().substr(3, string::npos); // contiene il valore dell'etichetta da controllare
+                            vector<int> number;
+                            for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                if (buf2 == database[s].get_map()[1][a]) {
+                                    for (int it = 2; it < database[s].get_map().size(); it++) {
+                                        if ((stof(buf3) > stof(database[s].get_map()[it][a])) || (stof(buf3) == stof(database[s].get_map()[it][a]))) {
+                                            number.emplace_back(it); // contiene tutti gli indici dei record dove la condizione WHERE è soddisfatta
+                                        }
+                                    }
+                                }
+                            }
+                            cout << database[s].get_map()[1] << endl;
+                            for (auto ti = number.begin(); ti < number.end(); ti++) {
+                                cout << database[s].get_map()[*ti] << endl;
+                            }
+                        }
+                        else if (where.find(">=")!=string::npos) {
+                            regex reg(R"(\w{0,22}[^ >=])");
+                            smatch match, match2;
+                            regex_search(buf, match, reg);
+                            string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                            regex reg2(R"(\>=(.*))");
+                            regex_search(buf, match2, reg2);
+                            string buf3 = match2.str().substr(3, string::npos); // contiene il valore dell'etichetta da controllare
+                            vector<int> number;
+                            for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                if (buf2 == database[s].get_map()[1][a]) {
+                                    for (int it = 2; it < database[s].get_map().size(); it++) {
+                                        if ((stof(buf3) < stof(database[s].get_map()[it][a])) || (stof(buf3) == stof(database[s].get_map()[it][a]))) {
+                                            number.emplace_back(it); // contiene tutti gli indici dei record dove la condizione WHERE è soddisfatta
+                                        }
+                                    }
+                                }
+                            }
+                            cout << database[s].get_map()[1] << endl;
+                            for (auto ti = number.begin(); ti < number.end(); ti++) {
+                                cout << database[s].get_map()[*ti] << endl;
+                            }
                         }
                     } else {
                         string order_by;
@@ -744,29 +1210,158 @@ void Table::print_table(const string& str, map <string,Table> database) {
                             regex_search(where, matchAlpha, regAlpha);
                             where = matchAlpha.str();
                             string buf = where.substr(where.find("WHERE") + 6, string::npos);
-                            regex reg(R"(\w{0,22}[^ =])");
-                            smatch match, match2;
-                            regex_search(buf, match, reg);
-                            string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
-                            regex reg2(R"(\=(.*))");
-                            regex_search(buf, match2, reg2);
-                            string buf3 = match2.str().substr(2,
-                                                              string::npos); // contiene il valore dell'etichetta da controllare
-                            vector<int> number;
-                            for (int a = 0; a < database[s].get_map()[1].size(); a++) {
-                                if (buf2 == database[s].get_map()[1][a]) {
-                                    for (int it = 2; it < database[s].get_map().size(); it++) {
-                                        if (buf3 == database[s].get_map()[it][a]) {
-                                            number.emplace_back(
-                                                    it); // contiene tutti gli indici dei record dove la condizione WHERE è soddisfatta
+                            if (where.find('=')!=string::npos) {
+                                regex reg(R"(\w{0,22}[^ =])");
+                                smatch match, match2;
+                                regex_search(buf, match, reg);
+                                string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                                regex reg2(R"(\=(.*))");
+                                regex_search(buf, match2, reg2);
+                                string buf3 = match2.str().substr(2,
+                                                                  string::npos); // contiene il valore dell'etichetta da controllare
+                                vector<int> number;
+                                for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                    if (buf2 == database[s].get_map()[1][a]) {
+                                        for (int it = 2; it < database[s].get_map().size(); it++) {
+                                            if (buf3 == database[s].get_map()[it][a]) {
+                                                number.emplace_back(
+                                                        it); // contiene tutti gli indici dei record dove la condizione WHERE è soddisfatta
+                                            }
                                         }
                                     }
                                 }
+                                if (order_by.find("ASC") != string::npos) {
+                                    database[s].order_asc(order_by, number);
+                                } else if (order_by.find("DESC") != string::npos) {
+                                    database[s].order_desc(order_by, number);
+                                }
                             }
-                            if (order_by.find("ASC") != string::npos) {
-                                database[s].order_asc(order_by, number);
-                            } else if (order_by.find("DESC") != string::npos) {
-                                database[s].order_desc(order_by, number);
+                            else if (where.find('<')!=string::npos) {
+                                regex reg(R"(\w{0,22}[^ <])");
+                                smatch match, match2;
+                                regex_search(buf, match, reg);
+                                string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                                regex reg2(R"(\<(.*))");
+                                regex_search(buf, match2, reg2);
+                                string buf3 = match2.str().substr(2,
+                                                                  string::npos); // contiene il valore dell'etichetta da controllare
+                                vector<int> number;
+                                for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                    if (buf2 == database[s].get_map()[1][a]) {
+                                        for (int it = 2; it < database[s].get_map().size(); it++) {
+                                            if (stof(buf3) > stof(database[s].get_map()[it][a])) {
+                                                number.emplace_back(
+                                                        it); // contiene tutti gli indici dei record dove la condizione WHERE è soddisfatta
+                                            }
+                                        }
+                                    }
+                                }
+                                if (order_by.find("ASC") != string::npos) {
+                                    database[s].order_asc(order_by, number);
+                                } else if (order_by.find("DESC") != string::npos) {
+                                    database[s].order_desc(order_by, number);
+                                }
+                            }
+                            else if (where.find('>')!=string::npos) {
+                                regex reg(R"(\w{0,22}[^ >])");
+                                smatch match, match2;
+                                regex_search(buf, match, reg);
+                                string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                                regex reg2(R"(\>(.*))");
+                                regex_search(buf, match2, reg2);
+                                string buf3 = match2.str().substr(2,
+                                                                  string::npos); // contiene il valore dell'etichetta da controllare
+                                vector<int> number;
+                                for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                    if (buf2 == database[s].get_map()[1][a]) {
+                                        for (int it = 2; it < database[s].get_map().size(); it++) {
+                                            if (stof(buf3) < stof(database[s].get_map()[it][a])) {
+                                                number.emplace_back(
+                                                        it); // contiene tutti gli indici dei record dove la condizione WHERE è soddisfatta
+                                            }
+                                        }
+                                    }
+                                }
+                                if (order_by.find("ASC") != string::npos) {
+                                    database[s].order_asc(order_by, number);
+                                } else if (order_by.find("DESC") != string::npos) {
+                                    database[s].order_desc(order_by, number);
+                                }
+                            }
+                            else if (where.find("<>")!=string::npos) {
+                                regex reg(R"(\w{0,22}[^ <>])");
+                                smatch match, match2;
+                                regex_search(buf, match, reg);
+                                string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                                regex reg2(R"(\<>(.*))");
+                                regex_search(buf, match2, reg2);
+                                string buf3 = match2.str().substr(3,string::npos); // contiene il valore dell'etichetta da controllare
+                                vector<int> number;
+                                for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                    if (buf2 == database[s].get_map()[1][a]) {
+                                        for (int it = 2; it < database[s].get_map().size(); it++) {
+                                            if (stof(buf3) != stof(database[s].get_map()[it][a])) {
+                                                number.emplace_back(
+                                                        it); // contiene tutti gli indici dei record dove la condizione WHERE è soddisfatta
+                                            }
+                                        }
+                                    }
+                                }
+                                if (order_by.find("ASC") != string::npos) {
+                                    database[s].order_asc(order_by, number);
+                                } else if (order_by.find("DESC") != string::npos) {
+                                    database[s].order_desc(order_by, number);
+                                }
+                            }
+                            else if (where.find("<=")!=string::npos) {
+                                regex reg(R"(\w{0,22}[^ <=])");
+                                smatch match, match2;
+                                regex_search(buf, match, reg);
+                                string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                                regex reg2(R"(\<=(.*))");
+                                regex_search(buf, match2, reg2);
+                                string buf3 = match2.str().substr(3,string::npos); // contiene il valore dell'etichetta da controllare
+                                vector<int> number;
+                                for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                    if (buf2 == database[s].get_map()[1][a]) {
+                                        for (int it = 2; it < database[s].get_map().size(); it++) {
+                                            if ((stof(buf3) > stof(database[s].get_map()[it][a])) || (stof(buf3) == stof(database[s].get_map()[it][a]))) {
+                                                number.emplace_back(
+                                                        it); // contiene tutti gli indici dei record dove la condizione WHERE è soddisfatta
+                                            }
+                                        }
+                                    }
+                                }
+                                if (order_by.find("ASC") != string::npos) {
+                                    database[s].order_asc(order_by, number);
+                                } else if (order_by.find("DESC") != string::npos) {
+                                    database[s].order_desc(order_by, number);
+                                }
+                            }
+                            else if (where.find(">=")!=string::npos) {
+                                regex reg(R"(\w{0,22}[^ >=])");
+                                smatch match, match2;
+                                regex_search(buf, match, reg);
+                                string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                                regex reg2(R"(\>=(.*))");
+                                regex_search(buf, match2, reg2);
+                                string buf3 = match2.str().substr(3,string::npos); // contiene il valore dell'etichetta da controllare
+                                vector<int> number;
+                                for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                    if (buf2 == database[s].get_map()[1][a]) {
+                                        for (int it = 2; it < database[s].get_map().size(); it++) {
+                                            if ((stof(buf3) < stof(database[s].get_map()[it][a])) || (stof(buf3) == stof(database[s].get_map()[it][a]))) {
+                                                number.emplace_back(
+                                                        it); // contiene tutti gli indici dei record dove la condizione WHERE è soddisfatta
+                                            }
+                                        }
+                                    }
+                                }
+                                if (order_by.find("ASC") != string::npos) {
+                                    database[s].order_asc(order_by, number);
+                                } else if (order_by.find("DESC") != string::npos) {
+                                    database[s].order_desc(order_by, number);
+                                }
                             }
                         }
                     }
@@ -856,38 +1451,215 @@ void Table::print_table(const string& str, map <string,Table> database) {
                         regex_search(where, matchAlpha, regAlpha);
                         where = matchAlpha.str();
                         string buf = where.substr(where.find("WHERE") + 6, string::npos);
-                        regex reg(R"(\w{0,22}[^ =])");
-                        smatch match, match2;
-                        regex_search(buf, match, reg);
-                        string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
-                        regex reg2(R"(\=(.*))");
-                        regex_search(buf, match2, reg2);
-                        string buf3 = match2.str().substr(2, string::npos); // contiene il valore dell'etichetta da controllare
-                        vector<int> number;
-                        for (int a = 0; a < database[s].get_map()[1].size(); a++) {
-                            if (buf2 == database[s].get_map()[1][a]) {
-                                for (int it = 2; it < database[s].get_map().size(); it++) {
-                                    if (buf3 == database[s].get_map()[it][a]) {
-                                        number.emplace_back(it); // contiene tutti gli indici delle righe (record) dove la condizione WHERE è soddisfatta
+                        if (where.find('=')!=string::npos) {
+                            regex reg(R"(\w{0,22}[^ =])");
+                            smatch match, match2;
+                            regex_search(buf, match, reg);
+                            string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                            regex reg2(R"(\=(.*))");
+                            regex_search(buf, match2, reg2);
+                            string buf3 = match2.str().substr(2, string::npos); // contiene il valore dell'etichetta da controllare
+                            vector<int> number;
+                            for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                if (buf2 == database[s].get_map()[1][a]) {
+                                    for (int it = 2; it < database[s].get_map().size(); it++) {
+                                        if (buf3 == database[s].get_map()[it][a]) {
+                                            number.emplace_back(it); // contiene tutti gli indici delle righe (record) dove la condizione WHERE è soddisfatta
+                                        }
                                     }
                                 }
                             }
-                        }
-                        vector<int> positions;
-                        for (int j = 0; j < vect.size(); j++) {
-                            for (int k = 0; k < database[s].get_map()[1].size(); k++) {
-                                if (vect[j] == database[s].get_map()[1][k]) {
-                                    cout << database[s].get_map()[1][k] << "\t";
-                                    positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
+                            vector<int> positions;
+                            for (int j = 0; j < vect.size(); j++) {
+                                for (int k = 0; k < database[s].get_map()[1].size(); k++) {
+                                    if (vect[j] == database[s].get_map()[1][k]) {
+                                        cout << database[s].get_map()[1][k] << "\t";
+                                        positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
+                                    }
                                 }
                             }
+                            cout << endl;
+                            for (auto b = number.begin(); b < number.end(); b++) {
+                                for (auto l = positions.begin(); l < positions.end(); l++) {
+                                    cout << database[s].get_map()[*b][*l] << "\t";
+                                }
+                                cout << endl;
+                            }
                         }
-                        cout << endl;
-                        for (auto b = number.begin(); b < number.end(); b++) {
-                            for (auto l = positions.begin(); l < positions.end(); l++) {
-                                cout << database[s].get_map()[*b][*l] << "\t";
+                        else if (where.find('<')!=string::npos) {
+                            regex reg(R"(\w{0,22}[^ <])");
+                            smatch match, match2;
+                            regex_search(buf, match, reg);
+                            string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                            regex reg2(R"(\<(.*))");
+                            regex_search(buf, match2, reg2);
+                            string buf3 = match2.str().substr(2, string::npos); // contiene il valore dell'etichetta da controllare
+                            vector<int> number;
+                            for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                if (buf2 == database[s].get_map()[1][a]) {
+                                    for (int it = 2; it < database[s].get_map().size(); it++) {
+                                        if (stof(buf3) > stof(database[s].get_map()[it][a])) {
+                                            number.emplace_back(it); // contiene tutti gli indici delle righe (record) dove la condizione WHERE è soddisfatta
+                                        }
+                                    }
+                                }
+                            }
+                            vector<int> positions;
+                            for (int j = 0; j < vect.size(); j++) {
+                                for (int k = 0; k < database[s].get_map()[1].size(); k++) {
+                                    if (vect[j] == database[s].get_map()[1][k]) {
+                                        cout << database[s].get_map()[1][k] << "\t";
+                                        positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
+                                    }
+                                }
                             }
                             cout << endl;
+                            for (auto b = number.begin(); b < number.end(); b++) {
+                                for (auto l = positions.begin(); l < positions.end(); l++) {
+                                    cout << database[s].get_map()[*b][*l] << "\t";
+                                }
+                                cout << endl;
+                            }
+                        }
+                        else if (where.find('>')!=string::npos) {
+                            regex reg(R"(\w{0,22}[^ >])");
+                            smatch match, match2;
+                            regex_search(buf, match, reg);
+                            string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                            regex reg2(R"(\>(.*))");
+                            regex_search(buf, match2, reg2);
+                            string buf3 = match2.str().substr(2, string::npos); // contiene il valore dell'etichetta da controllare
+                            vector<int> number;
+                            for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                if (buf2 == database[s].get_map()[1][a]) {
+                                    for (int it = 2; it < database[s].get_map().size(); it++) {
+                                        if (stof(buf3) < stof(database[s].get_map()[it][a])) {
+                                            number.emplace_back(it); // contiene tutti gli indici delle righe (record) dove la condizione WHERE è soddisfatta
+                                        }
+                                    }
+                                }
+                            }
+                            vector<int> positions;
+                            for (int j = 0; j < vect.size(); j++) {
+                                for (int k = 0; k < database[s].get_map()[1].size(); k++) {
+                                    if (vect[j] == database[s].get_map()[1][k]) {
+                                        cout << database[s].get_map()[1][k] << "\t";
+                                        positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
+                                    }
+                                }
+                            }
+                            cout << endl;
+                            for (auto b = number.begin(); b < number.end(); b++) {
+                                for (auto l = positions.begin(); l < positions.end(); l++) {
+                                    cout << database[s].get_map()[*b][*l] << "\t";
+                                }
+                                cout << endl;
+                            }
+                        }
+                        else if (where.find("<>")!=string::npos) {
+                            regex reg(R"(\w{0,22}[^ <>])");
+                            smatch match, match2;
+                            regex_search(buf, match, reg);
+                            string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                            regex reg2(R"(\<>(.*))");
+                            regex_search(buf, match2, reg2);
+                            string buf3 = match2.str().substr(3, string::npos); // contiene il valore dell'etichetta da controllare
+                            vector<int> number;
+                            for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                if (buf2 == database[s].get_map()[1][a]) {
+                                    for (int it = 2; it < database[s].get_map().size(); it++) {
+                                        if (stof(buf3) != stof(database[s].get_map()[it][a])) {
+                                            number.emplace_back(it); // contiene tutti gli indici delle righe (record) dove la condizione WHERE è soddisfatta
+                                        }
+                                    }
+                                }
+                            }
+                            vector<int> positions;
+                            for (int j = 0; j < vect.size(); j++) {
+                                for (int k = 0; k < database[s].get_map()[1].size(); k++) {
+                                    if (vect[j] == database[s].get_map()[1][k]) {
+                                        cout << database[s].get_map()[1][k] << "\t";
+                                        positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
+                                    }
+                                }
+                            }
+                            cout << endl;
+                            for (auto b = number.begin(); b < number.end(); b++) {
+                                for (auto l = positions.begin(); l < positions.end(); l++) {
+                                    cout << database[s].get_map()[*b][*l] << "\t";
+                                }
+                                cout << endl;
+                            }
+                        }
+                        else if (where.find("<=")!=string::npos) {
+                            regex reg(R"(\w{0,22}[^ <=])");
+                            smatch match, match2;
+                            regex_search(buf, match, reg);
+                            string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                            regex reg2(R"(\<=(.*))");
+                            regex_search(buf, match2, reg2);
+                            string buf3 = match2.str().substr(3, string::npos); // contiene il valore dell'etichetta da controllare
+                            vector<int> number;
+                            for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                if (buf2 == database[s].get_map()[1][a]) {
+                                    for (int it = 2; it < database[s].get_map().size(); it++) {
+                                        if ((stof(buf3) > stof(database[s].get_map()[it][a])) || (stof(buf3) == stof(database[s].get_map()[it][a]))) {
+                                            number.emplace_back(it); // contiene tutti gli indici delle righe (record) dove la condizione WHERE è soddisfatta
+                                        }
+                                    }
+                                }
+                            }
+                            vector<int> positions;
+                            for (int j = 0; j < vect.size(); j++) {
+                                for (int k = 0; k < database[s].get_map()[1].size(); k++) {
+                                    if (vect[j] == database[s].get_map()[1][k]) {
+                                        cout << database[s].get_map()[1][k] << "\t";
+                                        positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
+                                    }
+                                }
+                            }
+                            cout << endl;
+                            for (auto b = number.begin(); b < number.end(); b++) {
+                                for (auto l = positions.begin(); l < positions.end(); l++) {
+                                    cout << database[s].get_map()[*b][*l] << "\t";
+                                }
+                                cout << endl;
+                            }
+                        }
+                        else if (where.find(">=")!=string::npos) {
+                            regex reg(R"(\w{0,22}[^ >=])");
+                            smatch match, match2;
+                            regex_search(buf, match, reg);
+                            string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                            regex reg2(R"(\>=(.*))");
+                            regex_search(buf, match2, reg2);
+                            string buf3 = match2.str().substr(3, string::npos); // contiene il valore dell'etichetta da controllare
+                            vector<int> number;
+                            for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                if (buf2 == database[s].get_map()[1][a]) {
+                                    for (int it = 2; it < database[s].get_map().size(); it++) {
+                                        if ((stof(buf3) < stof(database[s].get_map()[it][a])) || (stof(buf3) == stof(database[s].get_map()[it][a]))) {
+                                            number.emplace_back(it); // contiene tutti gli indici delle righe (record) dove la condizione WHERE è soddisfatta
+                                        }
+                                    }
+                                }
+                            }
+                            vector<int> positions;
+                            for (int j = 0; j < vect.size(); j++) {
+                                for (int k = 0; k < database[s].get_map()[1].size(); k++) {
+                                    if (vect[j] == database[s].get_map()[1][k]) {
+                                        cout << database[s].get_map()[1][k] << "\t";
+                                        positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
+                                    }
+                                }
+                            }
+                            cout << endl;
+                            for (auto b = number.begin(); b < number.end(); b++) {
+                                for (auto l = positions.begin(); l < positions.end(); l++) {
+                                    cout << database[s].get_map()[*b][*l] << "\t";
+                                }
+                                cout << endl;
+                            }
                         }
                     } else {
                         string order_by;
@@ -913,35 +1685,197 @@ void Table::print_table(const string& str, map <string,Table> database) {
                             regex_search(where, matchAlpha, regAlpha);
                             where = matchAlpha.str();
                             string buf = where.substr(where.find("WHERE") + 6, string::npos);
-                            regex reg(R"(\w{0,22}[^ =])");
-                            smatch match, match2;
-                            regex_search(buf, match, reg);
-                            string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
-                            regex reg2(R"(\=(.*))");
-                            regex_search(buf, match2, reg2);
-                            string buf3 = match2.str().substr(2, string::npos); // contiene il valore dell'etichetta da controllare
-                            vector<int> number;
-                            for (int a = 0; a < database[s].get_map()[1].size(); a++) {
-                                if (buf2 == database[s].get_map()[1][a]) {
-                                    for (int it = 2; it < database[s].get_map().size(); it++) {
-                                        if (buf3 == database[s].get_map()[it][a]) {
-                                            number.emplace_back(it); // contiene tutti gli indici delle righe (record) dove la condizione WHERE è soddisfatta
+                            if (where.find('=')!=string::npos) {
+                                regex reg(R"(\w{0,22}[^ =])");
+                                smatch match, match2;
+                                regex_search(buf, match, reg);
+                                string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                                regex reg2(R"(\=(.*))");
+                                regex_search(buf, match2, reg2);
+                                string buf3 = match2.str().substr(2, string::npos); // contiene il valore dell'etichetta da controllare
+                                vector<int> number;
+                                for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                    if (buf2 == database[s].get_map()[1][a]) {
+                                        for (int it = 2; it < database[s].get_map().size(); it++) {
+                                            if (buf3 == database[s].get_map()[it][a]) {
+                                                number.emplace_back(it); // contiene tutti gli indici delle righe (record) dove la condizione WHERE è soddisfatta
+                                            }
                                         }
                                     }
                                 }
-                            }
-                            vector<int> positions;
-                            for (int j = 0; j < vect.size(); j++) {
-                                for (int k = 0; k < database[s].get_map()[1].size(); k++) {
-                                    if (vect[j] == database[s].get_map()[1][k]) {
-                                        positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
+                                vector<int> positions;
+                                for (int j = 0; j < vect.size(); j++) {
+                                    for (int k = 0; k < database[s].get_map()[1].size(); k++) {
+                                        if (vect[j] == database[s].get_map()[1][k]) {
+                                            positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
+                                        }
                                     }
                                 }
+                                if (order_by.find("ASC") != string::npos) {
+                                    database[s].select_order_asc(order_by, number, positions);
+                                } else if (order_by.find("DESC") != string::npos) {
+                                    database[s].select_order_desc(order_by, number, positions);
+                                }
                             }
-                            if (order_by.find("ASC") != string::npos) {
-                                database[s].select_order_asc(order_by, number, positions);
-                            } else if (order_by.find("DESC") != string::npos) {
-                                database[s].select_order_desc(order_by, number, positions);
+                            else if (where.find('<')!=string::npos) {
+                                regex reg(R"(\w{0,22}[^ <])");
+                                smatch match, match2;
+                                regex_search(buf, match, reg);
+                                string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                                regex reg2(R"(\<(.*))");
+                                regex_search(buf, match2, reg2);
+                                string buf3 = match2.str().substr(2, string::npos); // contiene il valore dell'etichetta da controllare
+                                vector<int> number;
+                                for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                    if (buf2 == database[s].get_map()[1][a]) {
+                                        for (int it = 2; it < database[s].get_map().size(); it++) {
+                                            if (stof(buf3) > stof(database[s].get_map()[it][a])) {
+                                                number.emplace_back(it); // contiene tutti gli indici delle righe (record) dove la condizione WHERE è soddisfatta
+                                            }
+                                        }
+                                    }
+                                }
+                                vector<int> positions;
+                                for (int j = 0; j < vect.size(); j++) {
+                                    for (int k = 0; k < database[s].get_map()[1].size(); k++) {
+                                        if (vect[j] == database[s].get_map()[1][k]) {
+                                            positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
+                                        }
+                                    }
+                                }
+                                if (order_by.find("ASC") != string::npos) {
+                                    database[s].select_order_asc(order_by, number, positions);
+                                } else if (order_by.find("DESC") != string::npos) {
+                                    database[s].select_order_desc(order_by, number, positions);
+                                }
+                            }
+                            else if (where.find('>')!=string::npos) {
+                                regex reg(R"(\w{0,22}[^ >])");
+                                smatch match, match2;
+                                regex_search(buf, match, reg);
+                                string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                                regex reg2(R"(\>(.*))");
+                                regex_search(buf, match2, reg2);
+                                string buf3 = match2.str().substr(2, string::npos); // contiene il valore dell'etichetta da controllare
+                                vector<int> number;
+                                for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                    if (buf2 == database[s].get_map()[1][a]) {
+                                        for (int it = 2; it < database[s].get_map().size(); it++) {
+                                            if (stof(buf3) < stof(database[s].get_map()[it][a])) {
+                                                number.emplace_back(it); // contiene tutti gli indici delle righe (record) dove la condizione WHERE è soddisfatta
+                                            }
+                                        }
+                                    }
+                                }
+                                vector<int> positions;
+                                for (int j = 0; j < vect.size(); j++) {
+                                    for (int k = 0; k < database[s].get_map()[1].size(); k++) {
+                                        if (vect[j] == database[s].get_map()[1][k]) {
+                                            positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
+                                        }
+                                    }
+                                }
+                                if (order_by.find("ASC") != string::npos) {
+                                    database[s].select_order_asc(order_by, number, positions);
+                                } else if (order_by.find("DESC") != string::npos) {
+                                    database[s].select_order_desc(order_by, number, positions);
+                                }
+                            }
+                            else if (where.find("<>")!=string::npos) {
+                                regex reg(R"(\w{0,22}[^ <>])");
+                                smatch match, match2;
+                                regex_search(buf, match, reg);
+                                string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                                regex reg2(R"(\<>(.*))");
+                                regex_search(buf, match2, reg2);
+                                string buf3 = match2.str().substr(3, string::npos); // contiene il valore dell'etichetta da controllare
+                                vector<int> number;
+                                for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                    if (buf2 == database[s].get_map()[1][a]) {
+                                        for (int it = 2; it < database[s].get_map().size(); it++) {
+                                            if (stof(buf3) != stof(database[s].get_map()[it][a])) {
+                                                number.emplace_back(it); // contiene tutti gli indici delle righe (record) dove la condizione WHERE è soddisfatta
+                                            }
+                                        }
+                                    }
+                                }
+                                vector<int> positions;
+                                for (int j = 0; j < vect.size(); j++) {
+                                    for (int k = 0; k < database[s].get_map()[1].size(); k++) {
+                                        if (vect[j] == database[s].get_map()[1][k]) {
+                                            positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
+                                        }
+                                    }
+                                }
+                                if (order_by.find("ASC") != string::npos) {
+                                    database[s].select_order_asc(order_by, number, positions);
+                                } else if (order_by.find("DESC") != string::npos) {
+                                    database[s].select_order_desc(order_by, number, positions);
+                                }
+                            }
+                            else if (where.find("<=")!=string::npos) {
+                                regex reg(R"(\w{0,22}[^ <=])");
+                                smatch match, match2;
+                                regex_search(buf, match, reg);
+                                string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                                regex reg2(R"(\<=(.*))");
+                                regex_search(buf, match2, reg2);
+                                string buf3 = match2.str().substr(3, string::npos); // contiene il valore dell'etichetta da controllare
+                                vector<int> number;
+                                for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                    if (buf2 == database[s].get_map()[1][a]) {
+                                        for (int it = 2; it < database[s].get_map().size(); it++) {
+                                            if ((stof(buf3) > stof(database[s].get_map()[it][a])) || (stof(buf3) == stof(database[s].get_map()[it][a]))) {
+                                                number.emplace_back(it); // contiene tutti gli indici delle righe (record) dove la condizione WHERE è soddisfatta
+                                            }
+                                        }
+                                    }
+                                }
+                                vector<int> positions;
+                                for (int j = 0; j < vect.size(); j++) {
+                                    for (int k = 0; k < database[s].get_map()[1].size(); k++) {
+                                        if (vect[j] == database[s].get_map()[1][k]) {
+                                            positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
+                                        }
+                                    }
+                                }
+                                if (order_by.find("ASC") != string::npos) {
+                                    database[s].select_order_asc(order_by, number, positions);
+                                } else if (order_by.find("DESC") != string::npos) {
+                                    database[s].select_order_desc(order_by, number, positions);
+                                }
+                            }
+                            else if (where.find(">=")!=string::npos) {
+                                regex reg(R"(\w{0,22}[^ >=])");
+                                smatch match, match2;
+                                regex_search(buf, match, reg);
+                                string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
+                                regex reg2(R"(\>=(.*))");
+                                regex_search(buf, match2, reg2);
+                                string buf3 = match2.str().substr(3, string::npos); // contiene il valore dell'etichetta da controllare
+                                vector<int> number;
+                                for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                    if (buf2 == database[s].get_map()[1][a]) {
+                                        for (int it = 2; it < database[s].get_map().size(); it++) {
+                                            if ((stof(buf3) < stof(database[s].get_map()[it][a])) || (stof(buf3) == stof(database[s].get_map()[it][a]))) {
+                                                number.emplace_back(it); // contiene tutti gli indici delle righe (record) dove la condizione WHERE è soddisfatta
+                                            }
+                                        }
+                                    }
+                                }
+                                vector<int> positions;
+                                for (int j = 0; j < vect.size(); j++) {
+                                    for (int k = 0; k < database[s].get_map()[1].size(); k++) {
+                                        if (vect[j] == database[s].get_map()[1][k]) {
+                                            positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
+                                        }
+                                    }
+                                }
+                                if (order_by.find("ASC") != string::npos) {
+                                    database[s].select_order_asc(order_by, number, positions);
+                                } else if (order_by.find("DESC") != string::npos) {
+                                    database[s].select_order_desc(order_by, number, positions);
+                                }
                             }
                         }
                     }
@@ -998,6 +1932,23 @@ void Table::save_nnull(const string& table_name) {
             outf << "0" << endl;
         }
     }
+    outf.close();
+}
+
+vector<bool> Table::upload_nnull(const string &table_name) {
+    string s;
+    ifstream inf (table_name + "_notnull.bin", ios::binary);
+    while(getline(inf, s)) {
+        if (!s.empty()) {
+            if (s == "1") {
+                n_null.push_back(true);
+            } else if (s == "0") {
+                n_null.push_back(false);
+            }
+        }
+    }
+    inf.close();
+    return n_null;
 }
 
 void Table::save_ainc (const string& table_name) {
@@ -1009,18 +1960,33 @@ void Table::save_ainc (const string& table_name) {
         } else if (*it == false) {
             outf << "0" << endl;
         }
-
     }
+    outf.close();
+}
 
+vector<bool> Table::upload_ainc(const string &table_name) {
+    string s;
+    ifstream inf (table_name + "_autoinc.bin", ios::binary);
+    while(getline(inf, s)) {
+        if (!s.empty()) {
+            if (s == "1") {
+                n_null.push_back(true);
+            } else if (s == "0") {
+                n_null.push_back(false);
+            }
+        }
+    }
+    inf.close();
+    return a_inc;
 }
 
 void Table::save_table(const string &table_name) {
+    ofstream outf (table_name + ".bin", ios::binary);
     for (const auto &it : m) {
         //ofstream outf(table_name + ".txt");
-        ofstream outf (table_name + ".bin", ios::binary);
         outf << it.second << endl;
-        outf.close();
     }
+    outf.close();
 }
 
 map<int, vector<string>> Table::uploader(const string& table_name) {    // ricarica le varie tabelle dai file singoli
@@ -1039,8 +2005,50 @@ map<int, vector<string>> Table::uploader(const string& table_name) {    // ricar
             //vect_buff.clear();
             i++;
         }
-        inf.close();
         //map_buff.clear();
     }
+    inf.close();
     return m;
 }
+
+void Table::save_keys(const string &table_name) {
+    int r = 0;
+    ofstream outf (table_name + "_keys.bin", ios::binary);
+    outf << primary_key << endl;
+    outf << foreign_key << endl;
+    outf << reference << endl;
+    for (int k = 0; k < a_inc.size(); k++) {
+        if (a_inc[k]){
+            r++;
+        }
+    }
+    if (r > 0) {
+        outf << a_inc_count << endl;
+    } else {
+        outf << "1" << endl;
+    }
+    outf.close();
+}
+
+void Table::upload_keys(const string& table_name) {
+    string buff;
+    int x = 0;
+    ifstream inf (table_name + "_keys.bin", ios::binary);
+    while (getline(inf,buff)) {
+        if (!buff.empty()) {
+            if (x == 0) {
+                primary_key = buff;
+            } else if (x == 1) {
+                foreign_key = buff;
+            } else if (x == 2) {
+                reference = buff;
+            } else if (x == 3) {
+                a_inc_count = stoi(buff);
+            }
+        }
+        x++;
+    }
+    inf.close();
+}
+
+

@@ -16,10 +16,9 @@ public:
     Date(const int& _day, const int& _month, const int& _year);
     Date(const Date &to_copy);
     virtual ~Date();
-
     void get_day (const string& str);
 
-private:
+protected:
     int day, month, year;
     string str;
 };

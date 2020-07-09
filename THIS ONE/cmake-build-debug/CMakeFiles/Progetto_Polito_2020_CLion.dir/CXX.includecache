@@ -6,8 +6,14 @@
 
 #IncludeRegexTransform: 
 
+C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Control.cpp
+Control.h
+C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Control.h
+
 C:/Users/lupol/Desktop/13-07-2020/THIS ONE/Control.h
 vector
+-
+stdio.h
 -
 algorithm
 -

@@ -26,7 +26,9 @@ int main() {
     {
         Table obj_buff;
         obj_buff.uploader(database_names[in]);
-        //tutti gli upload
+        obj_buff.upload_ainc(database_names[in]);
+        obj_buff.upload_nnull(database_names[in]);
+        obj_buff.upload_keys(database_names[in]);
         database[database_names[in]] = obj_buff;
     }
     int q = 0;
@@ -34,8 +36,7 @@ int main() {
         string command;
         getline(cin, command);
         if (command.find("CREATE") != string::npos) {
-            string name = t.create_Table(command); // ottengo il nome della mia prossima tabella
-                                                      // di fatto non serve t, potremmo portarlo fuori? Lupo 05/07
+            string name = t.create_Table(command);
             database[name].set_target_names();
             database_names.emplace_back(name);
             cout << "Table " + name + " successfully created" << endl << endl;
@@ -45,7 +46,7 @@ int main() {
             regex_search(command, match, reg);
             string name = match.str();
            database[name].insert_into(command, database);  // IMPORTANTE: ADESSO MANDO DATABASE A INSERT INTO PER POTER AVER TRACCIA DELLE ALTRE TABLE PER IL COLLEGAMENTO Lupo 05/07
-            //cout << database[name] << endl;
+            // cout << database[name] << endl;
             cout << "Record successfully inserted into Table " + name << endl << endl;
         }  else if (command.find("UPDATE") != string::npos) {
             regex reg(R"(\b(?!\bUPDATE\b)\w+\b)");
@@ -72,6 +73,7 @@ int main() {
                         cerr << "No such map exists" << endl;
                     } else {
                         database.erase(drop);
+
                         vector<string>::iterator del;
                         del = find(database_names.begin(), database_names.end(), drop);
                         database_names.erase(del);
@@ -113,8 +115,7 @@ int main() {
         database[database_names[k]].save_table(database_names[k]);
         database[database_names[k]].save_ainc(database_names[k]);
         database[database_names[k]].save_nnull(database_names[k]);
-        //  database[database_names[k]].save_foreingkey(database_names[k]);
-        //  database[database_names[k]].save_secondarykey(database_names[k]);
+        database[database_names[k]].save_keys(database_names[k]);
     }
     c.save_tablenames(database_names); // creo i file ognuno con un nome
     return 0;

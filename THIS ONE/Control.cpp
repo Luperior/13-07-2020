@@ -10,6 +10,12 @@ Control::~Control() {
 
 }
 
+void Control::drop (const string& str) {
+    string s = str + ".bin";
+    //remove (s);
+
+}
+
 vector<string> Control::printMatchesIT(string str, regex reg) {
     //cout << "PrintMatchesIT:" << endl;
     vector <string> vect;
@@ -67,12 +73,76 @@ bool Control::c_text(const string &str) {
 }
 
 bool Control::c_date(const string &str) {
-    // controllo che sia compatibile con una data
+        int month, year;
+        vector <string> vect_str;
+        regex reg("\\d{4}|\\d{2}");
+        vect_str = printMatchesIT(str, reg);
+        if (vect_str.size()!=3) {
+            return false;
+        } else {
+            for (int i = 3; i > 0; i--) {
+                if (i == 3) { // anno
+                    if ((vect_str[i].size() != 4) || (stoi(vect_str[i]) < 0)) {
+                        return false;
+                    }
+                    else {
+                        year = stoi(vect_str[i]);
+                    }
+                }
+                else if (i == 2) { // mese
+                    if ((vect_str[i].size() != 2) || (stoi(vect_str[i]) < 0) || (stoi(vect_str[i]) > 12)) {
+                        return false;
+                    }
+                    month = stoi(vect_str[i]);
+                }
+                else if (i == 1) { // giorno
+                    if ((year % 4 == 0) && (month == 2)) { // se è bisestile
+                        if ((stoi(vect_str[i]) < 0) || (stoi(vect_str[i]) > 29)) {
+                            return false;
+                        }
+                    }
+                    else if (month == 2) {
+                        if ((stoi(vect_str[i]) < 0) || (stoi(vect_str[i]) > 28)) {
+                            return false;
+                        }
+                    }
+                    else if (month == 1 || month== 3 || month== 5 || month== 7 || month == 8 || month == 10 || month == 12) {
+                        if ((stoi(vect_str[i]) < 0) || (stoi(vect_str[i]) > 31)) {
+                            return false;
+                        }
+                    }
+                    else if (month == 4 || month==  6 || month== 9 || month== 11) {
+                        if ((stoi(vect_str[i]) < 0) || (stoi(vect_str[i]) > 30)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
     return true;
 }
 
 bool Control::c_time(const string &str) {
-    // controllo che sia compatibile con un orario
+    vector <string> vect_str;
+    regex reg("\\d{2}");
+    vect_str = printMatchesIT(str, reg);
+    if (vect_str.size()!=3) {
+        return false;
+    }
+    else {
+        for (int i = 0; i < vect_str.size(); i++) {
+            if (i == 0) { // ora
+                if ( stoi(vect_str[i]) < 0 || stoi(vect_str[i])> 23) {
+                    return false;
+                }
+            }
+            else { // minuti e secondi
+                if (stoi(vect_str[i]) < 0 || stoi(vect_str[i]) > 59) {
+                    return false;
+                }
+            }
+        }
+    }
     return true;
 }
 
@@ -122,5 +192,6 @@ vector <string> Control::upload_tablenames(vector <string>& table_names) {
         table_names.push_back(s);
     }
     inf.close();
+    remove("table_names.bin"); // per evitare doppi valori
     return table_names;
 } // ricarica i nomi delle tabelle

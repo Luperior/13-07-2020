@@ -7,6 +7,7 @@
 #define MAXSIZE 50
 
 #include <vector>
+#include <stdio.h>
 #include <algorithm>
 #include <fstream>
 #include <iostream>
@@ -16,6 +17,7 @@
 #include <iomanip>
 #include <ctime>
 #include <exception>
+//#include "Date.h"
 using namespace std;
 
 class Control {
@@ -31,6 +33,7 @@ public:
     bool c_text (const string& str);
     bool c_date (const string& str);
     bool c_time (const string& str);
+    void drop (const string& str);
     string reget_str();
     void save_tablenames(const vector<string>& table_names);
     vector <string> upload_tablenames(vector <string>& table_names);
