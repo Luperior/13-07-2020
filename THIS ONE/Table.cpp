@@ -61,6 +61,10 @@ string Table::create_Table(string& str) {
     }
 }
 
+bool myfloat(const float& a, const float& b) {
+    return a<b;
+}
+
 void Table::order_asc(const string& str, const vector<int>& number) {
     regex reg(R"(\b(?!\bORDER|BY\b)\w+\b)");
     smatch match;
@@ -74,7 +78,41 @@ void Table::order_asc(const string& str, const vector<int>& number) {
             }
         }
     }
-    sort(target.begin(),target.end());
+    for (int q = 0; q < m[1].size(); q++) {
+        if (order_label == m[1][q]) {
+            if ((m[0][q] == "TEXT") || (m[0][q] == "CHAR")) {
+                sort(target.begin(),target.end());
+            } else if (m[0][q] == "INT") {
+                vector <int> buff;
+                for (int x = 0; x < target.size(); x++) {
+                    int y = stoi(target[x]);
+                    buff.emplace_back(y);
+                }
+                sort (buff.begin(),buff.end());
+                int x = 0;
+                for (int z = 0; z < buff.size(); z++) {
+                    target[x] = to_string(buff[z]);
+                    x++;
+                }
+            } else if (m[0][q] == "FLOAT") {
+                vector <float> buff;
+                for (int x = 0; x < target.size(); x++) {
+                    float y = stof(target[x]);
+                    buff.emplace_back(y);
+                }
+                sort (buff.begin(),buff.end(),myfloat);
+                int x = 0;
+                for (int z = 0; z < buff.size(); z++) {
+                    target[x] = to_string(buff[z]);
+                    x++;
+                }
+            } else if (m[0][q] == "DATE") {
+
+            } else if (m[0][q] == "TIME") {
+
+            }
+        }
+    }
     vector<string> order = target;
     vector<int> order_index;
     for (int n = 0; n < m[1].size(); n++) {
@@ -106,7 +144,41 @@ void Table::select_order_asc(const string& str, const vector<int>& number, const
             }
         }
     }
-    sort(target.begin(),target.end());
+    for (int q = 0; q < m[1].size(); q++) {
+        if (order_label == m[1][q]) {
+            if ((m[0][q] == "TEXT") || (m[0][q] == "CHAR")) {
+                sort(target.begin(),target.end());
+            } else if (m[0][q] == "INT") {
+                vector <int> buff;
+                for (int x = 0; x < target.size(); x++) {
+                    int y = stoi(target[x]);
+                    buff.emplace_back(y);
+                }
+                sort (buff.begin(),buff.end());
+                int x = 0;
+                for (int z = 0; z < buff.size(); z++) {
+                    target[x] = to_string(buff[z]);
+                    x++;
+                }
+            } else if (m[0][q] == "FLOAT") {
+                vector <float> buff;
+                for (int x = 0; x < target.size(); x++) {
+                    float y = stof(target[x]);
+                    buff.emplace_back(y);
+                }
+                sort (buff.begin(),buff.end(),myfloat);
+                int x = 0;
+                for (int z = 0; z < buff.size(); z++) {
+                    target[x] = to_string(buff[z]);
+                    x++;
+                }
+            } else if (m[0][q] == "DATE") {
+
+            } else if (m[0][q] == "TIME") {
+
+            }
+        }
+    }
     vector<string> order = target;
     vector<int> order_index;
     for (int n = 0; n < m[1].size(); n++) {
@@ -145,7 +217,41 @@ void Table::order_desc(const string& str, const vector<int>& number) {
             }
         }
     }
-    sort(target.begin(),target.end());
+    for (int q = 0; q < m[1].size(); q++) {
+        if (order_label == m[1][q]) {
+            if ((m[0][q] == "TEXT") || (m[0][q] == "CHAR")) {
+                sort(target.begin(),target.end());
+            } else if (m[0][q] == "INT") {
+                vector <int> buff;
+                for (int x = 0; x < target.size(); x++) {
+                    int y = stoi(target[x]);
+                    buff.emplace_back(y);
+                }
+                sort (buff.begin(),buff.end());
+                int x = 0;
+                for (int z = 0; z < buff.size(); z++) {
+                    target[x] = to_string(buff[z]);
+                    x++;
+                }
+            } else if (m[0][q] == "FLOAT") {
+                vector <float> buff;
+                for (int x = 0; x < target.size(); x++) {
+                    float y = stof(target[x]);
+                    buff.emplace_back(y);
+                }
+                sort (buff.begin(),buff.end(),myfloat);
+                int x = 0;
+                for (int z = 0; z < buff.size(); z++) {
+                    target[x] = to_string(buff[z]);
+                    x++;
+                }
+            } else if (m[0][q] == "DATE") {
+
+            } else if (m[0][q] == "TIME") {
+
+            }
+        }
+    }
     vector<string> order = target;
     vector<int> order_index;
     for (int n = 0; n < m[1].size(); n++) {
@@ -178,7 +284,41 @@ void Table::select_order_desc(const string& str, const vector<int>& number, cons
             }
         }
     }
-    sort(target.begin(),target.end());
+    for (int q = 0; q < m[1].size(); q++) {
+        if (order_label == m[1][q]) {
+            if ((m[0][q] == "TEXT") || (m[0][q] == "CHAR")) {
+                sort(target.begin(),target.end());
+            } else if (m[0][q] == "INT") {
+                vector <int> buff;
+                for (int x = 0; x < target.size(); x++) {
+                    int y = stoi(target[x]);
+                    buff.emplace_back(y);
+                }
+                sort (buff.begin(),buff.end());
+                int x = 0;
+                for (int z = 0; z < buff.size(); z++) {
+                    target[x] = to_string(buff[z]);
+                    x++;
+                }
+            } else if (m[0][q] == "FLOAT") {
+                vector <float> buff;
+                for (int x = 0; x < target.size(); x++) {
+                    float y = stof(target[x]);
+                    buff.emplace_back(y);
+                }
+                sort (buff.begin(),buff.end(),myfloat);
+                int x = 0;
+                for (int z = 0; z < buff.size(); z++) {
+                    target[x] = to_string(buff[z]);
+                    x++;
+                }
+            } else if (m[0][q] == "DATE") {
+
+            } else if (m[0][q] == "TIME") {
+
+            }
+        }
+    }
     vector<string> order = target;
     vector<int> order_index;
     for (int n = 0; n < m[1].size(); n++) {

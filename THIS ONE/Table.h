@@ -35,7 +35,7 @@ public:
     int size();
     vector <string> line (const int& idx);
     void print_table(const string& _str, map <string,Table> database);
-
+    //bool myfloat(const float& a, const float& b);
 
 private:
 string str, str2; // secondo me queste possiamo rimuoverle, del resto derivano dall'esterno e non sono proprie della singola Table

@@ -3,14 +3,6 @@
 #include "Date.h"
 #include "Time.h"
 
-//ci siamo dimenticati la push_back nel vettore target_names? (contenitore di tutti i nomi delle tabelle)
-//ricordiamoci quando faremo update                         30/06/2020 Evry
-
-//Ho momenteamente spostato "operatore stampa vettore in "Table.h" perchè mi serviva nel metodo "print_table"
-//Dovremmo mettere tutti gli operatori in una classe template? Probabilmente sì.
-//Potevo fare di meglio e mettere l'operatore sotto "Control.h"? Ovvio!
-//Re-edit: alla fine ho messo tutto in Control.h, la classe template dava troppe grane ed errori    30/06/2020 Evry
-
 
 ostream& operator<<(ostream& os, Table& t){ // operatore stampa tabella
     os << t.get_map();
