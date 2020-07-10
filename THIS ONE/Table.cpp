@@ -615,10 +615,7 @@ int Table::insert_into(const string& str, map <string,Table> database) {
     vector <string> primary_values;
     if ((str.find("INSERT INTO ") != string::npos) && (str.find('(') != string::npos)) {
         string value_group, buf, buf2, insert, target_list, a2, a3;
-        //regex reg(R"(\b(?!\bINSERT|INTO\b)\w+\b)");
         smatch match2, match3, match2A, match3A;
-        //regex_search(str, match, reg);
-        //test = match.str(); // nome della tabella da modificare
         int i = m.size(); // ogni volta che entro in insert into mette la riga dopo, dato che la 0 è occupata dai tipi e la 1 dalle etichette
         regex reg2("[\\(](.*)[\\)]");
         regex reg2A(R"([^ ,()]\w{0,22}|"^[0-9]+$")"); // ^[-+]?\d*\.?\d*$    ^[0-9]+$
@@ -632,11 +629,7 @@ int Table::insert_into(const string& str, map <string,Table> database) {
             regex_search(insert, matchAlpha, regAlpha);
             insert = matchAlpha.str();
             if ((insert.find("VALUES") != string::npos) && (insert.find(" (") != string::npos)) { // valori separati da uno spazio
-                regex reg3("\\((.*)\\)");
-                //regex reg3("[\\(](.*)[\\)]");
-                //regex reg3A("(?<=,)[^,]+(?=,)");
-                //regex reg3A("[^,\\n()]*");
-                //regex reg3A("(^[a-zA-Z0-9/:-]*$)(?!.*[<>, ()])");
+                regex reg3("[\\(](.*)[\\)]");
                 regex reg3A(R"([^ ,()]\w{0,22}|^[0-9/-]+$)"); // aggiungo +$ sennò matchava anche caratteri speciali, e la barra verticale è OR e la R iniziale suggerita
                 regex_search(insert, match3, reg3);
                 value_group = match3.str().substr(match3.str().find('(') + 1, string::npos);
@@ -644,7 +637,6 @@ int Table::insert_into(const string& str, map <string,Table> database) {
                 vector<string> values;
                 string bufextra;
                 while (getline(l,bufextra,',')) {
-                    //cout << bufextra << endl;
                     string bufs;
                     smatch matchs;
                     regex rep("(.*)[^ ()]");
@@ -652,9 +644,6 @@ int Table::insert_into(const string& str, map <string,Table> database) {
                     bufs = matchs.str();
                     values.emplace_back(bufs);
                 }
-                //cout << value_group;
-                //vector<string> values = printMatchesIT(value_group, reg3A);
-                //cout << values;
                 vector<string> records;
                 int quit = 0;
                 for (int k = 0; k < m[1].size(); k++) { // avvio controllo data types
