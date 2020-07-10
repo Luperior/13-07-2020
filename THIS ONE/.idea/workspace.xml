@@ -14,23 +14,22 @@
     <list default="true" id="6f93d186-80c6-44b3-868f-9deeafcb109c" name="Default Changelist" comment="DROP, DELETE e TRUNCATE #2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Control.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Control.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Control.h" beforeDir="false" afterPath="$PROJECT_DIR$/Control.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Date.h" beforeDir="false" afterPath="$PROJECT_DIR$/Date.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Table.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Table.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Table.h" beforeDir="false" afterPath="$PROJECT_DIR$/Table.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CIAO.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CIAO.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CIAO.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CIAO_keys.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CIAOautoinc.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CIAOnotnull.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/CXX.includecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/Control.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/Control.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/Date.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/Date.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/Table.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/Table.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/Time.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/Time.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/main.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progetto_Polito_2020_CLion.dir/objects.a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CUSTOMERS.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/PIPPO.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/PIPPO.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/PIPPO.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/PIPPO_keys.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/PIPPOautoinc.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/PIPPOnotnull.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Progetto_Polito_2020_CLion.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Progetto_Polito_2020_CLion.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/table_names.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +82,10 @@
       <workItem from="1594110389028" duration="13202000" />
       <workItem from="1594230057754" duration="12190000" />
       <workItem from="1594281059319" duration="11774000" />
-      <workItem from="1594303598630" duration="12818000" />
+      <workItem from="1594303598630" duration="13398000" />
+      <workItem from="1594320826475" duration="3093000" />
+      <workItem from="1594366151983" duration="745000" />
+      <workItem from="1594375127787" duration="18481000" />
     </task>
     <task id="LOCAL-00001" summary="Primary_Key now perfectly working">
       <created>1594047051144</created>
@@ -142,22 +144,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="585" y="88" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594140346241" />
-    <state width="1877" height="182" key="GridCell.Tab.0.bottom" timestamp="1594315032617">
+    <state width="1877" height="337" key="GridCell.Tab.0.bottom" timestamp="1594403178762">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="182" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594315032617" />
-    <state width="1877" height="182" key="GridCell.Tab.0.center" timestamp="1594315032617">
+    <state width="1877" height="337" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594403178762" />
+    <state width="1877" height="337" key="GridCell.Tab.0.center" timestamp="1594403178762">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="182" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594315032617" />
-    <state width="1877" height="182" key="GridCell.Tab.0.left" timestamp="1594315032617">
+    <state width="1877" height="337" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594403178762" />
+    <state width="1877" height="337" key="GridCell.Tab.0.left" timestamp="1594403178762">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="182" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594315032617" />
-    <state width="1877" height="182" key="GridCell.Tab.0.right" timestamp="1594315032617">
+    <state width="1877" height="337" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594403178762" />
+    <state width="1877" height="337" key="GridCell.Tab.0.right" timestamp="1594403178762">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="182" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594315032617" />
+    <state width="1877" height="337" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594403178762" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1594137058678">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

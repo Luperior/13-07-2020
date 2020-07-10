@@ -25,7 +25,9 @@ vector<string> Control::printMatchesIT(string str, regex reg) {
     {
         smatch match = *currentMatch;
         //cout << match.str() << endl;
-        vect.push_back(match.str());
+        if (match.str() != "\t" | match.str()!= " " | match.str()!= "\n" ) {
+            vect.push_back(match.str());
+        }
         currentMatch++;
     } while (currentMatch != lastMatch);
     // cout << "vector:" << vect << endl;
@@ -80,8 +82,8 @@ bool Control::c_date(const string &str) {
         if (vect_str.size()!=3) {
             return false;
         } else {
-            for (int i = 3; i > 0; i--) {
-                if (i == 3) { // anno
+            for (int i = 2; i > -1; i--) {
+                if (i == 2) { // anno
                     if ((vect_str[i].size() != 4) || (stoi(vect_str[i]) < 0)) {
                         return false;
                     }
@@ -89,13 +91,13 @@ bool Control::c_date(const string &str) {
                         year = stoi(vect_str[i]);
                     }
                 }
-                else if (i == 2) { // mese
+                else if (i == 1) { // mese
                     if ((vect_str[i].size() != 2) || (stoi(vect_str[i]) < 0) || (stoi(vect_str[i]) > 12)) {
                         return false;
                     }
                     month = stoi(vect_str[i]);
                 }
-                else if (i == 1) { // giorno
+                else if (i == 0) { // giorno
                     if ((year % 4 == 0) && (month == 2)) { // se è bisestile
                         if ((stoi(vect_str[i]) < 0) || (stoi(vect_str[i]) > 29)) {
                             return false;

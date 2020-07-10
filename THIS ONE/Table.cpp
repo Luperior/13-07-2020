@@ -6,9 +6,7 @@
 
 Table::Table() {}
 
-Table::Table(const string &_str, const string &_str2, const map<int, vector<string>>& _m, const vector<bool>& _n_null, const vector<bool>& _a_inc, const int& _a_inc_count, const string& _primary_key, const string& _foreign_key, const string& _reference) {
-    str = _str;
-    str2 = _str2;
+Table::Table(const map<int, vector<string>>& _m, const vector<bool>& _n_null, const vector<bool>& _a_inc, const int& _a_inc_count, const string& _primary_key, const string& _foreign_key, const string& _reference) {
     m = _m;
     n_null = _n_null;
     a_inc = _a_inc;
@@ -36,14 +34,6 @@ string Table::get_primary_key() {
     return primary_key;
 }
 
-string Table::get_foreign_key() {
-    return foreign_key;
-}
-
-string Table::get_reference() {
-    return reference;
-}
-
 string Table::create_Table(string& str) {
     if ((str.find("CREATE") != string::npos) && (str.find("TABLE") != string::npos) && (str.find(" (") != string::npos)) {
         regex reg(R"(\b(?!\bCREATE|TABLE\b)\w+\b)");
@@ -61,11 +51,8 @@ string Table::create_Table(string& str) {
     }
 }
 
-bool myfloat(const float& a, const float& b) {
-    return a<b;
-}
-
 void Table::order_asc(const string& str, const vector<int>& number) {
+    bool f = false;
     regex reg(R"(\b(?!\bORDER|BY\b)\w+\b)");
     smatch match;
     regex_search(str, match, reg);
@@ -100,12 +87,13 @@ void Table::order_asc(const string& str, const vector<int>& number) {
                     float y = stof(target[x]);
                     buff.emplace_back(y);
                 }
-                sort (buff.begin(),buff.end(),myfloat);
+                sort (buff.begin(),buff.end());
                 int x = 0;
                 for (int z = 0; z < buff.size(); z++) {
                     target[x] = to_string(buff[z]);
                     x++;
                 }
+                f = true;
             } else if (m[0][q] == "DATE") {
 
             } else if (m[0][q] == "TIME") {
@@ -119,7 +107,12 @@ void Table::order_asc(const string& str, const vector<int>& number) {
         if (m[1][n] == order_label) { // supponendo che order_label sia l'etichetta guida
             for (int i = 0; i < order.size(); i++) { // vettore ordinato
                 for (int j = 2; j < m.size(); j++) {
-                    if (order[i] == m[j][n]) { // n è la colonna dell'etichetta che indicizza l'ordinamento
+                    if (f == true) {
+                        if (stof(order[i]) == stof(m[j][n])) { // n è la colonna dell'etichetta che indicizza l'ordinamento
+                            order_index.emplace_back(j);
+                        }
+                    }
+                    else if (order[i] == m[j][n]) { // n è la colonna dell'etichetta che indicizza l'ordinamento
                         order_index.emplace_back(j);
                     }
                 }
@@ -132,6 +125,7 @@ void Table::order_asc(const string& str, const vector<int>& number) {
 }
 
 void Table::select_order_asc(const string& str, const vector<int>& number, const vector<int>& positions) {
+    bool f = false;
     regex reg(R"(\b(?!\bORDER|BY\b)\w+\b)");
     smatch match;
     regex_search(str, match, reg);
@@ -166,12 +160,13 @@ void Table::select_order_asc(const string& str, const vector<int>& number, const
                     float y = stof(target[x]);
                     buff.emplace_back(y);
                 }
-                sort (buff.begin(),buff.end(),myfloat);
+                sort (buff.begin(),buff.end());
                 int x = 0;
                 for (int z = 0; z < buff.size(); z++) {
                     target[x] = to_string(buff[z]);
                     x++;
                 }
+                f = true;
             } else if (m[0][q] == "DATE") {
 
             } else if (m[0][q] == "TIME") {
@@ -185,7 +180,12 @@ void Table::select_order_asc(const string& str, const vector<int>& number, const
         if (m[1][n] == order_label) { // supponendo che order_label sia l'etichetta guida
             for (int i = 0; i < order.size(); i++) { // vettore ordinato
                 for (int j = 2; j < m.size(); j++) {
-                    if (order[i] == m[j][n]) {
+                    if (f == true) {
+                        if (stof(order[i]) == stof(m[j][n])) { // n è la colonna dell'etichetta che indicizza l'ordinamento
+                            order_index.emplace_back(j);
+                        }
+                    }
+                    else if (order[i] == m[j][n]) { // n è la colonna dell'etichetta che indicizza l'ordinamento
                         order_index.emplace_back(j);
                     }
                 }
@@ -205,6 +205,7 @@ void Table::select_order_asc(const string& str, const vector<int>& number, const
 }
 
 void Table::order_desc(const string& str, const vector<int>& number) {
+    bool f = false;
     regex reg(R"(\b(?!\bORDER|BY\b)\w+\b)");
     smatch match;
     regex_search(str, match, reg);
@@ -239,12 +240,13 @@ void Table::order_desc(const string& str, const vector<int>& number) {
                     float y = stof(target[x]);
                     buff.emplace_back(y);
                 }
-                sort (buff.begin(),buff.end(),myfloat);
+                sort (buff.begin(),buff.end());
                 int x = 0;
                 for (int z = 0; z < buff.size(); z++) {
                     target[x] = to_string(buff[z]);
                     x++;
                 }
+                f = true;
             } else if (m[0][q] == "DATE") {
 
             } else if (m[0][q] == "TIME") {
@@ -258,7 +260,12 @@ void Table::order_desc(const string& str, const vector<int>& number) {
         if (m[1][n] == order_label) { // supponendo che order_label sia l'etichetta guida
             for (int i = 0; i < order.size(); i++) { // vettore ordinato
                 for (int j = 2; j < m.size(); j++) {
-                    if (order[i] == m[j][n]) {
+                    if (f == true) {
+                        if (stof(order[i]) == stof(m[j][n])) { // n è la colonna dell'etichetta che indicizza l'ordinamento
+                            order_index.emplace_back(j);
+                        }
+                    }
+                    else if (order[i] == m[j][n]) { // n è la colonna dell'etichetta che indicizza l'ordinamento
                         order_index.emplace_back(j);
                     }
                 }
@@ -272,6 +279,7 @@ void Table::order_desc(const string& str, const vector<int>& number) {
 }
 
 void Table::select_order_desc(const string& str, const vector<int>& number, const vector<int>& positions) {
+    bool f = false;
     regex reg(R"(\b(?!\bORDER|BY\b)\w+\b)");
     smatch match;
     regex_search(str, match, reg);
@@ -306,12 +314,13 @@ void Table::select_order_desc(const string& str, const vector<int>& number, cons
                     float y = stof(target[x]);
                     buff.emplace_back(y);
                 }
-                sort (buff.begin(),buff.end(),myfloat);
+                sort (buff.begin(),buff.end());
                 int x = 0;
                 for (int z = 0; z < buff.size(); z++) {
                     target[x] = to_string(buff[z]);
                     x++;
                 }
+                f = true;
             } else if (m[0][q] == "DATE") {
 
             } else if (m[0][q] == "TIME") {
@@ -325,7 +334,12 @@ void Table::select_order_desc(const string& str, const vector<int>& number, cons
         if (m[1][n] == order_label) { // supponendo che order_label sia l'etichetta guida
             for (int i = 0; i < order.size(); i++) { // vettore ordinato
                 for (int j = 2; j < m.size(); j++) {
-                    if (order[i] == m[j][n]) {
+                    if (f == true) {
+                        if (stof(order[i]) == stof(m[j][n])) { // n è la colonna dell'etichetta che indicizza l'ordinamento
+                            order_index.emplace_back(j);
+                        }
+                    }
+                    else if (order[i] == m[j][n]) { // n è la colonna dell'etichetta che indicizza l'ordinamento
                         order_index.emplace_back(j);
                     }
                 }
@@ -345,14 +359,14 @@ void Table::select_order_desc(const string& str, const vector<int>& number, cons
 }
 
 void Table::delete_from_table(const string& s2) {
-    string s3, buf4 , buf5;
-    if (s2.find(';')!=string::npos) {
+    string s3, buf4, buf5;
+    if (s2.find(';') != string::npos) {
         regex regAlpha(R"(^[^;]+)");
         smatch matchAlpha;
         regex_search(s2, matchAlpha, regAlpha);
         s3 = matchAlpha.str();
         if (s3.find("WHERE") != string::npos) {
-            if (s3.find('=')!=string::npos) {
+            if (s3.find('=') != string::npos) {
                 regex reg4(R"(\w{0,22}[^ =])");
                 regex reg5(R"(\=(.*))");
                 smatch match4, match5;
@@ -362,17 +376,18 @@ void Table::delete_from_table(const string& s2) {
                 regex_search(s3, match5, reg5);
                 buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
                 buf5 = buf5.substr(2, string::npos);
-                for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                for (int j = 0;
+                     j < m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
                     if (buf4 == m[1][j]) { // verifico che corrisponda
-                        for (int it = 2; it < m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
+                        for (int it = 2; it <
+                                         m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
                             if (m[it][j] == buf5) { // controllo che lo assuma
                                 m.erase(it);
                             }
                         }
                     }
                 }
-            }
-            else if (s3.find('<')!=string::npos) {
+            } else if (s3.find('<') != string::npos) {
                 regex reg4(R"(\w{0,22}[^ <])");
                 regex reg5(R"(\<(.*))");
                 smatch match4, match5;
@@ -382,17 +397,17 @@ void Table::delete_from_table(const string& s2) {
                 regex_search(s3, match5, reg5);
                 buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
                 buf5 = buf5.substr(2, string::npos);
-                for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
-                    if (stof(buf4) > stof(m[1][j])) { // verifico che corrisponda
-                        for (int it = 2; it < m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
-                            if (m[it][j] == buf5) { // controllo che lo assuma
+                for (int j = 0;
+                     j < m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                    if (buf4 == m[1][j]) { // verifico che corrisponda
+                        for (int it = 2; it <m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
+                            if (stof(m[it][j]) < stof(buf5)) { // controllo che lo assuma
                                 m.erase(it);
                             }
                         }
                     }
                 }
-            }
-            else if (s3.find('>')!=string::npos) {
+            } else if (s3.find('>') != string::npos) {
                 regex reg4(R"(\w{0,22}[^ >])");
                 regex reg5(R"(\>(.*))");
                 smatch match4, match5;
@@ -402,19 +417,20 @@ void Table::delete_from_table(const string& s2) {
                 regex_search(s3, match5, reg5);
                 buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
                 buf5 = buf5.substr(2, string::npos);
-                for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
-                    if (stof(buf4) < stof(m[1][j])) { // verifico che corrisponda
-                        for (int it = 2; it < m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
-                            if (m[it][j] == buf5) { // controllo che lo assuma
+                for (int j = 0;
+                     j < m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                    if (buf4 == m[1][j]) { // verifico che corrisponda
+                        for (int it = 2; it <
+                                         m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
+                            if (stof(m[it][j]) > stof(buf5)) { // controllo che lo assuma
                                 m.erase(it);
                             }
                         }
                     }
                 }
-            }
-            else if (s3.find("<>")!=string::npos) {
-                regex reg4(R"(\w{0,22}[^ <>])");
-                regex reg5(R"(\<>(.*))");
+            } else if (s3.find('!') != string::npos) {
+                regex reg4(R"(\w{0,22}[^ !])");
+                regex reg5(R"(\!(.*))");
                 smatch match4, match5;
                 string s2A = s3.substr(6, string::npos);
                 regex_search(s2A, match4, reg4);
@@ -422,19 +438,20 @@ void Table::delete_from_table(const string& s2) {
                 regex_search(s3, match5, reg5);
                 buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
                 buf5 = buf5.substr(3, string::npos);
-                for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
-                    if (stof(buf4) != stof(m[1][j])) { // verifico che corrisponda
-                        for (int it = 2; it < m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
-                            if (m[it][j] == buf5) { // controllo che lo assuma
+                for (int j = 0;
+                     j < m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                    if (buf4 == m[1][j]) { // verifico che corrisponda
+                        for (int it = 2; it <
+                                         m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
+                            if (stof(m[it][j]) != stof(buf5)) { // controllo che lo assuma
                                 m.erase(it);
                             }
                         }
                     }
                 }
-            }
-            else if (s3.find("<=")!=string::npos) {
-                regex reg4(R"(\w{0,22}[^ <=])");
-                regex reg5(R"(\<=(.*))");
+            } else if (s3.find('-') != string::npos) {
+                regex reg4(R"(\w{0,22}[^ -])");
+                regex reg5(R"(\-(.*))");
                 smatch match4, match5;
                 string s2A = s3.substr(6, string::npos);
                 regex_search(s2A, match4, reg4);
@@ -442,19 +459,18 @@ void Table::delete_from_table(const string& s2) {
                 regex_search(s3, match5, reg5);
                 buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
                 buf5 = buf5.substr(3, string::npos);
-                for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
-                    if ((stof(buf4) > stof(m[1][j])) || (stof(buf4) > stof(m[1][j]))) { // verifico che corrisponda
-                        for (int it = 2; it < m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
-                            if (m[it][j] == buf5) { // controllo che lo assuma
+                for (int j = 0;j < m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                    if (m[1][j] == buf4) { // verifico che corrisponda
+                        for (int it = 2; it <m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
+                            if ((stof(buf5) > stof(m[it][j])) || (stof(buf5) > stof(m[it][j]))) { // controllo che lo assuma
                                 m.erase(it);
                             }
                         }
                     }
                 }
-            }
-            else if (s3.find(">=")!=string::npos) {
-                regex reg4(R"(\w{0,22}[^ >=])");
-                regex reg5(R"(\>=(.*))");
+            } else if (s3.find('+') != string::npos) {
+                regex reg4(R"(\w{0,22}[^ +])");
+                regex reg5(R"(\+(.*))");
                 smatch match4, match5;
                 string s2A = s3.substr(6, string::npos);
                 regex_search(s2A, match4, reg4);
@@ -462,10 +478,36 @@ void Table::delete_from_table(const string& s2) {
                 regex_search(s3, match5, reg5);
                 buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
                 buf5 = buf5.substr(3, string::npos);
-                for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
-                    if ((stof(buf4) < stof(m[1][j])) || (stof(buf4) > stof(m[1][j]))) { // verifico che corrisponda
+                for (int j = 0;
+                     j < m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                    if (m[1][j] == buf4) { // verifico che corrisponda
+                        for (int it = 2; it <
+                                         m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
+                            if ((stof(buf5) < stof(m[it][j])) || (stof(buf5) > stof(m[it][j]))) {  // controllo che lo assuma
+                                m.erase(it);
+                            }
+                        }
+                    }
+                }
+            } else if ((s3.find("BETWEEN") != string::npos) && (s3.find("AND") != string::npos)) {
+                regex reg(R"(\b(?!\bWHERE\b)\w+\b)");
+                smatch match;
+                regex_search(s3, match, reg);
+                string bet = match.str(); // contiene l'etichetta guida
+                s3 = s3.substr(s3.find("BETWEEN") + 7, string::npos);
+                regex reg2(R"(\b(?!\bBETWEEN\b)\w+\b)");
+                smatch match2;
+                regex_search(s3, match2, reg2);
+                string val_sx = match2.str(); // il valore minimo
+                s3 = s3.substr(s3.find("AND") + 3, string::npos);
+                regex reg3(R"(\b(?!\bAND\b)\w+\b)");
+                smatch match3;
+                regex_search(s3, match3, reg3);
+                string val_dx = match3.str(); // il valore massimo
+                for (int j = 0; j < m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                    if (bet ==m[1][j]) { // verifico che corrisponda
                         for (int it = 2; it < m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
-                            if (m[it][j] == buf5) { // controllo che lo assuma
+                            if ((stof(m[it][j]) > stof(val_sx)) && (stof(m[it][j]) < stof(val_dx)))  { // controllo che lo assuma
                                 m.erase(it);
                             }
                         }
@@ -590,11 +632,29 @@ int Table::insert_into(const string& str, map <string,Table> database) {
             regex_search(insert, matchAlpha, regAlpha);
             insert = matchAlpha.str();
             if ((insert.find("VALUES") != string::npos) && (insert.find(" (") != string::npos)) { // valori separati da uno spazio
-                regex reg3("[\\(](.*)[\\)]");
-                regex reg3A(R"([^ ,()]\w{0,22}|"^[0-9]+$")"); // aggiungo +$ sennò matchava anche caratteri speciali, e la barra verticale è OR e la R iniziale suggerita
+                regex reg3("\\((.*)\\)");
+                //regex reg3("[\\(](.*)[\\)]");
+                //regex reg3A("(?<=,)[^,]+(?=,)");
+                //regex reg3A("[^,\\n()]*");
+                //regex reg3A("(^[a-zA-Z0-9/:-]*$)(?!.*[<>, ()])");
+                regex reg3A(R"([^ ,()]\w{0,22}|^[0-9/-]+$)"); // aggiungo +$ sennò matchava anche caratteri speciali, e la barra verticale è OR e la R iniziale suggerita
                 regex_search(insert, match3, reg3);
-                value_group = match3.str();
-                vector<string> values = printMatchesIT(value_group, reg3A);
+                value_group = match3.str().substr(match3.str().find('(') + 1, string::npos);
+                stringstream l(value_group);
+                vector<string> values;
+                string bufextra;
+                while (getline(l,bufextra,',')) {
+                    //cout << bufextra << endl;
+                    string bufs;
+                    smatch matchs;
+                    regex rep("(.*)[^ ()]");
+                    regex_search(bufextra, matchs, rep);
+                    bufs = matchs.str();
+                    values.emplace_back(bufs);
+                }
+                //cout << value_group;
+                //vector<string> values = printMatchesIT(value_group, reg3A);
+                //cout << values;
                 vector<string> records;
                 int quit = 0;
                 for (int k = 0; k < m[1].size(); k++) { // avvio controllo data types
@@ -869,9 +929,9 @@ int Table::update_record() { // IMPORTANTE CONTROLLO RICORSIONE         LUPO 07/
                             }
                         }
                     }
-                } else if (s2.find("<>")!= string::npos) {
-                    regex reg4(R"(\w{0,22}[^ <>])");
-                    regex reg5(R"(\<>(.*))");
+                } else if (s2.find('!')!= string::npos) {
+                    regex reg4(R"(\w{0,22}[^ !])");
+                    regex reg5(R"(\!(.*))");
                     smatch match4, match5;
                     string s2A = s2.substr(6, string::npos);
                     regex_search(s2A, match4, reg4);
@@ -917,9 +977,9 @@ int Table::update_record() { // IMPORTANTE CONTROLLO RICORSIONE         LUPO 07/
                             }
                         }
                     }
-                } else if (s2.find("<=")!= string::npos) {
-                    regex reg4(R"(\w{0,22}[^ <=])");
-                    regex reg5(R"(\<=(.*))");
+                } else if (s2.find('-')!= string::npos) {
+                    regex reg4(R"(\w{0,22}[^ -])");
+                    regex reg5(R"(\-(.*))");
                     smatch match4, match5;
                     string s2A = s2.substr(6, string::npos);
                     regex_search(s2A, match4, reg4);
@@ -965,16 +1025,15 @@ int Table::update_record() { // IMPORTANTE CONTROLLO RICORSIONE         LUPO 07/
                             }
                         }
                     }
-                } else if (s2.find(">=")!= string::npos) {
-                    regex reg4(R"(\w{0,22}[^ >=])");
-                    regex reg5(R"(\>=(.*))");
+                } else if (s2.find('+')!= string::npos) {
+                    regex reg4(R"(\w{0,22}[^ +])");
+                    regex reg5(R"(\+(.*))");
                     smatch match4, match5;
                     string s2A = s2.substr(6, string::npos);
                     regex_search(s2A, match4, reg4);
                     buf4 = match4.str(); // contiene il nome dell'etichetta da controllare
-                    regex_search(s2, match5, reg5);
+                    regex_search(s2A, match5, reg5);
                     buf5 = match5.str(); // contiene il valore di tale etichetta da controllare
-                    buf5 = buf5.substr(3, string::npos);
                     for (int k = 0; k < m[1].size(); k++) { // avvio controllo data types
                         for (int v = 0; v < set_names.size(); v++) {
                             if (m[1][k] == set_names [v]) {
@@ -1001,7 +1060,61 @@ int Table::update_record() { // IMPORTANTE CONTROLLO RICORSIONE         LUPO 07/
                     for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
                         if (buf4 == m[1][j]) { // verifico che corrisponda
                             for (int it = 2; it <m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
-                                if (stof(m[it][j]) > stof(buf5)||stof(m[it][j]) == stof(buf5)) { // controllo che lo assuma
+                                if ((stof(m[it][j]) > stof(buf5))||(stof(m[it][j]) == stof(buf5))) { // controllo che lo assuma
+                                    for (int k = 0;k < set_names.size(); k++) { // vedo via via quali sono le etichette da modificare
+                                        for (int l = 0; l < m[1].size(); l++) { // e vedo a che posizione corrispondono nella prima riga
+                                            if (set_names[k] == m[1][l]) { // appena trovo un match
+                                                m[it][l] = set_values[k]; // sostituisco il valore nuovo, corrispondente alla posizione di set_names
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else if ((s2.find("BETWEEN")!= string::npos) && (s2.find("AND")!= string::npos)) {
+                    regex reg(R"(\b(?!\bWHERE\b)\w+\b)");
+                    smatch match;
+                    regex_search(s2, match, reg);
+                    string bet = match.str(); // contiene l'etichetta guida
+                    s2 = s2.substr(s2.find("BETWEEN")+ 7, string::npos);
+                    regex reg2(R"(\b(?!\bBETWEEN\b)\w+\b)");
+                    smatch match2;
+                    regex_search(s2, match2, reg2);
+                    string val_sx = match2.str(); // il valore minimo
+                    s2 = s2.substr(s2.find("AND")+ 3, string::npos);
+                    regex reg3(R"(\b(?!\bAND\b)\w+\b)");
+                    smatch match3;
+                    regex_search(s2, match3, reg3);
+                    string val_dx = match3.str(); // il valore massimo
+                    //cout << bet << val_sx << val_dx << endl;
+                    for (int k = 0; k < m[1].size(); k++) { // avvio controllo data types
+                        for (int v = 0; v < set_names.size(); v++) {
+                            if (m[1][k] == set_names [v]) {
+                                if(!type_check (set_values [v], m[0][k])) // se ci sta qualche errore dovuto ai tipi
+                                {
+                                    cerr << "wrong data type input: try again. First line MUST be skipped (= UPDATE + name)" << endl;
+                                    update_record();
+                                    return 0;
+                                }
+                            }
+                        }
+                    } // termine controllo data types
+                    for (int k = 0; k < m[1].size(); k++) { // avvio controllo tentativo di sovrascrittura di dato auto_inc
+                        for (int v = 0; v < set_names.size(); v++) {
+                            if (m[1][k] == set_names[v]) {
+                                if (a_inc[k] == true) {
+                                    cerr << "auto_increment data cannot be updated: try again. First line MUST be skipped (= UPDATE + name)" << endl;
+                                    update_record();
+                                    return 0;
+                                }
+                            }
+                        }
+                    }  // termine controllo tentativo di sovrascrittura di dato auto_inc
+                    for (int j = 0; j <m[1].size(); j++) { // scorro la prima fila della mappa per trovare etichetta da controllare
+                        if (bet == m[1][j]) { // verifico che corrisponda
+                            for (int it = 2; it <m.size(); it++) { // ora scorro tutte le righe della map per trovare dove assume il valore che cerco
+                                if (stof(m[it][j]) > stof(val_sx)&&stof(m[it][j]) < stof(val_dx)) { // controllo che lo assuma
                                     for (int k = 0;k < set_names.size(); k++) { // vedo via via quali sono le etichette da modificare
                                         for (int l = 0; l < m[1].size(); l++) { // e vedo a che posizione corrispondono nella prima riga
                                             if (set_names[k] == m[1][l]) { // appena trovo un match
@@ -1018,14 +1131,6 @@ int Table::update_record() { // IMPORTANTE CONTROLLO RICORSIONE         LUPO 07/
         }
     }
     return 0;
-}
-
-int Table::size() {
-    return m.size();
-}
-
-vector<string> Table::line(const int& idx) {
-    return m[idx];
 }
 
 void Table::print_table(const string& str, map <string,Table> database) {
@@ -1128,12 +1233,12 @@ void Table::print_table(const string& str, map <string,Table> database) {
                                 cout << database[s].get_map()[*ti] << endl;
                             }
                         }
-                        else if (where.find("<>")!=string::npos) {
-                            regex reg(R"(\w{0,22}[^ <>])");
+                        else if (where.find('!')!=string::npos) {
+                            regex reg(R"(\w{0,22}[^ !])");
                             smatch match, match2;
                             regex_search(buf, match, reg);
                             string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
-                            regex reg2(R"(\<>(.*))");
+                            regex reg2(R"(\!(.*))");
                             regex_search(buf, match2, reg2);
                             string buf3 = match2.str().substr(3, string::npos); // contiene il valore dell'etichetta da controllare
                             vector<int> number;
@@ -1151,12 +1256,12 @@ void Table::print_table(const string& str, map <string,Table> database) {
                                 cout << database[s].get_map()[*ti] << endl;
                             }
                         }
-                        else if (where.find("<=")!=string::npos) {
-                            regex reg(R"(\w{0,22}[^ <=])");
+                        else if (where.find('-')!=string::npos) {
+                            regex reg(R"(\w{0,22}[^ -])");
                             smatch match, match2;
                             regex_search(buf, match, reg);
                             string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
-                            regex reg2(R"(\<=(.*))");
+                            regex reg2(R"(\-(.*))");
                             regex_search(buf, match2, reg2);
                             string buf3 = match2.str().substr(3, string::npos); // contiene il valore dell'etichetta da controllare
                             vector<int> number;
@@ -1174,12 +1279,12 @@ void Table::print_table(const string& str, map <string,Table> database) {
                                 cout << database[s].get_map()[*ti] << endl;
                             }
                         }
-                        else if (where.find(">=")!=string::npos) {
-                            regex reg(R"(\w{0,22}[^ >=])");
+                        else if (where.find('+')!=string::npos) {
+                            regex reg(R"(\w{0,22}[^ +])");
                             smatch match, match2;
                             regex_search(buf, match, reg);
                             string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
-                            regex reg2(R"(\>=(.*))");
+                            regex reg2(R"(\+(.*))");
                             regex_search(buf, match2, reg2);
                             string buf3 = match2.str().substr(3, string::npos); // contiene il valore dell'etichetta da controllare
                             vector<int> number;
@@ -1187,6 +1292,35 @@ void Table::print_table(const string& str, map <string,Table> database) {
                                 if (buf2 == database[s].get_map()[1][a]) {
                                     for (int it = 2; it < database[s].get_map().size(); it++) {
                                         if ((stof(buf3) < stof(database[s].get_map()[it][a])) || (stof(buf3) == stof(database[s].get_map()[it][a]))) {
+                                            number.emplace_back(it); // contiene tutti gli indici dei record dove la condizione WHERE è soddisfatta
+                                        }
+                                    }
+                                }
+                            }
+                            cout << database[s].get_map()[1] << endl;
+                            for (auto ti = number.begin(); ti < number.end(); ti++) {
+                                cout << database[s].get_map()[*ti] << endl;
+                            }
+                        } else if ((where.find("BETWEEN")!= string::npos) && (where.find("AND")!= string::npos)) {
+                            regex reg(R"(\b(?!\bWHERE\b)\w+\b)");
+                            smatch match;
+                            regex_search(where, match, reg);
+                            string bet = match.str(); // contiene l'etichetta guida
+                            where = where.substr(where.find("BETWEEN") + 7, string::npos);
+                            regex reg2(R"(\b(?!\bBETWEEN\b)\w+\b)");
+                            smatch match2;
+                            regex_search(where, match2, reg2);
+                            string val_sx = match2.str(); // il valore minimo
+                            where = where.substr(where.find("AND") + 3, string::npos);
+                            regex reg3(R"(\b(?!\bAND\b)\w+\b)");
+                            smatch match3;
+                            regex_search(where, match3, reg3);
+                            string val_dx = match3.str(); // il valore massimo
+                            vector<int> number;
+                            for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                if (bet == database[s].get_map()[1][a]) {
+                                    for (int it = 2; it < database[s].get_map().size(); it++) {
+                                        if ((stof(val_sx) < stof(database[s].get_map()[it][a])) && (stof(val_dx) > stof(database[s].get_map()[it][a]))) {
                                             number.emplace_back(it); // contiene tutti gli indici dei record dove la condizione WHERE è soddisfatta
                                         }
                                     }
@@ -1288,12 +1422,12 @@ void Table::print_table(const string& str, map <string,Table> database) {
                                     database[s].order_desc(order_by, number);
                                 }
                             }
-                            else if (where.find("<>")!=string::npos) {
-                                regex reg(R"(\w{0,22}[^ <>])");
+                            else if (where.find('!')!=string::npos) {
+                                regex reg(R"(\w{0,22}[^ !])");
                                 smatch match, match2;
                                 regex_search(buf, match, reg);
                                 string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
-                                regex reg2(R"(\<>(.*))");
+                                regex reg2(R"(\!(.*))");
                                 regex_search(buf, match2, reg2);
                                 string buf3 = match2.str().substr(3,string::npos); // contiene il valore dell'etichetta da controllare
                                 vector<int> number;
@@ -1313,12 +1447,12 @@ void Table::print_table(const string& str, map <string,Table> database) {
                                     database[s].order_desc(order_by, number);
                                 }
                             }
-                            else if (where.find("<=")!=string::npos) {
-                                regex reg(R"(\w{0,22}[^ <=])");
+                            else if (where.find('-')!=string::npos) {
+                                regex reg(R"(\w{0,22}[^ -])");
                                 smatch match, match2;
                                 regex_search(buf, match, reg);
                                 string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
-                                regex reg2(R"(\<=(.*))");
+                                regex reg2(R"(\-(.*))");
                                 regex_search(buf, match2, reg2);
                                 string buf3 = match2.str().substr(3,string::npos); // contiene il valore dell'etichetta da controllare
                                 vector<int> number;
@@ -1338,12 +1472,12 @@ void Table::print_table(const string& str, map <string,Table> database) {
                                     database[s].order_desc(order_by, number);
                                 }
                             }
-                            else if (where.find(">=")!=string::npos) {
-                                regex reg(R"(\w{0,22}[^ >=])");
+                            else if (where.find('+')!=string::npos) {
+                                regex reg(R"(\w{0,22}[^ +])");
                                 smatch match, match2;
                                 regex_search(buf, match, reg);
                                 string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
-                                regex reg2(R"(\>=(.*))");
+                                regex reg2(R"(\+(.*))");
                                 regex_search(buf, match2, reg2);
                                 string buf3 = match2.str().substr(3,string::npos); // contiene il valore dell'etichetta da controllare
                                 vector<int> number;
@@ -1353,6 +1487,36 @@ void Table::print_table(const string& str, map <string,Table> database) {
                                             if ((stof(buf3) < stof(database[s].get_map()[it][a])) || (stof(buf3) == stof(database[s].get_map()[it][a]))) {
                                                 number.emplace_back(
                                                         it); // contiene tutti gli indici dei record dove la condizione WHERE è soddisfatta
+                                            }
+                                        }
+                                    }
+                                }
+                                if (order_by.find("ASC") != string::npos) {
+                                    database[s].order_asc(order_by, number);
+                                } else if (order_by.find("DESC") != string::npos) {
+                                    database[s].order_desc(order_by, number);
+                                }
+                            } else if ((where.find("BETWEEN")!= string::npos) && (where.find("AND")!= string::npos)) {
+                                regex reg(R"(\b(?!\bWHERE\b)\w+\b)");
+                                smatch match;
+                                regex_search(where, match, reg);
+                                string bet = match.str(); // contiene l'etichetta guida
+                                where = where.substr(where.find("BETWEEN") + 7, string::npos);
+                                regex reg2(R"(\b(?!\bBETWEEN\b)\w+\b)");
+                                smatch match2;
+                                regex_search(where, match2, reg2);
+                                string val_sx = match2.str(); // il valore minimo
+                                where = where.substr(where.find("AND") + 3, string::npos);
+                                regex reg3(R"(\b(?!\bAND\b)\w+\b)");
+                                smatch match3;
+                                regex_search(where, match3, reg3);
+                                string val_dx = match3.str(); // il valore massimo
+                                vector<int> number;
+                                for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                    if (bet == database[s].get_map()[1][a]) {
+                                        for (int it = 2; it < database[s].get_map().size(); it++) {
+                                            if ((stof(val_sx) < stof(database[s].get_map()[it][a])) && (stof(val_dx) == stof(database[s].get_map()[it][a]))) {
+                                                number.emplace_back(it); // contiene tutti gli indici dei record dove la condizione WHERE è soddisfatta
                                             }
                                         }
                                     }
@@ -1556,12 +1720,12 @@ void Table::print_table(const string& str, map <string,Table> database) {
                                 cout << endl;
                             }
                         }
-                        else if (where.find("<>")!=string::npos) {
-                            regex reg(R"(\w{0,22}[^ <>])");
+                        else if (where.find('!')!=string::npos) {
+                            regex reg(R"(\w{0,22}[^ !])");
                             smatch match, match2;
                             regex_search(buf, match, reg);
                             string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
-                            regex reg2(R"(\<>(.*))");
+                            regex reg2(R"(\!(.*))");
                             regex_search(buf, match2, reg2);
                             string buf3 = match2.str().substr(3, string::npos); // contiene il valore dell'etichetta da controllare
                             vector<int> number;
@@ -1591,12 +1755,12 @@ void Table::print_table(const string& str, map <string,Table> database) {
                                 cout << endl;
                             }
                         }
-                        else if (where.find("<=")!=string::npos) {
-                            regex reg(R"(\w{0,22}[^ <=])");
+                        else if (where.find('-')!=string::npos) {
+                            regex reg(R"(\w{0,22}[^ -])");
                             smatch match, match2;
                             regex_search(buf, match, reg);
                             string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
-                            regex reg2(R"(\<=(.*))");
+                            regex reg2(R"(\-(.*))");
                             regex_search(buf, match2, reg2);
                             string buf3 = match2.str().substr(3, string::npos); // contiene il valore dell'etichetta da controllare
                             vector<int> number;
@@ -1626,12 +1790,12 @@ void Table::print_table(const string& str, map <string,Table> database) {
                                 cout << endl;
                             }
                         }
-                        else if (where.find(">=")!=string::npos) {
-                            regex reg(R"(\w{0,22}[^ >=])");
+                        else if (where.find('+')!=string::npos) {
+                            regex reg(R"(\w{0,22}[^ +])");
                             smatch match, match2;
                             regex_search(buf, match, reg);
                             string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
-                            regex reg2(R"(\>=(.*))");
+                            regex reg2(R"(\+(.*))");
                             regex_search(buf, match2, reg2);
                             string buf3 = match2.str().substr(3, string::npos); // contiene il valore dell'etichetta da controllare
                             vector<int> number;
@@ -1639,6 +1803,47 @@ void Table::print_table(const string& str, map <string,Table> database) {
                                 if (buf2 == database[s].get_map()[1][a]) {
                                     for (int it = 2; it < database[s].get_map().size(); it++) {
                                         if ((stof(buf3) < stof(database[s].get_map()[it][a])) || (stof(buf3) == stof(database[s].get_map()[it][a]))) {
+                                            number.emplace_back(it); // contiene tutti gli indici delle righe (record) dove la condizione WHERE è soddisfatta
+                                        }
+                                    }
+                                }
+                            }
+                            vector<int> positions;
+                            for (int j = 0; j < vect.size(); j++) {
+                                for (int k = 0; k < database[s].get_map()[1].size(); k++) {
+                                    if (vect[j] == database[s].get_map()[1][k]) {
+                                        cout << database[s].get_map()[1][k] << "\t";
+                                        positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
+                                    }
+                                }
+                            }
+                            cout << endl;
+                            for (auto b = number.begin(); b < number.end(); b++) {
+                                for (auto l = positions.begin(); l < positions.end(); l++) {
+                                    cout << database[s].get_map()[*b][*l] << "\t";
+                                }
+                                cout << endl;
+                            }
+                        } else if ((where.find("BETWEEN")!= string::npos) && (where.find("AND")!= string::npos)) {
+                            regex reg(R"(\b(?!\bWHERE\b)\w+\b)");
+                            smatch match;
+                            regex_search(where, match, reg);
+                            string bet = match.str(); // contiene l'etichetta guida
+                            where = where.substr(where.find("BETWEEN") + 7, string::npos);
+                            regex reg2(R"(\b(?!\bBETWEEN\b)\w+\b)");
+                            smatch match2;
+                            regex_search(where, match2, reg2);
+                            string val_sx = match2.str(); // il valore minimo
+                            where = where.substr(where.find("AND") + 3, string::npos);
+                            regex reg3(R"(\b(?!\bAND\b)\w+\b)");
+                            smatch match3;
+                            regex_search(where, match3, reg3);
+                            string val_dx = match3.str(); // il valore massimo
+                            vector<int> number;
+                            for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                if (bet == database[s].get_map()[1][a]) {
+                                    for (int it = 2; it < database[s].get_map().size(); it++) {
+                                        if ((stof(val_sx) < stof(database[s].get_map()[it][a])) && (stof(val_dx) == stof(database[s].get_map()[it][a]))) {
                                             number.emplace_back(it); // contiene tutti gli indici delle righe (record) dove la condizione WHERE è soddisfatta
                                         }
                                     }
@@ -1781,12 +1986,12 @@ void Table::print_table(const string& str, map <string,Table> database) {
                                     database[s].select_order_desc(order_by, number, positions);
                                 }
                             }
-                            else if (where.find("<>")!=string::npos) {
-                                regex reg(R"(\w{0,22}[^ <>])");
+                            else if (where.find('!')!=string::npos) {
+                                regex reg(R"(\w{0,22}[^ !])");
                                 smatch match, match2;
                                 regex_search(buf, match, reg);
                                 string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
-                                regex reg2(R"(\<>(.*))");
+                                regex reg2(R"(\!(.*))");
                                 regex_search(buf, match2, reg2);
                                 string buf3 = match2.str().substr(3, string::npos); // contiene il valore dell'etichetta da controllare
                                 vector<int> number;
@@ -1813,12 +2018,12 @@ void Table::print_table(const string& str, map <string,Table> database) {
                                     database[s].select_order_desc(order_by, number, positions);
                                 }
                             }
-                            else if (where.find("<=")!=string::npos) {
-                                regex reg(R"(\w{0,22}[^ <=])");
+                            else if (where.find('-')!=string::npos) {
+                                regex reg(R"(\w{0,22}[^ -])");
                                 smatch match, match2;
                                 regex_search(buf, match, reg);
                                 string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
-                                regex reg2(R"(\<=(.*))");
+                                regex reg2(R"(\-(.*))");
                                 regex_search(buf, match2, reg2);
                                 string buf3 = match2.str().substr(3, string::npos); // contiene il valore dell'etichetta da controllare
                                 vector<int> number;
@@ -1845,12 +2050,12 @@ void Table::print_table(const string& str, map <string,Table> database) {
                                     database[s].select_order_desc(order_by, number, positions);
                                 }
                             }
-                            else if (where.find(">=")!=string::npos) {
-                                regex reg(R"(\w{0,22}[^ >=])");
+                            else if (where.find('+')!=string::npos) {
+                                regex reg(R"(\w{0,22}[^ +])");
                                 smatch match, match2;
                                 regex_search(buf, match, reg);
                                 string buf2 = match.str(); // contiene il nome dell'etichetta da controllare
-                                regex reg2(R"(\>=(.*))");
+                                regex reg2(R"(\+(.*))");
                                 regex_search(buf, match2, reg2);
                                 string buf3 = match2.str().substr(3, string::npos); // contiene il valore dell'etichetta da controllare
                                 vector<int> number;
@@ -1858,6 +2063,44 @@ void Table::print_table(const string& str, map <string,Table> database) {
                                     if (buf2 == database[s].get_map()[1][a]) {
                                         for (int it = 2; it < database[s].get_map().size(); it++) {
                                             if ((stof(buf3) < stof(database[s].get_map()[it][a])) || (stof(buf3) == stof(database[s].get_map()[it][a]))) {
+                                                number.emplace_back(it); // contiene tutti gli indici delle righe (record) dove la condizione WHERE è soddisfatta
+                                            }
+                                        }
+                                    }
+                                }
+                                vector<int> positions;
+                                for (int j = 0; j < vect.size(); j++) {
+                                    for (int k = 0; k < database[s].get_map()[1].size(); k++) {
+                                        if (vect[j] == database[s].get_map()[1][k]) {
+                                            positions.emplace_back(k); // positions contiene gli indici delle colonne delle etichette che ci interessa visualizzare
+                                        }
+                                    }
+                                }
+                                if (order_by.find("ASC") != string::npos) {
+                                    database[s].select_order_asc(order_by, number, positions);
+                                } else if (order_by.find("DESC") != string::npos) {
+                                    database[s].select_order_desc(order_by, number, positions);
+                                }
+                            } else if ((where.find("BETWEEN")!= string::npos) && (where.find("AND")!= string::npos)) {
+                                regex reg(R"(\b(?!\bWHERE\b)\w+\b)");
+                                smatch match;
+                                regex_search(where, match, reg);
+                                string bet = match.str(); // contiene l'etichetta guida
+                                where = where.substr(where.find("BETWEEN") + 7, string::npos);
+                                regex reg2(R"(\b(?!\bBETWEEN\b)\w+\b)");
+                                smatch match2;
+                                regex_search(where, match2, reg2);
+                                string val_sx = match2.str(); // il valore minimo
+                                where = where.substr(where.find("AND") + 3, string::npos);
+                                regex reg3(R"(\b(?!\bAND\b)\w+\b)");
+                                smatch match3;
+                                regex_search(where, match3, reg3);
+                                string val_dx = match3.str(); // il valore massimo
+                                vector<int> number;
+                                for (int a = 0; a < database[s].get_map()[1].size(); a++) {
+                                    if (bet == database[s].get_map()[1][a]) {
+                                        for (int it = 2; it < database[s].get_map().size(); it++) {
+                                            if ((stof(val_sx) < stof(database[s].get_map()[it][a])) && (stof(val_dx) == stof(database[s].get_map()[it][a]))) {
                                                 number.emplace_back(it); // contiene tutti gli indici delle righe (record) dove la condizione WHERE è soddisfatta
                                             }
                                         }
