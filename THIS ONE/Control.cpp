@@ -126,7 +126,7 @@ bool Control::c_date(const string &str) {
 
 bool Control::c_time(const string &str) {
     vector <string> vect_str;
-    regex reg("\\d{2}");
+    regex reg("\\d{4}|\\d{2}");
     vect_str = printMatchesIT(str, reg);
     if (vect_str.size()!=3) {
         return false;

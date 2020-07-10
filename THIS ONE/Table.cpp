@@ -51,6 +51,80 @@ string Table::create_Table(string& str) {
     }
 }
 
+vector<string> printMatchesIT(string str, regex reg) {
+    //cout << "PrintMatchesIT:" << endl;
+    vector <string> vect;
+    sregex_iterator currentMatch(str.begin(), str.end(), reg);
+    sregex_iterator lastMatch;
+    do
+    {
+        smatch match = *currentMatch;
+        //cout << match.str() << endl;
+        if (match.str() != "\t" | match.str()!= " " | match.str()!= "\n" ) {
+            vect.push_back(match.str());
+        }
+        currentMatch++;
+    } while (currentMatch != lastMatch);
+    // cout << "vector:" << vect << endl;
+    return vect;
+}
+
+bool mytime(const string& a, const string& b) {
+    vector<string> vectA, vectB;
+    regex reg("\\d{4}|\\d{2}");
+    vectA = printMatchesIT(a, reg);
+    vectB = printMatchesIT(b, reg);
+    cout << vectA << vectB << endl;
+    if (stoi(vectB[0]) > stoi(vectA[0])) { // ore
+        return b < a;
+    } else if (stoi(vectB[0]) < stoi(vectA[0])) {
+        return b > a;
+    } else {
+        if (stoi(vectB[1]) > stoi(vectA[1])) { // minuti
+            return b < a;
+        } else if (stoi(vectB[1]) < stoi(vectA[1])) {
+            return b > a;
+        }
+        else {
+            if (stoi(vectB[2]) > stoi(vectA[2])) { // secondi
+                return b < a;
+            } else if (stoi(vectB[2]) < stoi(vectA[2])) {
+                return b > a;
+            } else {
+                return b > a;
+            }
+        }
+    }
+}
+
+bool mydate(const string& a, const string& b) {
+    vector<string> vectA, vectB;
+    regex reg("\\d{4}|\\d{2}");
+    vectA = printMatchesIT(a, reg);
+    vectB = printMatchesIT(b, reg);
+    cout << vectA << vectB << endl;
+    if (stoi(vectB[2]) > stoi(vectA[2])) { // anno
+        return b < a;
+    } else if (stoi(vectB[2]) < stoi(vectA[2])) {
+        return b > a;
+    } else {
+        if (stoi(vectB[1]) > stoi(vectA[1])) { // mese
+            return b < a;
+        } else if (stoi(vectB[1]) < stoi(vectA[1])) {
+            return b > a;
+        }
+        else {
+            if (stoi(vectB[0]) > stoi(vectA[0])) { // giorno
+                return b < a;
+            } else if (stoi(vectB[0]) < stoi(vectA[0])) {
+                return b > a;
+            } else {
+                return b < a;
+            }
+        }
+    }
+}
+
 void Table::order_asc(const string& str, const vector<int>& number) {
     bool f = false;
     regex reg(R"(\b(?!\bORDER|BY\b)\w+\b)");
@@ -95,9 +169,9 @@ void Table::order_asc(const string& str, const vector<int>& number) {
                 }
                 f = true;
             } else if (m[0][q] == "DATE") {
-
+                sort (target.begin(),target.end(), mydate);
             } else if (m[0][q] == "TIME") {
-
+                sort (target.begin(),target.end(), mytime);
             }
         }
     }
@@ -168,9 +242,9 @@ void Table::select_order_asc(const string& str, const vector<int>& number, const
                 }
                 f = true;
             } else if (m[0][q] == "DATE") {
-
+                sort (target.begin(),target.end(), mydate);
             } else if (m[0][q] == "TIME") {
-
+                sort (target.begin(),target.end(), mytime);
             }
         }
     }
@@ -248,9 +322,9 @@ void Table::order_desc(const string& str, const vector<int>& number) {
                 }
                 f = true;
             } else if (m[0][q] == "DATE") {
-
+                sort (target.begin(),target.end(), mydate);
             } else if (m[0][q] == "TIME") {
-
+                sort (target.begin(),target.end(), mytime);
             }
         }
     }
@@ -322,9 +396,9 @@ void Table::select_order_desc(const string& str, const vector<int>& number, cons
                 }
                 f = true;
             } else if (m[0][q] == "DATE") {
-
+                sort (target.begin(),target.end(), mydate);
             } else if (m[0][q] == "TIME") {
-
+                sort (target.begin(),target.end(), mytime);
             }
         }
     }
