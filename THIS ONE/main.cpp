@@ -4,19 +4,12 @@
 #include "Time.h"
 
 
-ostream& operator<<(ostream& os, Table& t){ // operatore stampa tabella
+/*ostream& operator<<(ostream& os, Table& t){ // operatore stampa tabella
     os << t.get_map();
     return os;
-}
+}*/ // ho commentato perchè forse potremmo toglierlo dato che non lo richiamiamo mai nel main
 
 int main() {
-    /*time_t now;
-    time (&now);
-    cout << ctime (&now) << endl;
-    Date daje;
-    daje.get_day("03/07/2020");
-    Time time;
-    time.get_time("14:45:58");*/ // ho commentato per non "sporcare" ogni volta quando avvio il codice
     map <string,Table> database;
     vector<string> database_names;
     Table t;
@@ -37,16 +30,19 @@ int main() {
         getline(cin, command);
         if (command.find("CREATE") != string::npos) {
             string name = t.create_Table(command);
-            database[name].set_target_names();
-            database_names.emplace_back(name);
-            cout << "Table " + name + " successfully created" << endl << endl;
+            bool b = database[name].set_target_names(database);
+            if (!b) {
+                database.erase(name);
+            } else {
+                database_names.emplace_back(name);
+                cout << "Table " + name + " successfully created" << endl << endl;
+            }
         } else if (command.find("INSERT") != string::npos) {
             regex reg(R"(\b(?!\bINSERT|INTO\b)\w+\b)");         //ci va un if/else nel caso in cui sia inserito male? 30/06 Evry
             smatch match;
             regex_search(command, match, reg);
             string name = match.str();
            database[name].insert_into(command, database);  // IMPORTANTE: ADESSO MANDO DATABASE A INSERT INTO PER POTER AVER TRACCIA DELLE ALTRE TABLE PER IL COLLEGAMENTO Lupo 05/07
-            // cout << database[name] << endl;
             cout << "Record successfully inserted into Table " + name << endl << endl;
         }  else if (command.find("UPDATE") != string::npos) {
             regex reg(R"(\b(?!\bUPDATE\b)\w+\b)");
@@ -73,7 +69,6 @@ int main() {
                         cerr << "No such map exists" << endl;
                     } else {
                         database.erase(drop);
-
                         vector<string>::iterator del;
                         del = find(database_names.begin(), database_names.end(), drop);
                         database_names.erase(del);

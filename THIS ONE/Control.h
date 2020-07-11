@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <stdio.h>
+#include <bits/stdc++.h>
 #include <algorithm>
 #include <fstream>
 #include <iostream>
@@ -17,11 +18,12 @@
 #include <iomanip>
 #include <ctime>
 #include <exception>
-//#include "Date.h"
 using namespace std;
 
 class Control {
+
 public:
+
     Control();
     Control(const string &str, const regex& _reg);
     virtual ~Control();
@@ -38,9 +40,11 @@ public:
     void save_tablenames(const vector<string>& table_names);
     vector <string> upload_tablenames(vector <string>& table_names);
 
-private:  //protected o private?
+private:
+
 string str, type;
 regex reg;
+
 };
 
 template <typename T> // operatore stampa vettore
@@ -69,4 +73,5 @@ ostream& operator<<(ostream& os, const map < T , Z >& v)
     }
     return os;
 }
+
 #endif //PROGETTO_POLITO_2020_CLION_CONTROL_H

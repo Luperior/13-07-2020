@@ -17,20 +17,17 @@ void Control::drop (const string& str) {
 }
 
 vector<string> Control::printMatchesIT(string str, regex reg) {
-    //cout << "PrintMatchesIT:" << endl;
     vector <string> vect;
     sregex_iterator currentMatch(str.begin(), str.end(), reg);
     sregex_iterator lastMatch;
     do
     {
         smatch match = *currentMatch;
-        //cout << match.str() << endl;
         if (match.str() != "\t" | match.str()!= " " | match.str()!= "\n" ) {
             vect.push_back(match.str());
         }
         currentMatch++;
     } while (currentMatch != lastMatch);
-    // cout << "vector:" << vect << endl;
     return vect;
 }
 

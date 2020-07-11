@@ -8,7 +8,9 @@
 #include "Control.h"
 
 class Table:Control {
+
 public:
+
     Table();
     Table(const map<int, vector<string>>& _m, const vector<bool>& _n_null, const vector<bool>& _a_inc, const int& _a_inc_count, const string& _primary_key, const string& _foreign_key, const string& _reference);
     virtual ~Table();
@@ -23,7 +25,7 @@ public:
     void save_keys(const string &table_name);
     void upload_keys(const string& table_name);
     vector<string> getlabel(const vector<string>& structure);
-    void set_target_names();
+    bool set_target_names(map <string,Table> database);
     vector<string> get_types(const vector<string>& structure);
     map <int, vector <string>> get_map();
     int insert_into(const string& str, map <string,Table> database);
@@ -35,7 +37,6 @@ public:
     void delete_from_table(const string& s2);
     string get_primary_key();
     void print_table(const string& _str, map <string,Table> database);
-
 
 private:
 
